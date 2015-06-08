@@ -23,4 +23,4 @@ startDbPromise.then(function () {
     console.log(chalk.green('MongoDB connection opened!'));
 });
 
-module.exports = startDbPromise;
+module.exports = startDbPromise;adfasdf
