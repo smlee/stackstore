@@ -1,3 +1,4 @@
+'use strict';
 app.directive('tutorialVideo', function ($sce) {
 
     var formYoutubeURL = function (id) {
