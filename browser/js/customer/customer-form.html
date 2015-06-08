@@ -1,0 +1,42 @@
+<form name="customerForm" ng-submit="sendCustomerInfo(customer)">
+
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Name</label>
+		<input type="name" class="form-control" placeholder="Enter name" ng-model="customer.name">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Email</label>
+		<input type="email" class="form-control" placeholder="Enter email" ng-model="customer.email">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Address</label>
+		<input type="address" class="form-control" placeholder="Enter address" ng-model="customer.address">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">City</label>
+		<input type="city" class="form-control" placeholder="Enter city" ng-model="customer.city">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+	   <div class="btn-group" dropdown is-open="status.isopen">
+	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+	        States <span class="caret"></span>
+	      </button>
+	      <ul class="dropdown-menu" role="menu" >
+	        <li ng-repeat="state in states">{{state.name}}</li>
+	      </ul>
+     </div>
+<!-- 		<select class="form-control">
+			<option ng-repeat="state in states">{{state.name}}</option>
+		</select> -->
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Zip Code</label>
+		<input type="zipcode" class="form-control" placeholder="Enter zip" ng-model="customer.zip">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Phone</label>
+		<input type="phone" class="form-control" placeholder="Enter accolades" ng-model="customer.phone">
+	</div>
+	<input id="submit" class="btn btn-default" type="submit" value="Submit">
+	
+</form>
