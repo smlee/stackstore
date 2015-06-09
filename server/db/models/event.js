@@ -41,15 +41,16 @@ var schema = new mongoose.Schema({
 		type: Date,
 		default: Date.now
 	},
-	db_price: Number
+	//db_price: Number
+	price:String
 });
 
-schema.virtual('price').set(function(num) {
-	this.db_price = num*100;
-});
+// schema.virtual('price').set(function(num) {
+// 	this.db_price = num*100;
+// });
 
-schema.virtual('price').get(function() {
-    return (this.db_price/100).toFixed(2);
-});	
+// schema.virtual('price').get(function() {
+//     return (this.db_price/100).toFixed(2);
+// });	
 
 mongoose.model('Event', schema);

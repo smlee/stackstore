@@ -6,7 +6,7 @@ var schema = new mongoose.Schema({
 		ref: 'Art'
 	},
 	user: {
-		type: [mongoose.Schema.Types.ObjectId],
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
 	type: String,

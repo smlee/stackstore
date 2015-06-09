@@ -3,9 +3,9 @@ var router = require('express').Router();
 module.exports = router;
 
 
-var apis = require('./apis');
+//var apis = require('./apis');
 
-
+router.use('/', require('./apis'));
 //router.use('/tutorial', require('./tutorial'));
 router.use('/members', require('./members'));
 

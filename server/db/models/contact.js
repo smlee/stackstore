@@ -18,7 +18,7 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	address_line_2: String,
-	type:String,
+	type: String,
 	city: {
 		type: String,
 		required: true

@@ -23,4 +23,13 @@ var schema = new mongoose.Schema({
 	}
 });
 
+schema.methods.getChildren = function() {
+   return mongoose.model('Category').find({parent: this.id}).exec();
+}
+schema.methods.getSiblings = function() {
+   	mongoose.model('Category').findOne({_id: this.parent}, function(err, result){
+       return mongoose.model('Category').find({parent: result._id}).exec();
+   	});
+} 
+
 mongoose.model('Category', schema);

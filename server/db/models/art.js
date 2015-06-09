@@ -15,26 +15,21 @@ var schema = new mongoose.Schema({
 		//required: true
 	},
 	artist_name: String,
-	db_url: String,
-	db_price: Number,
+	url:String,
+	price:String,
 	description: String,
-	tags: [String]	
+	tags:{
+		type: [],
+		set: setTags,
+		get: getTags
+	}
 });
+function setTags(arrArg){
+	return arrArg;
+}
 
-schema.virtual('price').set(function(num) {
-	this.db_price = num*100;
-});
-
-schema.virtual('price').get(function() {
-    return (this.db_price/100).toFixed(2);
-});
-
-schema.virtual('url').set(function(urlStr) {
-	this.db_url = urlStr;
-});
-
-schema.virtual('url').get(function() {
-    return this.db_url;
-});
+function getTags(arrArg){
+	return arrArg.join(',');
+}
 
 mongoose.model('Art', schema);

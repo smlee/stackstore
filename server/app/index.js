@@ -1,7 +1,10 @@
 'use strict';
 var path = require('path');
 var express = require('express');
+var flash = require('connect-flash');
 var app = express();
+app.use(flash());
+
 module.exports = app;
 
 // Pass our express application pipeline into the configuration
