@@ -7,9 +7,18 @@ app.config(function ($stateProvider){
     });
 });
 
-app.controller('CustomerForm', function ($scope, AuthService, $state) {
+app.controller('CustomerForm', function ($scope, AuthService, $state, CustomerFactory) {
 
-	$scope.profile = {}
+	$scope.customer = {};
+
+	$scope.sendCustomerInfo = function(info){
+		// CustomerFactory.submit(profile);
+		console.log('this is the customer info', info);
+	};
+
+	// $scope.check = function(){
+	// 	console.log('this is chekc function')
+	// }
 
 	$scope.states = [
 	   { name: 'ALABAMA', abbreviation: 'AL'},
@@ -72,12 +81,6 @@ app.controller('CustomerForm', function ($scope, AuthService, $state) {
 	   { name: 'WISCONSIN', abbreviation: 'WI'},
 	   { name: 'WYOMING', abbreviation: 'WY' }
 	];
-
-
-	// $scope.sendCustomerInfo = function(profile){
-	// 	CustomerFactory.submit(profile);
-	// 	console.log('this is the profile', profile);
-	// }
 	
 
 });
