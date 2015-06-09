@@ -1,5 +1,5 @@
 'use strict';
-let mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -11,8 +11,8 @@ var schema = new mongoose.Schema({
 	},
 	category: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Category',
-		required: true
+		ref: 'Category'
+		//required: true
 	},
 	artist_name: String,
 	url: {
