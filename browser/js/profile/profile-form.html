@@ -1,0 +1,29 @@
+<form name="profileForm" ng-submit="sendProfileInfo(profile)">
+
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Name</label>
+		<input type="name" class="form-control" placeholder="Enter name" ng-model="profile.name">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Email</label>
+		<input type="name" class="form-control" placeholder="Enter email" ng-model="profile.email">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Bio</label>
+		<textarea name='bio' class="form-control" rows="13" ng-model="profile.bio"></textarea>
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Website</label>
+		<input type="name" class="form-control" placeholder="Enter website" ng-model="profile.website">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Main Medium</label>
+		<input type="name" class="form-control" placeholder="Enter medium" ng-model="profile.medium">
+	</div>
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Profile">Accolades</label>
+		<input type="name" class="form-control" placeholder="Enter accolades" ng-model="profile.accolades">
+	</div>
+	<input class="btn btn-default" type="submit" value="Submit">
+	
+</form>

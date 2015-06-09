@@ -1,3 +1,4 @@
+'use strict';
 app.factory('RandomGreetings', function () {
 
     var getRandomFromArray = function (arr) {
