@@ -25,19 +25,12 @@
 		<input type="city" class="form-control" placeholder="Enter city" ng-model="customer.city">
 	</div>
 
-	<!-- <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3 col-centered"> -->
-	  <!--  <div class="btn-group" dropdown is-open="status.isopen">
-	      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-	        States <span class="caret"></span>
-	      </button>
-	      <ul class="dropdown-menu" role="menu" >
-	        <li ng-repeat="state in states">{{state.name}}</li>
-	      </ul> -->
-	<!--       <label for="Profile">State</label>
-	     <select id="state" class="form-control">
-			<option ng-repeat="state in states" ng-model="customer.state">{{state.abbreviation}}</option>
+	<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3 col-centered">
+	    <label for="Profile">State</label>
+	    <select id="state" class="form-control" ng-model="customer.state">
+			<option ng-repeat="state in states">{{state.abbreviation}}</option>
 		</select>
-     </div> -->
+     </div>
 
 	<div class="form-group col-lg-4 col-md-4 col-sm-4 col-centered">
 		<label for="Profile">Zip Code</label>
@@ -46,11 +39,11 @@
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Profile">Phone</label>
-		<input type="phone" class="form-control" placeholder="Enter accolades" ng-model="customer.phone">
+		<input type="phone" class="form-control" placeholder="Enter phone number" ng-model="customer.phone">
 	</div>
 
-	<!-- <div class="form-group col-lg-3 col-md-3 col-sm-3 col-centered"> -->
+	<div class="form-group col-lg-3 col-md-3 col-sm-3 col-centered">
 		<input class="btn btn-default" type="submit" value="Submit">
-	<!-- </div> -->
+	</div>
 	
 </form>
