@@ -4,10 +4,12 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     salt: {
         type: String
@@ -23,7 +25,12 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
-    }
+    },
+    contact: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Contact'
+    },
+    role: String
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
@@ -40,14 +47,11 @@ var encryptPassword = function (plainText, salt) {
 };
 
 schema.pre('save', function (next) {
-
     if (this.isModified('password')) {
         this.salt = this.constructor.generateSalt();
         this.password = this.constructor.encryptPassword(this.password, this.salt);
     }
-
     next();
-
 });
 
 schema.statics.generateSalt = generateSalt;
