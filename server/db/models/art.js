@@ -11,40 +11,30 @@ var schema = new mongoose.Schema({
 	},
 	category: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Category'
+		ref: 'Category'//,
 		//required: true
 	},
 	artist_name: String,
-	url: {
-		type: String,
-		set: setUrl,
-		get: getUrl
-	},
-	price: {
-		type: Number, 
-		set: setPrice,
-		get: getPrice
-		
-	},
+	db_url: String,
+	db_price: Number,
 	description: String,
 	tags: [String]	
 });
 
+schema.virtual('price').set(function(num) {
+	this.db_price = num*100;
+});
 
-function getPrice () {
-	return (this.price/100).toFixed(2);
-};
+schema.virtual('price').get(function() {
+    return (this.db_price/100).toFixed(2);
+});
 
-function setPrice (num) {
-	return num*100;
-};
+schema.virtual('url').set(function(urlStr) {
+	this.db_url = urlStr;
+});
 
-function setUrl (urlStr) {
-	return urlStr;
-};
-
-function getUrl () {
-	return this.url;
-};
+schema.virtual('url').get(function() {
+    return this.db_url;
+});
 
 mongoose.model('Art', schema);
