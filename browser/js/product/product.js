@@ -19,9 +19,9 @@ app.controller('ProductController', function ($scope, ProductFactory){
 	}
 
 	$scope.cart = {
-		total: 2000,
+		total: 0,
 		items: [],
-		quantity: 2
+		quantity: 0
 	}
 
 	// ProductFactory.getProduct()
@@ -35,13 +35,13 @@ app.controller('ProductController', function ($scope, ProductFactory){
 	// }) 
 
 	$scope.addcart = function(){
-		ProductFactory.addCart(product);
-		$scope.cart.total+= $scope.product.price;
+		ProductFactory.addCart();
+		$scope.cart.total += $scope.product.price;
 		$scope.cart.quantity++
 	}
 
 	$scope.addwish = function() {
-		ProductFactory.addWish(product)
+		ProductFactory.addWish()
 	}
 
 
