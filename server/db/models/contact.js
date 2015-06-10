@@ -30,7 +30,7 @@ var schema = new mongoose.Schema({
 	},
 	zip: {
 		type: Number,
-		min: 00501,
+		min: 501,
 		max: 99950,
 		required: true
 	}
