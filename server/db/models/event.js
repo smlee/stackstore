@@ -1,33 +1,32 @@
 'use strict';
 var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
-	name: {
+	event_name: {
 		type: String,
 		required: true
 	},
-	address_line_1: {
-		type: String,
-		required: true
-	},
-	address_line_2: String,
-	city: {
-		type: String,
-		required: true
-	},
-	state: {
-		type: String,
-		required: true
-	},
-	zip: {
-		type: {
-			String,
-			minLength: 5,
-			maxLength: 5
-		},
-		required: true
-	},
+	contact_info: {type: mongoose.Schema.Types.ObjectId, ref: 'Contact'},
+	// address_line_1: {
+	// 	type: String,
+	// 	required: true
+	// },
+	// address_line_2: String,
+	// city: {
+	// 	type: String,
+	// 	required: true
+	// },
+	// state: {
+	// 	type: String,
+	// 	required: true
+	// },
+	// zip: {
+	// 	type: String,
+	// 	minLength: 5,
+	// 	maxLength: 5,
+	// 	required: true
+	// },
 	description: String,
-	artist_id: {
+	user_id: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'User'
     },
@@ -40,24 +39,17 @@ var schema = new mongoose.Schema({
 		default: Date.now
 	},
 	event_date: {
-		type: Date,
-		default: Date.now
+		type: Date
 	},
-	price: {
-		type: Number, 
-		get: getPrice,
-		set: setPrice
-	}
+	price: Number
 });
 
+schema.pre('save', function(){
+	this.updated_at = Date.now();
+});
 
-function getPrice () {
-	return (this.price/100).toFixed(2);
-}
-
-function setPrice (num) {
-	return num*100;
-}	
-
+schema.pre('update', function(){
+	this.updated_at = Date.now();
+});
 
 mongoose.model('Event', schema);

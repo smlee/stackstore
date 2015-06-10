@@ -1,6 +1,8 @@
 'use strict';
 var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
+	contact_type: {type: String, enum: ['shipping', 'billing', 'home', 'event']},
+	label: String,	
 	first_name: {
 		type: String,
 		required: true
@@ -18,7 +20,6 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	address_line_2: String,
-	type:String,
 	city: {
 		type: String,
 		required: true
@@ -28,13 +29,11 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	zip: {
-		type: {
-			String,
-			minLength: 5,
-			maxLength: 5
-		},
+		type: Number,
+		min: 00501,
+		max: 99950,
 		required: true
-	},
+	}
 });
 
 mongoose.model('Contact', schema);
