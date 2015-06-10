@@ -29,7 +29,6 @@ schema.methods.getChildren = function() {
 schema.methods.getSiblings = function() {
    	// mongoose.model('Category').findOne({_id: this.parent}, function(err, result){
        return this.constructor.find({parent: this.parent, _id: {$ne: this._id }}).exec();
-   	});
 };
 
 schema.pre('save', function(){
