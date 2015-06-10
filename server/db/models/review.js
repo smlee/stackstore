@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
-	review: String,
+	content: String,
 	rating: { 
 		type: Number, 
 		min: 1,

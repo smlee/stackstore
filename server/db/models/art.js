@@ -15,21 +15,12 @@ var schema = new mongoose.Schema({
 		//required: true
 	},
 	artist_name: String,
-	url:String,
-	price:String,
+	url: String,
+	price: Number,
 	description: String,
-	tags:{
-		type: [],
-		set: setTags,
-		get: getTags
-	}
+	quantity: Number,
+	tags: [String]
 });
-function setTags(arrArg){
-	return arrArg;
-}
 
-function getTags(arrArg){
-	return arrArg.join(',');
-}
 
 mongoose.model('Art', schema);

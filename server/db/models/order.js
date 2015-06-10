@@ -1,26 +1,44 @@
 'use strict';
 var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
-	all_items: {
-		type: [mongoose.Schema.Types.ObjectId],
-		ref: 'Art'
-	},
+	all_items: [{
+		art: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Art'
+		}, 
+		quantity: Number
+	}],
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	type: String,
+	order_type: {type: String, enum: ['gallery', 'order']},
 	created_at: {
 		type: Date,
 		default: Date.now
 	},
 	updated_at: {
-		type: Date,
-		default: Date.now
+		type: Date
 	},
-	total: {type: Number},
+	total: Number, // do in frontend
 	paid: Boolean,
 	invoice_id: Number
 });
+
+
+schema.pre('update', function(next){
+	this.updated_at = Date.now();
+});
+
+schema.pre('findOneAndUpdate', function(next){
+	this.updated_at = Date.now();
+});
+
+schema.pre('save', function(next){
+	this.updated_at = Date.now();
+	this.invoice_id = Date.now();
+});
+
+
 
 mongoose.model('Order', schema);
