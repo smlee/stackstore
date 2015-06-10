@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 require('../../../server/db/models/user');
 
 var User = mongoose.model('User');
+var Contact = mongoose.model('Contact');
 
 describe('User model', function () {
 
@@ -140,6 +141,56 @@ describe('User model', function () {
             });
 
         });
+
+    });
+
+
+    describe('contacts in user', function () {
+        var newUser;
+        var newContact;
+
+        beforeEach('Create new contact', function(done){
+            contactInfo = {
+                contact_type:'home',
+                label: 'default',
+                first_name: 'Kevin',
+                last_name: 'John',
+                phone_number: '(212) 123-5555',
+                address_line_1: '123 Hanover Rd',
+                city: 'New York',
+                state: 'New York',
+                zip: '12345'
+            };
+            newContact = new Contact(contactInfo);
+            newContact.save(done);
+        });
+
+        beforeEach('Contacts after creating new user', function(done){
+            newUser = new User({
+                email: 'test@test.org',
+                password: 'test',
+                contact: [newContact._id]
+            });
+            newUser.save(done);
+        });
+
+        it('should save the contacts id in an array', function(done){
+            User.findOne({email: 'test@test.org'}, function(err, user) {
+                expect(user.contact).to.be.an('array');
+            });
+            done();
+        });
+
+        it('should have same contact ID', function(done){
+            Contact.findOne({first_name: 'Kevin', last_name: 'John'}, function(err, contact) {
+                if(err) console.log('#####ERORRRR#####', err);
+                User.findOne({email: 'test@test.org'}, function(err, user) {
+                    expect(user.contact[0].toString()).to.be.equal(contact._id.toString());
+                })
+            });
+            done();
+        });
+
 
     });
 
