@@ -1,0 +1,51 @@
+<h1 class="artistHeader">{{ product.name }}</h1>
+<h2 class="artistHeader">{{ product.artist_name }}</h2>
+<div class="row">
+
+	<div id="product-gallery" class="col-lg-8 col-md-8 col-sm-8">
+		<img zoom src="http://placekitten.com/g/400/500">
+	</div>
+
+	<div id="master-product" class="col-lg-4 col-md-4 col-sm-4">
+		<div id="cart"><h5>Cart:</h5> {{cart.total | currency}} ({{cart.quantity}})</div>
+		<hr>
+		<tabset justified="true">
+		    <tab heading="Description">
+		    	<div class="product-info">
+					<div><h3>Price:</h3>{{product.price | currency}}</div>
+					<div>
+						<h3>Size:</h3>
+						{{product.size}}
+					</div>
+					<div>
+						<h3>Description:</h3>
+						{{product.description}}
+					</div>
+					
+				</div>
+		    </tab>
+		    <tab heading="Medium">
+		    	<div class="product-info">
+					<div><h3>Medium:</h3>{{product.medium}}</div>
+					<div>
+						<h3>Tags:</h3>
+						<ul ng-repeat="tag in product.tags">
+							<li>{{tag}}</li>
+						</ul>
+					</div>
+				</div>
+		    </tab>
+		    <tab heading="Artist">
+		    	<div class="product-info">
+					<div><h3>Artist:</h3>{{product.artist_name}}</div>
+				</div>
+		    </tab>
+	  	</tabset>
+	    <div>
+			<button class="btn btn-info product-button" ng-click="addcart()">Add to Cart</button>
+			<button class="btn btn-info product-button" ng-click="addwish()">Add to Wishlist</button>
+		</div>
+	</div>
+
+</div>
+

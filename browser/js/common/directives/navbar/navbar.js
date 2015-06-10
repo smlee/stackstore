@@ -10,11 +10,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             scope.items = [
                 { label: 'Home', state: 'home' },
                 { label: 'About', state: 'about' },
-                { label: 'Tutorial', state: 'tutorial' },
-                { label: 'Profile', state: 'profileForm' },
+                // { label: 'Tutorial', state: 'tutorial' },
                 { label: 'New Customer', state: 'customerForm' },
+                { label: 'Purchase', state: 'product' },
                 { label: 'Artist Page', state: 'artist' },
-                { label: 'Members Only', state: 'membersOnly', auth: true }
+                { label: 'Artist Manage', state: 'profileForm' }
+                // { label: 'Members Only', state: 'membersOnly', auth: true }
             ];
 
             scope.user = null;
