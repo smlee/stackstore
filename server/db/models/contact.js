@@ -18,7 +18,7 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	address_line_2: String,
-	type:String,
+	type: String,
 	city: {
 		type: String,
 		required: true
@@ -28,13 +28,11 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	zip: {
-		type: {
-			String,
-			minLength: 5,
-			maxLength: 5
-		},
+		type: String,
+		minLength: 5,
+		maxLength: 5,
 		required: true
-	},
+	}
 });
 
 mongoose.model('Contact', schema);

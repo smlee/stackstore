@@ -1,5 +1,5 @@
 'use strict';
-let mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -11,40 +11,25 @@ var schema = new mongoose.Schema({
 	},
 	category: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Category',
-		required: true
+		ref: 'Category'//,
+		//required: true
 	},
 	artist_name: String,
-	url: {
-		type: String,
-		set: setUrl,
-		get: getUrl
-	},
-	price: {
-		type: Number, 
-		set: setPrice,
-		get: getPrice
-		
-	},
+	url:String,
+	price:String,
 	description: String,
-	tags: [String]	
+	tags:{
+		type: [],
+		set: setTags,
+		get: getTags
+	}
 });
+function setTags(arrArg){
+	return arrArg;
+}
 
-
-function getPrice () {
-	return (this.price/100).toFixed(2);
-};
-
-function setPrice (num) {
-	return num*100;
-};
-
-function setUrl (urlStr) {
-	return urlStr;
-};
-
-function getUrl () {
-	return this.url;
-};
+function getTags(arrArg){
+	return arrArg.join(',');
+}
 
 mongoose.model('Art', schema);
