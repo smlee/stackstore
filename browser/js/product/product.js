@@ -14,7 +14,7 @@ app.controller('ProductController', function ($scope, ProductFactory){
 		price: 9001,
 		description: "Awesome, amazing, breathtaking, gripping piece of art.",
 		medium: "Watercolor with oil paints.",
-		tags: ["Art", "Canvas", "Badass"],
+		tags: ["Art", "Canvas", "Badass"], // category?
 		size: '24x30'
 	}
 
