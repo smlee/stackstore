@@ -1,0 +1,4 @@
+{"__v":0,"_id":{"$oid":"5579b79876a4ec4e1f31f1c7"},"art_id":{"$oid":"5579ab85fcf5a1561e5157b3"},"content":"AMAZING ART FOR THE WIN!","rating":4,"user_id":{"$oid":"5579a6577b93c0151efc21b2"}}
+{"__v":0,"_id":{"$oid":"5579b79876a4ec4e1f31f1c8"},"art_id":{"$oid":"5579ab85fcf5a1561e5157af"},"content":"SUPER AMAZING! LOOKS GREAT IN MY ROOM","rating":5,"user_id":{"$oid":"5579a6577b93c0151efc21b4"}}
+{"__v":0,"_id":{"$oid":"5579b79876a4ec4e1f31f1c9"},"art_id":{"$oid":"5579ab85fcf5a1561e5157b1"},"content":"Eh, it's ok","rating":3,"user_id":{"$oid":"5579a6577b93c0151efc21b3"}}
+{"__v":0,"_id":{"$oid":"5579b79876a4ec4e1f31f1ca"},"art_id":{"$oid":"5579ab85fcf5a1561e5157b5"},"content":"Such an amazing piece and worth every penny","rating":5,"user_id":{"$oid":"5579a6577b93c0151efc21b3"}}
