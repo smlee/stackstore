@@ -32,10 +32,10 @@ schema.pre('update', function(next){
     next();
 });
 
-schema.pre('findOneAndUpdate', function(next){
-	this.updated_at = Date.now();
-    next();
-});
+// schema.pre('findOneAndUpdate', function(next){
+// 	this.updated_at = Date.now();
+//     next();
+// });
 
 schema.pre('save', function(next){
 	this.updated_at = Date.now();

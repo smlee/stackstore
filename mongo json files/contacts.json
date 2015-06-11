@@ -1,0 +1,6 @@
+{"__v":0,"_id":{"$oid":"5579a435aca016731d3805ed"},"address_line_1":"66 N. Conger Ave","city":"Congers","contact_type":"shipping","first_name":"Joanne","last_name":"Yae","phone_number":"8452705776","state":"NY","zip":10920}
+{"__v":0,"_id":{"$oid":"5579a435aca016731d3805ee"},"address_line_1":"123 45th St.","city":"Queens","contact_type":"billing","first_name":"Trey","last_name":"Rodrigues","phone_number":"123456789","state":"NY","zip":19284}
+{"__v":0,"_id":{"$oid":"5579a435aca016731d3805ef"},"address_line_1":"34 Douglas Ave","city":"Newark","contact_type":"home","first_name":"James","last_name":"Nissenbaum","phone_number":"123456789","state":"NJ","zip":33495}
+{"__v":0,"_id":{"$oid":"5579a435aca016731d3805f0"},"address_line_1":"34 Hoot Ave.","city":"Flushing","contact_type":"event","first_name":"Sang","last_name":"Lee","phone_number":"123456789","state":"NY","zip":34245}
+{"__v":0,"_id":{"$oid":"5579a435aca016731d3805f1"},"address_line_1":"43 Sleepy Rd.","city":"Yonkers","contact_type":"event","first_name":"Bob","last_name":"Jones","phone_number":"123456789","state":"NY","zip":12345}
+{"__v":0,"_id":{"$oid":"5579a435aca016731d3805f2"},"address_line_1":"45 Willow St.","city":"Brooklyn","contact_type":"shipping","first_name":"Jane","last_name":"Smart","phone_number":"123456789","state":"NY","zip":10001}
