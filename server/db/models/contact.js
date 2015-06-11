@@ -29,9 +29,9 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	zip: {
-		type: Number,
-		min: 501,
-		max: 99950,
+		type: String,
+		minLength: 5,
+		maxLength: 5,
 		required: true
 	}
 });
