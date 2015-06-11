@@ -39,6 +39,47 @@ var seedUsers = function () {
         {
             email: 'obama@gmail.com',
             password: 'potus'
+        },
+        {
+            email: 'yae.joanne@gmail.com',
+            password: 'joanne',
+            contact: "5579a435aca016731d3805ed", // seed contacts first
+            role: 'buyer'
+        },
+        {
+            email: 'rod.trey@gmail.com',
+            password: 'trey',
+            contact: "5579a435aca016731d3805ee", // seed contacts first
+            role: 'buyer'
+        },
+        {
+            email: 'niss.james@gmail.com',
+            password: 'james',
+            contact: "5579a435aca016731d3805ef", // seed contacts first
+            role: 'buyer'
+        },
+        {
+            email: 'kim.sang@gmail.com',
+            password: 'sang',
+            contact: "5579a435aca016731d3805f0", // seed contacts first
+            role: 'artist'
+        },
+        {
+            email: 'jones.bob@gmail.com',
+            password: 'bob',
+            contact: "5579a435aca016731d3805f1", // seed contacts first
+            role: 'buyer'
+        },
+        {
+            email: 'smart.jane@gmail.com',
+            password: 'jane',
+            contact: "5579a435aca016731d3805f2", // seed contacts first
+            role: 'buyer'
+        },
+        {
+            email: 'butler.ash@gmail.com',
+            password: 'butler',
+            role: 'artist'
         }
     ];
 
