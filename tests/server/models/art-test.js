@@ -25,4 +25,21 @@ describe('Art model', function(){
     it('should exist', function(){
         expect(Art).to.be.a('function');
     });
+
+    describe('Model Test', function() {
+        var someArt;
+        beforeEach('', function (done) {
+            someArt = new Art({
+                name: 'Art of farting',
+                artist_name: 'Fart Master'
+            });
+            someArt.save(done);
+        });
+        it('should be able to save', function(done) {
+            Art.findOne({name: 'Art of farting'}, function(err, art) {
+                expect(art.artist_name).to.be.equal('Fart Master');
+            });
+            done();
+        })
+    });
 });
