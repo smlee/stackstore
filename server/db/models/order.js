@@ -15,10 +15,11 @@ var schema = new mongoose.Schema({
 	order_type: {type: String, enum: ['gallery', 'order']},
 	created_at: {
 		type: Date,
-		default: Date.now
+		default: Date.now()
 	},
 	updated_at: {
-		type: Date
+		type: Date,
+        default: Date.now()
 	},
 	total: Number, // do in frontend
 	paid: Boolean,
