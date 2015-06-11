@@ -4,6 +4,7 @@ module.exports = router;
 
 var Category = mongoose.model('Category');
 
+//would need to add contact onto req.body?
 router.get('/:id', function (req, res, next){
 	Category.findOne({_id: req.params.id})
 	.populate({
@@ -20,7 +21,7 @@ router.get('/:id', function (req, res, next){
 router.put('/', function (req, res, next){
 
 });
-
+//tested 
 router.post('/', function (req, res, next){
 	Category.create(req.body)
 	.then(function(){
@@ -29,7 +30,7 @@ router.post('/', function (req, res, next){
 	.then(null, next);
 });
 
-router.delete('/', function (req, res, next){
+router.delete('/:id', function (req, res, next){
 	Category.remove({_id: req.params.id})
 	.exec()
 	.then(function () {
