@@ -26,6 +26,7 @@ router.put('/', function (req, res, next){
 
 });
 
+//getting wierd error when trying to post
 router.post('/', function (req, res, next){
 	Order.create(req.body)
 	.then(function(){

@@ -4,6 +4,7 @@ module.exports = router;
 
 var Event = mongoose.model('Event');
 
+//tested 
 router.get('/', function (req, res, next){
 	Event.find({})
 	.exec()
@@ -12,7 +13,7 @@ router.get('/', function (req, res, next){
 	})
 	.then(null, next);;
 });
-
+//tested
 router.get('/:id', function (req, res, next){
 	Event.findOne({_id: req.params.id})
 	.exec()
@@ -21,7 +22,7 @@ router.get('/:id', function (req, res, next){
 	})
 	.then(null, next);;
 });
-
+//tested   
 router.post('/', function (req, res, next){	
 	Event.create(req.body)
 	.then(function(){
@@ -30,7 +31,7 @@ router.post('/', function (req, res, next){
 	})
 	.then(null, next);
 });
-
+//tested
 router.delete('/:id', function (req, res, next){
 	Event.remove({_id: req.params.id})
 	.exec()
