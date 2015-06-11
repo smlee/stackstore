@@ -4,7 +4,7 @@ module.exports = router;
 
 var Event = mongoose.model('Event');
 
-router.get('/event', function (req, res, next){
+router.get('/', function (req, res, next){
 	Event.find({})
 	.exec()
 	.then(function (event){
@@ -13,7 +13,7 @@ router.get('/event', function (req, res, next){
 	.then(null, next);;
 });
 
-router.get('/event/:id', function (req, res, next){
+router.get('/:id', function (req, res, next){
 	Event.findOne({_id: req.params.id})
 	.exec()
 	.then(function (event){
@@ -22,16 +22,16 @@ router.get('/event/:id', function (req, res, next){
 	.then(null, next);;
 });
 
-router.post('/event', function (req, res, next){	
+router.post('/', function (req, res, next){	
 	Event.create(req.body)
-	.exec()
 	.then(function(){
+		console.log("got here");
 		res.send({message: 'event was saved'});
 	})
 	.then(null, next);
 });
 
-router.delete('/event/:id', function (req, res, next){
+router.delete('/:id', function (req, res, next){
 	Event.remove({_id: req.params.id})
 	.exec()
 	.then(function(){

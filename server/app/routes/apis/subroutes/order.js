@@ -4,7 +4,7 @@ module.exports = router;
 
 var Order = mongoose.model('Order');
 
-router.get('/order', function (req, res, next){
+router.get('/', function (req, res, next){
 	Order.find({})
 	.exec()
 	.then(function (orders){
@@ -13,7 +13,7 @@ router.get('/order', function (req, res, next){
 	.then(null, next);
 });
 
-router.get('/order/:id', function (req, res, next){
+router.get('/:id', function (req, res, next){
 	Order.findOne({_id: req.params.id})
 	.exec()
 	.then(function (order){
@@ -22,13 +22,12 @@ router.get('/order/:id', function (req, res, next){
 	.then(null, next);
 });
 
-router.put('/order', function (req, res, next){
+router.put('/', function (req, res, next){
 
 });
 
-router.post('/order', function (req, res, next){
+router.post('/', function (req, res, next){
 	Order.create(req.body)
-	.exec()
 	.then(function(){
 		res.send({message: 'order was saved'});
 	})

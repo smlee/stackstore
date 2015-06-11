@@ -5,7 +5,9 @@ module.exports = router;
 var User = mongoose.model('User');
 var Contact = mongoose.model('Contact');
 
-router.get('/user', function (req, res, next){
+router.get('/', function (req, res, next){
+	console.log(req.query.role);
+	
 	User.find({role: req.query.role})
 	.exec()
 	.then(function (users){
@@ -14,7 +16,7 @@ router.get('/user', function (req, res, next){
 	.then(null, next);		
 });
 
-router.get('/user/:id', function (req, res, next){
+router.get('/:id', function (req, res, next){
 	User.findOne({
 		_id: req.params.id,
 		role: req.query.role
@@ -26,7 +28,7 @@ router.get('/user/:id', function (req, res, next){
 	.then(null, next);				
 });
 
-router.put('/user/:id', function (req, res, next){
+router.put('/:id', function (req, res, next){
 	User.findOne({_id: req.params.id})
 	.populate({
 		path: 'Contact',
@@ -44,7 +46,11 @@ router.put('/user/:id', function (req, res, next){
 	.then(null, next);
 });
 
-router.post('/user', function (req, res, next){
+router.post('/', function (req, res, next){
+	//2 problems 
+	//1. right now in order to create a user all the things required in the contacts model must also be on the req.body
+	//2. also the user info is in the req.body but is being used by contact instead of user
+	
 	Contact.create(req.body
 	// {
 	// 	first_name: req.body.firstname,
@@ -58,7 +64,6 @@ router.post('/user', function (req, res, next){
 	// 	type: req.body.type
 	// }
 	)
-	.exec()
 	.then(function (contact){
 		User.findOneAndUpdate({_id: req.body.id}, {contact: contact._id})
 		.exec()
