@@ -28,15 +28,18 @@ var schema = new mongoose.Schema({
 
 schema.pre('update', function(next){
 	this.updated_at = Date.now();
+    next();
 });
 
 schema.pre('findOneAndUpdate', function(next){
 	this.updated_at = Date.now();
+    next();
 });
 
 schema.pre('save', function(next){
 	this.updated_at = Date.now();
 	this.invoice_id = Date.now();
+    next();
 });
 
 

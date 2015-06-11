@@ -31,8 +31,9 @@ schema.methods.getSiblings = function() {
        return this.constructor.find({parent: this.parent, _id: {$ne: this._id }}).exec();
 };
 
-schema.pre('save', function(){
+schema.pre('save', function(next){
 	this.updated_at = Date.now();
+    next();
 });
 
 mongoose.model('Category', schema);

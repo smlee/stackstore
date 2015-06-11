@@ -44,12 +44,14 @@ var schema = new mongoose.Schema({
 	price: Number
 });
 
-schema.pre('save', function(){
+schema.pre('save', function(next){
 	this.updated_at = Date.now();
+    next();
 });
 
-schema.pre('update', function(){
+schema.pre('update', function(next){
 	this.updated_at = Date.now();
+    next();
 });
 
 mongoose.model('Event', schema);

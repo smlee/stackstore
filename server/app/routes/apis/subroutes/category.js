@@ -4,7 +4,7 @@ module.exports = router;
 
 var Category = mongoose.model('Category');
 
-router.get('/category/:id', function (req, res, next){
+router.get('/:id', function (req, res, next){
 	Category.findOne({_id: req.params.id})
 	.populate({
 		path: 'parent',
@@ -17,20 +17,19 @@ router.get('/category/:id', function (req, res, next){
 	.then(null, next)
 });
 
-router.put('/category', function (req, res, next){
+router.put('/', function (req, res, next){
 
 });
 
-router.post('/category', function (req, res, next){
+router.post('/', function (req, res, next){
 	Category.create(req.body)
-	.exec()
 	.then(function(){
 		res.send({message: 'category was saved'})
 	})
 	.then(null, next);
 });
 
-router.delete('/category', function (req, res, next){
+router.delete('/', function (req, res, next){
 	Category.remove({_id: req.params.id})
 	.exec()
 	.then(function () {
