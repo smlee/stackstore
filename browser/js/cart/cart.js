@@ -21,7 +21,7 @@ app.config(function ($stateProvider) {
 
 app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory) {
 
-	$scope.user = user
+	$scope.user = user;
     $scope.carts = carts;
 
 	
@@ -31,13 +31,13 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory) {
     	.then(function (updatedOrders) {
     		$scope.carts = updatedOrders
     	})
-    }
+    };
 
     $scope.removeItem = function (cartid, itemid) {
     	CartFactory.removeItem(cartid, itemid)
     	.then(function (response) {
     	})
-    }
+    };
 
     $scope.submitOrder = function (cartid) {
     	CartFactory.submitOrder(cartid)
