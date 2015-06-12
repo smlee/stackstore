@@ -7,9 +7,8 @@ app.config(function ($stateProvider){
 });
 
 app.controller('ShoppingController', function ($scope, ProductFactory, CategoryFactory){
-	// $scope.categoryName = '';
 	console.log('this is the model', $scope.categoryName)
-
+	
 
 	ProductFactory.getProduct().then(function (response) {
 		$scope.products = response;
@@ -18,7 +17,11 @@ app.controller('ShoppingController', function ($scope, ProductFactory, CategoryF
 	CategoryFactory.getCategories().then(function(response){
 		$scope.categories = response;
 	});
-
+	
+	// on search, should automatically filter
+	$scope.testFn = function(){
+		console.log($scope.searchQuery)
+	}
 	$scope.filterProducts = function(){
 		console.log('category Name INSIDE', $scope.categoryName._id)
 		var categoryId = $scope.categoryName._id
@@ -29,3 +32,7 @@ app.controller('ShoppingController', function ($scope, ProductFactory, CategoryF
 		
 	}
 });
+
+// app.filter('category', ["$filter", function($filter){
+	
+// }]);
