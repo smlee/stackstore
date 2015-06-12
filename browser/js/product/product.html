@@ -3,9 +3,8 @@
 <div class="row">
 
 	<div id="product-gallery" class="col-lg-8 col-md-8 col-sm-8">
-		<img zoom src="http://placekitten.com/g/400/500">
+				<img style="height: 400px" zoom src="{{picture.url}}">
 	</div>
-
 	<div id="master-product" class="col-lg-4 col-md-4 col-sm-4">
 		<div id="cart"><h5>Cart:</h5> {{cart.total | currency}} ({{cart.quantity}})</div>
 		<hr>
@@ -29,8 +28,8 @@
 					<div><h3>Medium:</h3>{{product.medium}}</div>
 					<div>
 						<h3>Tags:</h3>
-						<ul ng-repeat="tag in product.tags">
-							<li>{{tag}}</li>
+						<ul>
+							<li class="tags" ng-repeat="tag in product.tags">{{tag}}</li>
 						</ul>
 					</div>
 				</div>

@@ -15,7 +15,7 @@ app.controller('CustomerForm', function ($scope, AuthService, $state, CustomerFa
 		// CustomerFactory.submit(profile);
 		console.log('this is the customer info', info);
 	};
-
+	$scope.contactType = ['shipping', 'billing', 'home', 'event'];
 	// $scope.check = function(){
 	// 	console.log('this is chekc function')
 	// }
