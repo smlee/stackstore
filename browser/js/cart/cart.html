@@ -1,20 +1,17 @@
 <section id="cart">
 	<div>
-		<div ng-repeat="cart in carts">
+		<div>
+		<pre>{{cart}}</pre>
 			<div ng-repeat="item in cart.all_items">
 				<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url"></img>
 				<p>Name: {{item.art.name}}</p>
 				<p>Price: {{item.art.price | currency}}</p>
 				<select ng-model="quantity">{{item.quantity}}</select>
 				<button ng-click="editItem(cart._id, item._id, 2)">Update Quantity(2)</button>
-				<button ng-click="removeItem(cart._id, item._id)">Remove</button>
+				<button ng-click="removeItem(cart._id, item.art._id, $index)">Remove</button>
 				<hr>
 			</div>
-			<p>created at: {{ cart.created_at}}</p>
-			<p>invoice id: {{ cart.invoice_id}}</p>
 			<p>Order type: {{ cart.order_type}}</p>
-			<p>Paid: {{ cart.paid}}</p>
-			<p>Updated at: {{ cart.updated_at}}</p>
 		</div>
 		<button ng-click="submitOrder(cart._id)">Place Order</button>
 	</div>

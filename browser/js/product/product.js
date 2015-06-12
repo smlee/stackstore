@@ -6,9 +6,9 @@ app.config(function ($stateProvider){
 	});
 });
 
-app.controller('ProductController', function ($scope, $stateParams, ProductFactory){
-	console.log('this is stateParams', $stateParams.id)
-	console.log('this is just stateParams', $stateParams)
+app.controller('ProductController', function ($scope, $stateParams, ProductFactory, CartFactory){
+	console.log('this is stateParams', $stateParams.id);
+	console.log('this is just stateParams', $stateParams);
 
 	// $scope.product = {
 	// 	name: 'My Temporary Product',
@@ -26,7 +26,7 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 		total: 0,
 		items: [],
 		quantity: 0
-	}
+	};
 	$scope.product;
 
 
@@ -41,16 +41,20 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 	// 	$scope.cart = cart
 	// }) 
 	
-	$scope.addcart = function(){
+	$scope.addcart = function(product, qty){
 		// ProductFactory.addCart();
 		$scope.cart.total += $scope.product.price;
-		$scope.cart.quantity++
+		$scope.cart.quantity++;
+		console.log('this is product', product, 'this is quantity', qty);
+		var cart = {all_items: [{art: product, quantity: qty}], order_type: "order", paid: false };
+		CartFactory.addToLocalStorage(cart);
+
+
+		};
 	}
 
 	// $scope.addwish = function() {
 	// 	ProductFactory.addWish()
 	// }
 
-
-
-});
+);

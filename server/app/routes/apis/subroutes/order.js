@@ -35,11 +35,15 @@ router.put('/', function (req, res, next){
 
 //getting wierd error when trying to post
 router.post('/', function (req, res, next){
-	Order.create(req.body)
-	.then(function(){
-		res.send({message: 'order was saved'});
+	console.log('hit the post!', req.body)
+	Order.create(req.body, function(err, order){
+		if(err) next(err);
+		res.send('order was successfully created')
 	})
-	.then(null, next);
+	// .then(function(){
+	// 	res.send({message: 'order was saved'});
+	// })
+	// .then(null, next);
 });
 
 router.delete('/:id', function (req, res, next){
