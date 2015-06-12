@@ -28,7 +28,7 @@ router.put('/', function (req, res, next){
 	Order.findOneAndUpdate({_id: req.params._id})
 	.exec()
 	.then(function (updatedOrder) {
-		res.send(updatedOrder);
+		res.send(updatedOrder)
 	})
 	.then(null, next);
 });
