@@ -99,6 +99,7 @@ app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, Us
 
     $scope.getSingleUser = UsersFactory.getUsers($stateParams.id)
 
+
 });
 
 app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, ProductFactory, $state) {

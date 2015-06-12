@@ -7,7 +7,6 @@ app.factory('EventsFactory', function($http){
 				});
 			} else {
 				return $http.get('/api/event').then(function(events){
-					console.log(events)
 					return events.data;
 				});
 			}
