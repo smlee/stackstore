@@ -9,9 +9,9 @@ router.get('/', function (req, res, next){
 	Event.find({})
 	.exec()
 	.then(function (event){
-		res.send(event)
+		res.send(event);
 	})
-	.then(null, next);;
+	.then(null, next);
 });
 //tested
 router.get('/:id', function (req, res, next){
@@ -20,7 +20,7 @@ router.get('/:id', function (req, res, next){
 	.then(function (event){
 		res.send(event);
 	})
-	.then(null, next);;
+	.then(null, next);
 });
 //tested   
 router.post('/', function (req, res, next){	
