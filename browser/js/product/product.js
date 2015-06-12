@@ -7,8 +7,7 @@ app.config(function ($stateProvider){
 });
 
 app.controller('ProductController', function ($scope, $stateParams, ProductFactory){
-	console.log('this is stateParams', $stateParams.id)
-	console.log('this is just stateParams', $stateParams)
+
 
 	// $scope.product = {
 	// 	name: 'My Temporary Product',
@@ -31,7 +30,6 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 
 
 	ProductFactory.getPicture($stateParams).then(function(prod) {
-		console.log('INSIDE! product', prod);
 		$scope.picture = prod;
 		$scope.product = prod;
 	}); 

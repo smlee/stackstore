@@ -26,10 +26,10 @@ var schema = new mongoose.Schema({
 	// 	required: true
 	// },
 	description: String,
-	user_id: {
-        type: [mongoose.Schema.Types.ObjectId],
+	user_id: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
+    }],
 	created_at: {
 		type: Date,
 		default: Date.now
