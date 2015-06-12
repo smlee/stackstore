@@ -19,13 +19,16 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 	// 	tags: ["Art", "Canvas", "Badass"], // category?
 	// 	size: '24x30'
 	// }
-
+	
+	
+	
 	$scope.cart = {
 		total: 0,
 		items: [],
 		quantity: 0
 	}
 	$scope.product;
+
 
 	ProductFactory.getPicture($stateParams).then(function(prod) {
 		console.log('INSIDE! product', prod);
@@ -37,7 +40,7 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 	// .then(function (cart) {
 	// 	$scope.cart = cart
 	// }) 
-
+	
 	$scope.addcart = function(){
 		// ProductFactory.addCart();
 		$scope.cart.total += $scope.product.price;
