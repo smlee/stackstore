@@ -40,7 +40,7 @@ router.put('/:id', function (req, res, next){
 			contactArr[0] = req.body.contact;
 			contactArr[0].save(function(){
 				res.send({message: 'saved'});
-			})
+			});
 		}
 	})
 	.then(null, next);
@@ -68,7 +68,7 @@ router.post('/', function (req, res, next){
 		User.findOneAndUpdate({_id: req.body.id}, {contact: contact._id})
 		.exec()
 		.then(function(){
-			res.send({message: 'contact info saved'})
+			res.send({message: 'contact info saved'});
 		})
 		.then(null, next);	
 	})

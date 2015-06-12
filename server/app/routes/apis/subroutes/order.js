@@ -5,7 +5,7 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
-	var _id = req.query._id
+	var _id = req.query._id;
 	Order.find({ user: _id })
 	.populate("all_items.art")
 	.exec()
