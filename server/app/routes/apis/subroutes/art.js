@@ -7,8 +7,10 @@ var Art = mongoose.model('Art');
 //tested without query string gets all
 //tested with query gets specific
 router.get('/', function (req, res, next){
+	var category = req.query.category ? {category: req.query.category} : {}
+	console.log('this is category in the backend', category)
 	// if(req.query){
-		Art.find(req.query)
+		Art.find(category)
 		.exec()
 		.then(function (art) {
 			res.send(art);
@@ -18,6 +20,7 @@ router.get('/', function (req, res, next){
 });
 //tested
 router.get('/:id', function (req, res, next){
+	console.log('this is req.params.id', req.params.id)
 	Art.findOne({_id: req.params.id})
 	.exec()
 	.then(function (art){

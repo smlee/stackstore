@@ -4,18 +4,20 @@ module.exports = router;
 
 var Category = mongoose.model('Category');
 
-//would need to add contact onto req.body?
+router.get('/', function(req, res, next){
+	Category.find({}, function(err, category){
+		res.send(category);
+	});
+});
+
 router.get('/:id', function (req, res, next){
-	Category.findOne({_id: req.params.id})
-	.populate({
-		path: 'parent',
-		match: {type: req.body.contact.type}
-	})
-	.exec()
-	.then(function (contactChildArr){
-		res.send(contactChildArr[0]);
-	})
-	.then(null, next)
+    Category.findOne({_id: req.params.id})
+    .populate('parent')
+    .exec()
+    .then(function (contactChild){
+        res.send(contactChild);
+    })
+    .then(null, next)
 });
 
 router.put('/', function (req, res, next){
@@ -29,6 +31,17 @@ router.post('/', function (req, res, next){
 	})
 	.then(null, next);
 });
+
+//will post sub-category when someone adds it to a form
+// router.post('/:parentId', function(){
+// 	var subCategory = new Category({
+// 		parent: req.params.parentId,
+// 		name: req.body.subcategoryName
+// 	});
+// 	subCategory.save(function(err, data){
+// 		res.send('success!')
+// 	});
+// });
 
 router.delete('/:id', function (req, res, next){
 	Category.remove({_id: req.params.id})

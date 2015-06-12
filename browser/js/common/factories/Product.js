@@ -1,26 +1,34 @@
 app.factory('ProductFactory', function($http){
 	return{
-		getProduct: function () {
-			$http.get('/api/someroute').then(function(response){
+		getProduct: function (category) {
+			var queryParams = {};
+			if(category){ queryParams.category = category; }
+			return $http.get('/api/art', {params: queryParams}).then(function(response){
 				return response.data;
 			});
 		},
-
+		getPicture: function(prodId){
+			console.log('this is prodId in getPicture', prodId.id)
+			return $http.get('/api/art/' + prodId.id).then(function(response){
+				console.log('this is response from getPicture', response)
+				return response.data;
+			})
+		},
 		getCart: function () {
-			$http.get('/api/someroute').then(function(response){
+			return $http.get('/api/art').then(function(response){
 				return response.data;
 			});
 		},
 
 		addCart: function (item) {
 			console.log('helllooo!!!');
-			$http.post('/api/someroute').then(function(response){
+			return $http.post('/api/art').then(function(response){
 				return response.data;
 			});
 		},
 
 		addWish: function (item) {
-			$http.post('/api/someroute').then(function(response){
+			return $http.post('/api/art').then(function(response){
 				return response.data;
 			});
 		}
