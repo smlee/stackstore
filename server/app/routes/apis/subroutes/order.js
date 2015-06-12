@@ -5,7 +5,7 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
-	var _id = req.query._id
+	var _id = req.query._id;
 	Order.find({ user: _id })
 	.populate("all_items.art")
 	.exec()
@@ -28,7 +28,7 @@ router.put('/', function (req, res, next){
 	Order.findOneAndUpdate({_id: req.params._id})
 	.exec()
 	.then(function (updatedOrder) {
-		res.send(updatedOrder)
+		res.send(updatedOrder);
 	})
 	.then(null, next);
 });
