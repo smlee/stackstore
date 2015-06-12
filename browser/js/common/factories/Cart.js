@@ -1,4 +1,4 @@
-app.factory('CartFactory', function($http, ){
+app.factory('CartFactory', function($http){
 	return{
 		getCarts: function (userId) {
 			return $http.get('/api/order', {
@@ -30,7 +30,7 @@ app.factory('CartFactory', function($http, ){
 			.then(function(response){
 				return response.data;
 			});
-		}
+		},
 
 		submitOrder: function (orderId) {
 			return $http.put('/api/order/submit', {
