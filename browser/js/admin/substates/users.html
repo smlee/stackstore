@@ -11,6 +11,8 @@
 
 	<div ng-repeat="contact in user.contact">
 
+		<admin-submit inputs="contact"></admin-submit>
+		
 		<label>Type</label>
 		<input value="{{ contact.contact_type }}"></input>
 		<label>First</label>
@@ -30,8 +32,6 @@
 		<label ng-model="updatedusers.user[_id].zip">Zip</label>
 		<input value="{{ contact.zip }}"></input>
 
-
-		<admin-submit inputValues="contact.zip"></admin-submit>
 	</div>
 	<input type="submit"></input>
 	<hr>
