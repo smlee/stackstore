@@ -36,21 +36,20 @@ router.get('/:id', function (req, res, next){
 });
 
 router.put('/:id', function (req, res, next){
-	User.findOne({_id: req.params.id})
-	.populate({
-		path: 'Contact',
-		match: {type: req.body.contact.type}
-	})
-	.exec()
-	.then(function (contactArr){
-		if(req.body.contact){
-			contactArr[0] = req.body.contact;
-			contactArr[0].save(function(){
-				res.send({message: 'saved'});
-			});
+	if(req.body.updateType === 'user'){
+		if(req.body.info.contact){
+			req.body.info.contact = req.body.info.contact._id;
 		}
-	})
-	.then(null, next);
+		User.findOneAndUpdate({_id: req.params.id}, req.body.info).exec();
+	}else{
+		User.findOne({_id: req.params.id})
+		.populate('Contact')
+		.exec()
+		.then(function (contactId){
+			Contact.findOneAndUpdate({_id: contactId}, req.body.info).exec();
+		})
+		.then(null, next);
+	}
 });
 
 router.post('/', function (req, res, next){
@@ -81,3 +80,12 @@ router.post('/', function (req, res, next){
 	})
 	.then(null, next);	
 });
+
+router.delete('/:id', function (req, res, next){
+	User.remove({_id: req.params.id})
+	.exec()
+	.then(function (){
+		res.send({message: 'review successfully removed'});
+	})
+	.then(null, next);
+})

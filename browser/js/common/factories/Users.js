@@ -6,10 +6,22 @@ app.factory('UsersFactory', function($http){
 					return user.data;
 				});
 			} else {
-				return $http.get('/api/user').then(function(users){
+				return $http.get('/api/user').then(function(users){					
 					return users.data;
 				});
 			}
+		},
+
+		deleteUser: function(userId){
+			return $http.delete('/api/user/'+userId).then(function(){
+				return;			
+			});
+		},
+
+		updateUser: function(userId, user){
+			return $http.put('/api/user/'+userId, user).then(function(){
+				return;			
+			});
 		}
 	}
 });

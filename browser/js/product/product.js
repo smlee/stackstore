@@ -43,7 +43,7 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 		// ProductFactory.addCart();
 		$scope.cart.total += $scope.product.price;
 		$scope.cart.quantity++
-	}
+	}	
 
 	// $scope.addwish = function() {
 	// 	ProductFactory.addWish()
