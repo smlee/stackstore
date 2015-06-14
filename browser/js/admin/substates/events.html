@@ -1,0 +1,13 @@
+<h1>events page</h1>
+
+<div ng-repeat="event in events">
+	<label>Event Name</label>
+	<input value="{{event.event_name}}"></input>
+	<label>Description</label>
+	<input value="{{event.description}}"></input>
+	<label>Price</label>
+	<input value="{{event.price | currency}}"></input>
+	<label>Updated At</label>
+	<input value="{{event.updated_at}}"></input>
+	<p>Created At: {{event.updated_at}}</p>
+</div>

@@ -31,7 +31,6 @@ app.controller('ProductController', function ($scope, $stateParams, user, carts,
 
 
 	ProductFactory.getPicture($stateParams).then(function(prod) {
-		console.log('INSIDE! product', prod);
 		$scope.picture = prod;
 		$scope.product = prod;
 	}); 

@@ -1,0 +1,35 @@
+<h1>Artwork Page </h1>
+
+	<div class="input-group col-lg-4 col-md-4">
+		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		<input ng-model="query" type="text" class="form-control">
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-4">
+		<select class="form-control" ng-model="categoryName" ng-change="filterProducts()" ng-options="category.name for category in categories"></select>
+	</div>
+
+
+<div class="productImgContainer" ng-repeat="product in products | filter: query">
+	<div class="productImage">
+		<img ui-sref="product({id: product._id})" class="productImage" src="{{product.url}}" />
+		<label>Name</label>
+		<input value="{{product.name}}"></input>	
+		<label>Artist Name</label>
+		<input value="{{product.artist_name}}"></input>
+		<label>Category</label>
+		<input value="{{product.category}}"></input>
+		<label>Description</label>
+		<input value="{{product.description}}"></input>
+		<label>Price</label>
+		<input value="{{product.price | currency}}"></input>
+		<label>Quantity</label>
+		<input value="{{product.quantity}}"></input>
+		<label>Image Source</label>
+		<input value="{{product.url}}"></input>
+		<label>Tags</label>
+		<div ng-repeat="tag in product.tags">
+			<input value="{{tag}}"></input>
+		</div>
+	</div>
+</div>
+

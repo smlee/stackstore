@@ -7,10 +7,12 @@ var Contact = mongoose.model('Contact');
 
 router.get('/', function (req, res, next){
 	console.log(req.query.role);
-	
-	User.find({role: req.query.role})
+	//User.find({role: req.query.role})
+	User.find({})
+	.populate("contact")
 	.exec()
 	.then(function (users){
+
 		res.send(users);
 	})
 	.then(null, next);		
@@ -23,6 +25,11 @@ router.get('/:id', function (req, res, next){
 	})
 	.exec()
 	.then(function (user){
+
+		//User.findOne({_id: req.query.contactId})
+		//.exec()
+
+
 		res.send(user);
 	})
 	.then(null, next);				

@@ -26,10 +26,10 @@ var schema = new mongoose.Schema({
     google: {
         id: String
     },
-    contact: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Contact'
-    },
+    contact: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Contact'  
+    }],
     role: String
 });
 

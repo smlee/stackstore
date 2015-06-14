@@ -1,0 +1,22 @@
+<h1>Reviews </h1>
+
+	<div class="input-group col-lg-4 col-md-4">
+		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		<input ng-model="query" type="text" class="form-control">
+	</div>
+	<div class="col-lg-4 col-md-4 col-sm-4">
+		<select class="form-control" ng-model="categoryName" ng-change="filterProducts()" ng-options="category.name for category in categories"></select>
+	</div>
+
+
+<div class="productImgContainer" ng-repeat="product in products | filter: query">
+	<div class="productImage">
+		<img ui-sref="product({id: product._id})" class="productImage" src="{{product.url}}" />
+		<p>{{product.name}}</p>	
+		<label>Reviews</label>
+		<div ng-repeat="review in reviews[product._id]">
+			<input value="{{review.content}}"></input>
+		</div>
+		<button ng-click="getReview(product._id)">Get Review</button>
+	</div>
+</div>
