@@ -12,7 +12,7 @@ app.config(function ($stateProvider) {
         		return AuthService.getLoggedInUser()
         		.then(function (user) {
         			if (user) return CartFactory.getCarts(user._id)
-                    return JSON.parse(localStorage.userCart);
+                    return CartFactory.getFromLocalStorage();
         		})
         	}
         }
@@ -33,9 +33,10 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory) {
     };
 
     $scope.removeItem = function (cartid, itemid, idx) {
-
+        console.log('what is cartid', cartid)
         CartFactory.removeItem(cartid, itemid, idx)
 
+        // removes from view
         $scope.cart.all_items.splice(idx,1);
         $scope.cart = $scope.cart;
     	

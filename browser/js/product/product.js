@@ -2,25 +2,25 @@ app.config(function ($stateProvider){
 	$stateProvider.state('product',{
 		url: '/product/:id',
         templateUrl: 'js/product/product.html',
-        controller: 'ProductController'
+        controller: 'ProductController', 
+        resolve: {
+        	user: function (AuthService) {
+        		return AuthService.getLoggedInUser()
+        	},
+        	carts: function (AuthService, CartFactory) {
+        		return AuthService.getLoggedInUser()
+        		.then(function (user) {
+        			if (user) return CartFactory.getCarts(user._id)
+                    return CartFactory.getFromLocalStorage();
+        		})
+        	}
+        }
 	});
 });
 
-app.controller('ProductController', function ($scope, $stateParams, ProductFactory, CartFactory){
+app.controller('ProductController', function ($scope, $stateParams, user, carts, ProductFactory, CartFactory, AuthService){
 	console.log('this is stateParams', $stateParams.id);
 	console.log('this is just stateParams', $stateParams);
-
-	// $scope.product = {
-	// 	name: 'My Temporary Product',
-	// 	artist_name: "Joanne Yae",
-	// 	price: 9001,
-	// 	description: "Awesome, amazing, breathtaking, gripping piece of art.",
-	// 	medium: "Watercolor with oil paints.",
-	// 	tags: ["Art", "Canvas", "Badass"], // category?
-	// 	size: '24x30'
-	// }
-	
-	
 	
 	$scope.cart = {
 		total: 0,
@@ -45,16 +45,10 @@ app.controller('ProductController', function ($scope, $stateParams, ProductFacto
 		// ProductFactory.addCart();
 		$scope.cart.total += $scope.product.price;
 		$scope.cart.quantity++;
-		console.log('this is product', product, 'this is quantity', qty);
+
 		var cart = {all_items: [{art: product, quantity: qty}], order_type: "order", paid: false };
-		CartFactory.addToLocalStorage(cart);
+		if(user) CartFactory.pushItem(carts._id, cart) 
+		else CartFactory.addToLocalStorage(cart);
 
-
-		};
-	}
-
-	// $scope.addwish = function() {
-	// 	ProductFactory.addWish()
-	// }
-
-);
+	};
+});

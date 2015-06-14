@@ -29,10 +29,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.logout = function () {
                 // need to work on this
                 AuthService.getLoggedInUser().then(function(user){
+                    console.log('on logout user', user)
                     CartFactory.getCarts(user._id).then(function(carts){
+                        console.log('on logout carts', carts)
                         localStorage.setItem('userCart', JSON.stringify(carts))
-                    })
-                })
+                    });
+                });
                 AuthService.logout().then(function () {
                    $state.go('home');
                 });

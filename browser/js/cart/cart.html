@@ -6,8 +6,9 @@
 				<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url"></img>
 				<p>Name: {{item.art.name}}</p>
 				<p>Price: {{item.art.price | currency}}</p>
-				<select ng-model="quantity">{{item.quantity}}</select>
-				<button ng-click="editItem(cart._id, item._id, 2)">Update Quantity(2)</button>
+				<input ng-model="item.quantity" />
+				<pre>{{item}}</pre>
+				<button ng-click="editItem(cart._id, item._id, item.quantity)">Update Quantity</button>
 				<button ng-click="removeItem(cart._id, item.art._id, $index)">Remove</button>
 				<hr>
 			</div>
