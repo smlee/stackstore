@@ -11,7 +11,8 @@ app.config(function ($stateProvider) {
         	carts: function (AuthService, CartFactory) {
         		return AuthService.getLoggedInUser()
         		.then(function (user) {
-        			return CartFactory.getCarts(user._id)
+        			if (user) return CartFactory.getCarts(user._id)
+                    return CartFactory.getFromLocalStorage();
         		})
         	}
         }
@@ -22,9 +23,7 @@ app.config(function ($stateProvider) {
 app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory) {
 
 	$scope.user = user;
-    $scope.carts = carts;
-
-	
+    $scope.cart = carts;
 
     $scope.editItem = function (cartid, itemid, newInfo) {
     	CartFactory.editItem(cartid, itemid, newInfo)
@@ -33,10 +32,14 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory) {
     	})
     };
 
-    $scope.removeItem = function (cartid, itemid) {
-    	CartFactory.removeItem(cartid, itemid)
-    	.then(function (response) {
-    	})
+    $scope.removeItem = function (cartid, itemid, idx) {
+        console.log('what is cartid', cartid)
+        CartFactory.removeItem(cartid, itemid, idx)
+
+        // removes from view
+        $scope.cart.all_items.splice(idx,1);
+        $scope.cart = $scope.cart;
+    	
     };
 
     $scope.submitOrder = function (cartid) {

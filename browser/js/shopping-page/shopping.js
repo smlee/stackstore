@@ -18,10 +18,6 @@ app.controller('ShoppingController', function ($scope, ProductFactory, CategoryF
 		$scope.categories = response;
 	});
 	
-	// on search, should automatically filter
-	$scope.testFn = function(){
-		console.log($scope.searchQuery)
-	}
 	$scope.filterProducts = function(){
 		console.log('category Name INSIDE', $scope.categoryName._id)
 		var categoryId = $scope.categoryName._id

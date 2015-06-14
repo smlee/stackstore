@@ -21,7 +21,6 @@ app.factory('ProductFactory', function($http){
 		},
 
 		addCart: function (item) {
-			console.log('helllooo!!!');
 			return $http.post('/api/art').then(function(response){
 				return response.data;
 			});
