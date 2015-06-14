@@ -12,8 +12,7 @@ var schema = new mongoose.Schema({
 		required: true
 	},
 	phone_number: {
-		type: String,
-		required: true
+		type: String
 	},
 	address_line_1: {
 		type: String,

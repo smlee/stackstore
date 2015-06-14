@@ -6,21 +6,23 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
-
+            scope.adminNotAuth = true;
+            scope.adminNotAuthorized = function(){
+                return scope.adminNotAuth;
+            };
             scope.items = [
                 { label: 'Home', state: 'home' },
                 { label: 'About', state: 'about' },
                 { label: 'View Products', state: 'shopping'},
                 // { label: 'Tutorial', state: 'tutorial' },
+                { label: 'Admin', state: 'admin', auth: true, adminAuth: scope.adminNotAuthorized},
                 { label: 'New Customer', state: 'customerForm' },
                 { label: 'Purchase', state: 'product' },
                 { label: 'Cart', state: 'cart' },
                 { label: 'Artist Page', state: 'artist' },
-                { label: 'Artist Manage', state: 'profileForm' }
-                // { label: 'Members Only', state: 'membersOnly', auth: true }
+                { label: 'Artist Manage', state: 'profileForm' },
+                { label: 'Members Only', state: 'membersOnly', auth: true}
             ];
-
-            scope.user = null;
 
             scope.isLoggedIn = function () {
                 return AuthService.isAuthenticated();
@@ -41,16 +43,24 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             };
 
             var setUser = function () {
-                AuthService.getLoggedInUser().then(function (user) {
+                AuthService.getLoggedInUser().then(function (user) {                    
                     scope.user = user;
+                    if(user.is_admin){
+                        $rootScope.$broadcast('adminLoggedIn', false);
+                    }
                 });
             };
 
             var removeUser = function () {
+                if(scope.user.is_admin){
+                    $rootScope.$broadcast('adminLoggedIn', true);
+                }
                 scope.user = null;
             };
 
-            setUser();
+            $rootScope.$on('adminLoggedIn', function (event, bool){                                                
+                scope.adminNotAuth = bool;
+            });
 
             $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);

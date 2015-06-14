@@ -26,11 +26,12 @@ var schema = new mongoose.Schema({
     google: {
         id: String
     },
-    contact: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Contact'
-    },
-    role: String
+    contact: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Contact'  
+    }],
+    role: String,
+    is_admin: Boolean
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

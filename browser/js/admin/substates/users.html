@@ -1,0 +1,42 @@
+<h1>users page</h1>
+
+<ul>
+<li ng-repeat="user in users">{{user.email}}<button ng-click='deleteUser(user)'>Delete</button><button ng-click='promoteAdmin(user)' ng-if="!user.is_admin">Promote Admin</button><button ng-click='demoteAdmin(user)' ng-if="user.is_admin">Demote Admin</button></li>
+</ul>
+
+
+
+<!-- <form ng-repeat="user in users" ng-submit="submit(user)">
+<pre>{{userInfo}}</pre>
+
+	<label>Email</label>
+	<input ng-model="userInfo.email" value="{{ user.email }}"></input>
+	<label>Role</label>
+	<input ng-model="userInfo.info" value="{{ user.role }}"></input>
+
+	<div ng-repeat="contact in user.contact">
+	<label>Type</label>
+	<input ng-model="userInfo.contact" value="{{ contact.contact_type }}"></input>
+	<label>First</label>
+	<input ng-model="userInfo.first" value="{{ contact.first_name }}"></input>
+	<label>Last</label>
+	<input ng-model="userInfo.last" value="{{ contact.last_name }}"></input>
+	<label>Phone</label>
+	<input ng-model="userInfo.phone" value="{{ contact.phone_number }}"></input>
+	<label>Address1</label>
+	<input ng-model="userInfo.address1" value="{{ contact.address_line_1 }}"></input>
+	<label>Address2</label>
+	<input ng-model="userInfo.address2" value="{{ contact.address_line_2 }}"></input>
+	<label>City</label>
+	<input ng-model="userInfo.city" value="{{ contact.city }}"></input>
+	<label>State</label>
+	<input ng-model="userInfo.state" value="{{ contact.state }}"></input>
+	<label>Zip</label>
+	<input ng-model="userInfo.zip" value="{{ contact.zip }}"></input>
+	</div> 
+
+
+	
+	<input type="submit"></input>
+	<hr>
+</form> -->

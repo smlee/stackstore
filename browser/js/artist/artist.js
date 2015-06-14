@@ -8,4 +8,6 @@ app.config(function ($stateProvider){
 
 app.controller('ArtistController', function ($scope, ArtistFactory){
 
+// add delete own profile button
+
 });

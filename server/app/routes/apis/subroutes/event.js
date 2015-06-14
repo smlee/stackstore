@@ -8,8 +8,9 @@ var Event = mongoose.model('Event');
 router.get('/', function (req, res, next){
 	Event.find({})
 	.exec()
-	.then(function (event){
-		res.send(event);
+	.then(function (events){
+		console.log('here be events', events)
+		res.send(events);
 	})
 	.then(null, next);
 });
