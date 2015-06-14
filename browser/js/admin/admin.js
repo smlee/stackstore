@@ -80,6 +80,13 @@ app.config(function ($stateProvider) {
         resolve: {
             user: function (AuthService) {
                 return AuthService.getLoggedInUser()
+            },
+            carts: function (AuthService, CartFactory) {
+                return AuthService.getLoggedInUser()
+                .then(function (user) {
+                    if (user) return CartFactory.getCarts(user._id)
+                    return CartFactory.getFromLocalStorage();
+                })
             }
         }
     });
@@ -149,8 +156,9 @@ app.controller('AdminEventsCtrl', function ($scope, user, events, $state) {
 
 });
 
-app.controller('AdminOrdersCtrl', function ($scope, user, $state) {
+app.controller('AdminOrdersCtrl', function ($scope, user, carts, $state) {
 
     $scope.user = user
+    $scope.cart = carts;
 
 });
