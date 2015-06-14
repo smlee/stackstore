@@ -30,7 +30,8 @@ var schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Contact'  
     }],
-    role: String
+    role: String,
+    is_admin: Boolean
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

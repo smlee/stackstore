@@ -93,20 +93,46 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('AdminCtrl', function ($scope, user, $state) {
-
-    $scope.user = user
-
+app.controller('AdminCtrl', function ($scope, user, $state, $rootScope) {
+    $scope.user = user;
 });
 
 app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, UsersFactory, $state) {
+    $scope.user = user;
+    $scope.users = users; 
 
-    $scope.user = user
-    $scope.users = users 
+    $scope.deleteUser = function(user){
+        UsersFactory.deleteUser(user._id).then(function(){
+            UsersFactory.getUsers().then(function(users){
+                $scope.users = users;
+            });
+        });             
+    }
 
-    $scope.getSingleUser = UsersFactory.getUsers($stateParams.id)
+    var obj = {
+        updateType: 'user',
+        info: null
+    };
 
+    $scope.promoteAdmin = function(user){
+        user.is_admin = true;
+        obj.info = user;
+        console.dir(user);
+        console.dir(obj.info);
+        UsersFactory.updateUser(user._id, obj).then(function(){
+            //$scope.users = users;
+        });
+    }
 
+    $scope.demoteAdmin = function(user){
+        user.is_admin = false;
+        obj.info = user;
+        console.dir(user);
+        console.dir(obj.info);
+        UsersFactory.updateUser(user._id, obj).then(function(){
+            //$scope.users = users;
+        });
+    }
 });
 
 app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, ProductFactory, $state) {
@@ -142,7 +168,7 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
     $scope.getReview = function (id) {
         ReviewsFactory.getReviews(id)
         .then(function (review) {
-            console.log(review)
+            // console.log(review)
             $scope.reviews[id] = review
         })
     }
