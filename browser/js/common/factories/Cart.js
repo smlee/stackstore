@@ -102,7 +102,22 @@ app.factory('CartFactory', function($http){
 			return $http.put('/api/order/push', { params: {_id: cartid, newData: item} }).then(function(response){
 				return response.data;
 			});
-		}
+		},
+
+        syncCart: function(userId) {
+            var self = this;
+            this.getCarts(userId).then(function(cart){
+                // if they have a cart, add to it from localStorage to database
+                if(cart !== undefined){
+                    self.updateOrder(cart._id, self.getFromLocalStorage())
+                } else {
+                    var newCart = self.getFromLocalStorage();
+                    newCart['user'] = userId;
+                    self.createCart(newCart).then(function (result) {
+                    })
+                }
+            })
+        }
 
 	}
 });
