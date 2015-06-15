@@ -182,12 +182,24 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
         })
     });
 
+    $scope.updateReview = function (review) {
+        ReviewsFactory.updateReview(review).then(function(response){
+            review.updated = response
+        })
+    }
 });
 
-app.controller('AdminEventsCtrl', function ($scope, user, events, $state) {
+app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory, $state) {
 
     $scope.user = user
     $scope.events = events
+    console.log(events)
+
+    $scope.updateEvent = function (event) {
+        EventsFactory.updateEvents(event).then(function(response){
+            event.updated = response
+        })
+    }
 
 });
 
@@ -195,5 +207,7 @@ app.controller('AdminOrdersCtrl', function ($scope, user, carts, $state) {
 
     $scope.user = user
     $scope.cart = carts;
+
+    // $scope.
 
 });

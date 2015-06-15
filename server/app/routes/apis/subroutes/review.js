@@ -16,8 +16,15 @@ router.get('/:id', function (req, res, next){
         .then(null, next);
 });
 
+//tested
 router.put('/', function (req, res, next){
-
+	req.body.user_id = req.body.user_id._id
+	Review.findOneAndUpdate({_id: req.body._id}, req.body)
+	.exec()
+	.then(function() {
+		res.send("Updated")
+	})
+	.then(null, next);
 });
 //tested but i think art id should be required in the models
 router.post('/', function (req, res, next){

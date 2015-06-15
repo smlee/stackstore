@@ -21,38 +21,46 @@ app.config(function ($stateProvider){
     });
 });
 
-app.controller('ProductController', function ($scope, $stateParams, user, carts, reviews, ProductFactory, CartFactory){
-    console.log('this is stateParams', $stateParams.id);
-    console.log('this is just stateParams', $stateParams);
+app.controller('ProductController', function ($scope, $stateParams, user, carts, ProductFactory, CartFactory, ReviewsFactory, AuthService){
+	console.log('this is stateParams', $stateParams.id);
+	console.log('this is just stateParams', $stateParams);
+	
+	$scope.cart = {
+		total: 0,
+		items: [],
+		quantity: 0
+	};
+	$scope.product;
 
-    $scope.cart = {
-        total: 0,
-        items: [],
-        quantity: 0
-    };
-    $scope.product;
-    $scope.reviews = reviews;
+
+	ProductFactory.getPicture($stateParams).then(function(prod) {
+		console.log('INSIDE! product', prod);
+		$scope.picture = prod;
+		$scope.product = prod;
+		return prod
+	})
+	.then(function(prod){
+		ReviewsFactory.getReviews(prod._id).then(function(review){
+			$scope.reviews = review
+			console.log('prodreview', $scope.review)
+		})
+	});
 
 
-    ProductFactory.getPicture($stateParams).then(function(prod) {
-        console.log('INSIDE! product', prod);
-        $scope.picture = prod;
-        $scope.product = prod;
-    });
 
-    // ProductFactory.getCart()
-    // .then(function (cart) {
-    // 	$scope.cart = cart
-    // }) 
+	// ProductFactory.getCart()
+	// .then(function (cart) {
+	// 	$scope.cart = cart
+	// }) 
+	
+	$scope.addcart = function(product, qty){
+		// ProductFactory.addCart();
+		$scope.cart.total += $scope.product.price;
+		$scope.cart.quantity++;
 
-    $scope.addcart = function(product, qty){
-        // ProductFactory.addCart();
-        $scope.cart.total += $scope.product.price;
-        $scope.cart.quantity++;
+		var cart = {all_items: [{art: product, quantity: qty}], order_type: "order", paid: false };
+		if(user) CartFactory.pushItem(carts._id, cart) 
+		else CartFactory.addToLocalStorage(cart);
 
-        var cart = {all_items: [{art: product, quantity: qty}], order_type: "order", paid: false };
-        if(user) CartFactory.pushItem(carts._id, cart)
-        else CartFactory.addToLocalStorage(cart);
-
-    };
+	};
 });
