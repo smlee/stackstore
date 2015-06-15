@@ -18,7 +18,7 @@ app.config(function ($stateProvider){
 	});
 });
 
-app.controller('ProductController', function ($scope, $stateParams, user, carts, ProductFactory, CartFactory, AuthService){
+app.controller('ProductController', function ($scope, $stateParams, user, carts, ProductFactory, CartFactory, ReviewsFactory, AuthService){
 	console.log('this is stateParams', $stateParams.id);
 	console.log('this is just stateParams', $stateParams);
 	
@@ -34,7 +34,16 @@ app.controller('ProductController', function ($scope, $stateParams, user, carts,
 		console.log('INSIDE! product', prod);
 		$scope.picture = prod;
 		$scope.product = prod;
-	}); 
+		return prod
+	})
+	.then(function(prod){
+		ReviewsFactory.getReviews(prod._id).then(function(review){
+			$scope.reviews = review
+			console.log('prodreview', $scope.review)
+		})
+	});
+
+
 
 	// ProductFactory.getCart()
 	// .then(function (cart) {

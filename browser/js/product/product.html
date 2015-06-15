@@ -39,6 +39,12 @@
 					<div><h3>Artist:</h3>{{product.artist_name}}</div>
 				</div>
 		    </tab>
+		    <tab heading="Reviews">
+		    	<div class="product-info" ng-repeat="review in reviews">
+					<div><h3>Stars:</h3>{{review.rating}}</div>
+					<div><h3>Review:</h3>{{review.content}}</div>
+				</div>
+		    </tab>
 	  	</tabset>
 	    <div>
 			<button class="btn btn-info product-button" ng-click="addcart(product, qty)">Add to Cart</button><label for="qty">Quantity</label><input id="qty" ng-model="qty" type="text" />
