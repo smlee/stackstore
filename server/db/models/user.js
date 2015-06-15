@@ -31,7 +31,9 @@ var schema = new mongoose.Schema({
         ref: 'Contact'  
     }],
     role: String,
-    is_admin: Boolean
+    is_admin: Boolean,
+    first_name: String,
+    last_name: String
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

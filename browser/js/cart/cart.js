@@ -20,22 +20,29 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory) {
+app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, AuthService) {
 
 	$scope.user = user;
     $scope.cart = carts;
 
-    $scope.editItem = function (cartid, itemid, newInfo) {
-    	CartFactory.editItem(cartid, itemid, newInfo)
-    	.then(function (updatedOrders) {
-    		$scope.carts = updatedOrders
-    	})
+    $scope.editItem = function (cartid, itemid, newInfo, idx) {
+        if (AuthService.isAuthenticated()) {
+            CartFactory.editItem(cartid, itemid, newInfo)
+                .then(function (updatedOrders) {
+                    $scope.carts = updatedOrders
+                });
+        }
+        CartFactory.editLocal(idx, newInfo);
+
     };
 
     $scope.removeItem = function (cartid, itemid, idx) {
-        console.log('what is cartid', cartid)
-        CartFactory.removeItem(cartid, itemid, idx)
+        console.log('what is cartid', cartid);
+        if (AuthService.isAuthenticated()) {
+            CartFactory.removeItem(cartid, itemid);
+        }
 
+        CartFactory.removeItemLocal(idx, itemid);
         // removes from view
         $scope.cart.all_items.splice(idx,1);
         $scope.cart = $scope.cart;

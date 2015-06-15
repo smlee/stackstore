@@ -11,15 +11,23 @@ app.factory('CartFactory', function($http){
 		},
 
 		editItem: function (cartId, itemId, quantity) {
-			return $http.put('/api/order/'+cartId, {
-				params: {
-					_id: itemId,
-					quantity: quantity
-				}
-			}).then(function(updatedOrders){
-				return updatedOrders.data;
-			});
+
+            return $http.put('/api/order/update/'+cartId, {
+                params: {
+                    _id: itemId,
+                    quantity: quantity
+                }
+            }).then(function(updatedOrders){
+                return updatedOrders.data;
+            });
+
 		},
+
+        editLocal: function(idx, newInfo) {
+            var cart = this.getFromLocalStorage();
+            cart.all_items[idx].quantity = newInfo;
+            localStorage.userCart = JSON.stringify(cart);
+        },
 
 		updateOrder: function(cartId, newInfo){
 			return $http.put('/api/order/update', { params: {_id: cartId, newData: newInfo} })
@@ -28,27 +36,26 @@ app.factory('CartFactory', function($http){
 				});
 		},
 
-		removeItem: function (cartId, itemId, idx) {
-			if(cartId){
-				return $http.delete('/api/order/'+cartId, {
-					params: {
-						_id: itemId
-					}
-				})
-		.then(function(response){
-					return response.data;
-				});	
-			} else {
-				var cart = this.getFromLocalStorage();
-				var all_items = cart.all_items;
-	            var updatedItem = cart.all_items.filter(function(item){
-	                return item.art._id !== itemId;
-	            });
-	            cart.all_items = updatedItem;
-	            localStorage.userCart = JSON.stringify(cart);
-			}
-			
+		removeItem: function (cartId, itemId) {
+            return $http.delete('/api/order/' + cartId, {
+                params: {
+                    _id: itemId
+                }
+            })
+                .then(function (response) {
+                    return response.data;
+                });
+
 		},
+
+        removeItemLocal: function(idx, itemId) {
+            var cart = this.getFromLocalStorage();
+            var updatedItem = cart.all_items.filter(function(item){
+                return item.art._id !== itemId;
+            });
+            cart.all_items = updatedItem;
+            localStorage.userCart = JSON.stringify(cart);
+        },
 
 		submitOrder: function (orderId) {
 			return $http.put('/api/order/submit', {
@@ -91,7 +98,22 @@ app.factory('CartFactory', function($http){
 			return $http.put('/api/order/push', { params: {_id: cartid, newData: item} }).then(function(response){
 				return response.data;
 			});
-		}
+		},
+
+        syncCart: function(userId) {
+            var self = this;
+            this.getCarts(userId).then(function(cart){
+                // if they have a cart, add to it from localStorage to database
+                if(cart !== undefined){
+                    self.updateOrder(cart._id, self.getFromLocalStorage())
+                } else {
+                    var newCart = self.getFromLocalStorage();
+                    newCart['user'] = userId;
+                    self.createCart(newCart).then(function (result) {
+                    })
+                }
+            })
+        }
 
 	}
 });

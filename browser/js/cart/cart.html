@@ -8,7 +8,7 @@
 				<p>Price: {{item.art.price | currency}}</p>
 				<input ng-model="item.quantity" />
 				<pre>{{item}}</pre>
-				<button ng-click="editItem(cart._id, item._id, item.quantity)">Update Quantity</button>
+				<button ng-click="editItem(cart._id, item._id, item.quantity, $index)">Update Quantity</button>
 				<button ng-click="removeItem(cart._id, item.art._id, $index)">Remove</button>
 				<hr>
 			</div>
