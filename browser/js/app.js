@@ -21,7 +21,7 @@ app.run(function ($rootScope, AuthService, $state) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, AUTH_EVENTS) {
         
         if (toState.data && toState.data.authorizedRoles && !AuthService.isAuthorized(toState.data.authorizedRoles)) {
-            event.preventDefault();            
+            // event.preventDefault();            
             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
             $state.go('home');
         }

@@ -13,23 +13,25 @@
 	<div class="productImage">
 		<img ui-sref="product({id: product._id})" class="productImage" src="{{product.url}}" />
 		<label>Name</label>
-		<input value="{{product.name}}"></input>	
+		<input value="{{product.name}}" ng-model="product.name"></input>	
 		<label>Artist Name</label>
-		<input value="{{product.artist_name}}"></input>
+		<input value="{{product.artist_name}}" ng-model="product.artist_name"></input>
 		<label>Category</label>
-		<input value="{{product.category}}"></input>
+		<input value="{{product.category.name}}" ng-model="product.category.name"></input>
 		<label>Description</label>
-		<input value="{{product.description}}"></input>
+		<input value="{{product.description}}" ng-model="product.description"></input>
 		<label>Price</label>
-		<input value="{{product.price | currency}}"></input>
+		<input value="{{product.price | currency}}" ng-model="product.price"></input>
 		<label>Quantity</label>
-		<input value="{{product.quantity}}"></input>
+		<input value="{{product.quantity}}" ng-model="product.quantity"></input>
 		<label>Image Source</label>
-		<input value="{{product.url}}"></input>
+		<input value="{{product.url}}" ng-model="product.url"></input>
 		<label>Tags</label>
 		<div ng-repeat="tag in product.tags">
 			<input value="{{tag}}"></input>
 		</div>
+		<button ng-click="updateProduct(product)">Update</button>
+		<div>{{product.updated}}</div>
 	</div>
 </div>
 

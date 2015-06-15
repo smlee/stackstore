@@ -151,6 +151,12 @@ app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, 
         }); 
     }
 
+    $scope.updateProduct = function (product) {
+        ProductFactory.updateProduct(product).then(function(response){
+            product.updated = response
+        })
+    }
+
 });
 
 app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, ReviewsFactory, ProductFactory, $state) {
@@ -168,17 +174,13 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
         }); 
     }
 
-    console.log(artwork)
-    
-    
-
-    $scope.getReview = function (id) {
-        ReviewsFactory.getReviews(id)
+    artwork.forEach(function (art) {
+        ReviewsFactory.getReviews(art._id)
         .then(function (review) {
             // console.log(review)
-            $scope.reviews[id] = review
+            $scope.reviews[art._id] = review
         })
-    }
+    });
 
 });
 

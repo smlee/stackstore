@@ -166,9 +166,17 @@ describe('AuthService', function () {
                 password: 'potus'
             };
 
-            $httpBackend.expectPOST('/login', potus).respond(200, {});
+            $httpBackend.expectPOST('/login', potus).respond(200, {
+                id: 1,
+                user: {
+                    id: 1,
+                    email: 'obama@gmail.com'    
+                }
+            });
 
-            AuthService.login(potus).then(done);
+            AuthService.login(potus).then(function () {
+                done();
+            });
 
             $httpBackend.flush();
 
