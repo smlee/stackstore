@@ -29,8 +29,10 @@ router.get('/:id', function (req, res, next){
 	.then(null, next);
 });
 
+//untested
 router.put('/', function(req, res, next){
-
+	Art.findOneAndUpdate({_id: req.params._id}).exec()
+	.then(null, next);
 });
 //tested
 router.post('/', function (req, res, next){
