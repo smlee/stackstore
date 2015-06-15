@@ -10,6 +10,11 @@ app.factory('EventsFactory', function($http){
 					return events.data;
 				});
 			}
+		},
+		updateEvents: function(eventId, event) {
+			return $http.put('/api/event/'+eventId, user).then(function(){
+				return;			
+			});
 		}
 	}
 });

@@ -1,13 +1,11 @@
 app.factory('CartFactory', function($http){
 	return{
 		getCarts: function (userId) {
-			console.log('am i in getCarts after login?', userId)
 			return $http.get('/api/order', {
 				params: {
 					_id: userId
 				}
 			}).then(function(orders){
-				console.log('this is orders data in get carts', orders.data)
 				return orders.data[0];
 			});
 		},
@@ -32,10 +30,8 @@ app.factory('CartFactory', function($http){
         },
 
 		updateOrder: function(cartId, newInfo){
-			console.log('inside updatedOrder', cartId, newInfo)
 			return $http.put('/api/order/update', { params: {_id: cartId, newData: newInfo} })
 				.then(function(order){ 
-					console.log('this is what updatedOrder looks like', order.data)
 					return order.data 
 				});
 		},

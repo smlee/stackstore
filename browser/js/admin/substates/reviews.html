@@ -13,7 +13,11 @@
 	<div class="productImage">
 		<img ui-sref="product({id: product._id})" class="productImage" src="{{product.url}}" />
 		<p>{{product.name}}</p>	
-		<p>{{reviews[product._id][0].content}}</p>
-		<button ng-click="getReview(product._id)">Get Review</button>
+		<div ng-repeat="review in reviews[product._id]">
+			<label>Stars</label>
+			<input value="{{review.rating}}"></input>
+			<label>Reviews</label>
+			<input value="{{review.content}}"></input>
+		</div>
 	</div>
 </div>

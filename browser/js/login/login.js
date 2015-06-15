@@ -24,12 +24,12 @@ app.controller('LoginCtrl', function ($scope, $rootScope, AuthService, $state, C
             // when the user is verified, create a new Cart object in the db
             // but first, check if that cartID already exists.  if it does, updated the cart
             AuthService.getLoggedInUser().then(function(user){
+                console.log('user exists', user)
                 if(user) {
                     // CartFactory.getOpenCarts(user._id).then(function (carts){
                     //     console.log('These are the open carts if they exist: ',carts);
                     // })
-                    console.log('line 31 login.js ',$rootScope.previousPath);
-                    //location.href = $rootScope.previousPath;
+                    // location.href = $rootScope.previousPath;
                     CartFactory.syncCart(user._id)
                 } else {
                     if (localStorage.userCart !== undefined){

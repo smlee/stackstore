@@ -24,6 +24,13 @@
         notAuthorized: 'auth-not-authorized'
     });
 
+
+    app.constant('USER_ROLES', {
+        all: '*',
+        admin: 'admin',
+        guest: 'guest'
+    });
+
     app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
         var statusDict = {
             401: AUTH_EVENTS.notAuthenticated,
@@ -54,6 +61,15 @@
         // authenticated user is currently registered.
         this.isAuthenticated = function () {
             return !!Session.user;
+        };
+
+
+        this.isAuthorized = function (authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+              authorizedRoles = [authorizedRoles];
+            }
+            return (this.isAuthenticated() &&
+              authorizedRoles.indexOf(Session.userRole) !== -1);
         };
 
         this.getLoggedInUser = function () {
@@ -100,7 +116,6 @@
     });
 
     app.service('Session', function ($rootScope, AUTH_EVENTS) {
-
         var self = this;
 
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
@@ -113,17 +128,21 @@
 
         this.id = null;
         this.user = null;
+        this.userRole = null;
 
         this.create = function (sessionId, user) {
             this.id = sessionId;
             this.user = user;
+
+            if(user.is_admin){
+                this.userRole = 'admin'; 
+            }
         };
 
         this.destroy = function () {
             this.id = null;
             this.user = null;
+            this.userRole = null;
         };
-
     });
-
 })();
