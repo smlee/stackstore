@@ -18,7 +18,6 @@ router.get('/:code', function (req, res, next){
 	Promo.findOne({code: req.params.code})
 	.exec()
 	.then(function (promo) {
-		console.log(promo);
 		if (promo){
 			res.send(true)
 		} else res.send(false)
@@ -36,6 +35,8 @@ router.put('/', function(req, res, next){
 });
 
 router.post('/', function (req, res, next){
+	console.log(req.body);
+	
 	Promo.create(req.body)
 	.then(function (){
 		res.send({message: 'promo was saved'});

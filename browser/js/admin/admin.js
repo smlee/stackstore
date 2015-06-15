@@ -94,10 +94,26 @@ app.config(function ($stateProvider, USER_ROLES) {
         }
     });
 
+    $stateProvider.state('admin.promos', {
+        url: '/admin/promos',
+        templateUrl: 'js/admin/substates/promos.html',
+        controller: 'AdminPromosCtrl',
+        resolve: {
+            user: function (AuthService) {
+                return AuthService.getLoggedInUser()
+            },
+            promos: function(PromosFactory){
+                return PromosFactory.getAllPromos();
+            }
+        }
+    });
 });
 
 app.controller('AdminCtrl', function ($scope, user, $state, $rootScope) {
     $scope.user = user;
+    $scope.test = function () {
+        $state.go('admin.promos')
+    }
 });
 
 app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, UsersFactory, $state) {
@@ -211,3 +227,38 @@ app.controller('AdminOrdersCtrl', function ($scope, user, carts, $state) {
     // $scope.
 
 });
+
+app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, PromosFactory, promos) {
+    $scope.user = user;
+    $scope.promos = promos;
+
+    $scope.addPromoCode = function (promo){
+        console.log(promo);
+        PromosFactory.addPromos(promo)
+        .then(function(response){
+            console.log(response);
+
+            promo.updated = response;
+        });
+    }
+    $scope.updatePromo = function (promo){
+        
+        
+        PromosFactory.updatePromo(promo)
+        .then(function(response){
+            promo.updated = response;
+                        
+            // $timeout(function() {
+            //     promo.updated = null
+            // }, 2000);
+        });
+    }
+
+    $scope.deletePromo = function (promo){
+        PromosFactory.deletePromo(promo)
+        .then(function(response){
+            promo.updated = response
+        });
+    }
+});
+

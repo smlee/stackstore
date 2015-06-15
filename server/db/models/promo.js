@@ -3,9 +3,10 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
 	code: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
-	type: { 
+	promo_type: { 
 		type: String,
 		enum: ['shipping', 'product']
 	},
