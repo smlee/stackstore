@@ -50,7 +50,7 @@ router.put('/', function(req, res, next){
 //tested
 router.post('/', function (req, res, next){
 	Art.create(req.body)
-	.then(function (err){
+	.then(function (){
 		res.send({message: 'art was saved'});
 	})
 	.then(null, next);
@@ -59,7 +59,7 @@ router.post('/', function (req, res, next){
 router.delete('/:id', function (req, res, next){
 	Art.remove({_id: req.params.id})
 		.exec()
-		.then(function (err){
+		.then(function (){
 			res.send({message: 'art successfully removed'});
 		})
 		.then(null, next);

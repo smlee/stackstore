@@ -23,7 +23,11 @@ var schema = new mongoose.Schema({
 	},
 	total: Number, // do in frontend
 	paid: Boolean,
-	invoice_id: Number
+	invoice_id: Number,
+	promo_code: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'promo'
+	}
 });
 
 

@@ -3,40 +3,36 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
 	code: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
-	type: String,
+	promo_type: { 
+		type: String,
+		enum: ['shipping', 'product']
+	},
+	discount: {
+		discount_type: {
+			type: String,
+			enum: ['percent', 'flat']
+		},
+		amount: Number
+	},
 	art_id: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Art'
 	}],
-	exp_date: Date,
-	
+	category_id: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Category'
+	}],
+	creation_date: {
+		type: Date,
+		default: Date.now()
+	},
+	exp_date: {
+		type: Date,
+		default: Date.now() + 2592000000 
+	}
 });
 
 mongoose.model('Promo', schema);
-
-
-// all_items: [{
-// 		art: {
-// 			type: mongoose.Schema.Types.ObjectId,
-// 			ref: 'Art'
-// 		}, 
-// 		quantity: Number
-// 	}],
-// 	user: {
-// 		type: mongoose.Schema.Types.ObjectId,
-// 		ref: 'User'
-// 	},
-// 	order_type: {type: String, enum: ['gallery', 'order']},
-// 	created_at: {
-// 		type: Date,
-// 		default: Date.now()
-// 	},
-// 	updated_at: {
-// 		type: Date,
-//         default: Date.now()
-// 	},
-// 	total: Number, // do in frontend
-// 	paid: Boolean,
-// 	invoice_id: Number
