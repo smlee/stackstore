@@ -165,6 +165,10 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
         }); 
     }
 
+    console.log(artwork)
+    
+    
+
     $scope.getReview = function (id) {
         ReviewsFactory.getReviews(id)
         .then(function (review) {
