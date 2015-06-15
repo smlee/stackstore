@@ -60,6 +60,15 @@ router.put('/update', function(req, res, next){
 	.then(null, next);
 });
 
+router.put('/update/:id', function(req, res, next){
+    Order.findOneAndUpdate({_id: req.params.id, 'all_items._id': req.body.params._id},
+        { $set: {'all_items.$.quantity': req.body.params.quantity}}, function (err, result) {
+            if (err) return next(err);
+            console.log('Is this updated?',result);
+            res.send({message: 'Quantity updated.'});
+        })
+});
+
 router.put('/', function (req, res, next){
 	Order.findOneAndUpdate({_id: req.params._id})
 	.exec()

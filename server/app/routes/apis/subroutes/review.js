@@ -7,13 +7,13 @@ var Review = mongoose.model('Review');
 //tested remember to use art id in params
 router.get('/:id', function (req, res, next){
 	Review.find({art_id: req.params.id})
-   .populate('user_id')
-    .exec()
-    .then(function (reviews){
-           console.log(reviews);
-        res.send(reviews);
-    })
-    .then(null, next);
+        .populate('user_id')
+        .exec()
+        .then(function (reviews){
+            console.log(reviews);
+            res.send(reviews);
+        })
+        .then(null, next);
 });
 
 //tested
