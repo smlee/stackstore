@@ -11,9 +11,9 @@ app.factory('EventsFactory', function($http){
 				});
 			}
 		},
-		updateEvents: function(eventId, event) {
-			return $http.put('/api/event/'+eventId, user).then(function(){
-				return;			
+		updateEvents: function(event) {
+			return $http.put('/api/event/', event).then(function(response){
+				return response.data;			
 			});
 		}
 	}

@@ -33,9 +33,13 @@ router.post('/', function (req, res, next){
 	.then(null, next);
 });
 
-//untested
-router.put('/:id', function (req, res, next){
-	Event.findOneAndUpdate({_id: req.params._id}).exec()
+//tested
+router.put('/', function (req, res, next){
+	Event.findOneAndUpdate({_id: req.body._id}, req.body)
+	.exec()
+	.then(function() {
+		res.send("Updated")
+	})
 	.then(null, next);
 });
 
