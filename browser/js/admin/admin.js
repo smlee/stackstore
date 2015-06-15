@@ -1,4 +1,4 @@
-app.config(function ($stateProvider) {
+app.config(function ($stateProvider, USER_ROLES) {
 
     $stateProvider.state('admin', {
         url: '/admin',
@@ -8,6 +8,9 @@ app.config(function ($stateProvider) {
         	user: function (AuthService) {
         		return AuthService.getLoggedInUser()
         	}
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.admin]
         }
     });
 
