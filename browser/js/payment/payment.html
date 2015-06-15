@@ -1,0 +1,38 @@
+<h1>Payment Options</h1>
+
+
+<form name="cardForm" ng-submit="sendCardInfo(card)">
+	<select ng-model="card.type"><option ng-repeat="creditCard in creditCards">{{creditCard}}</option></select>
+	<code>{{card}}</code>
+
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Name">Full Name</label>
+		<input type="text" class="form-control" placeholder="Enter full name" ng-model="card.name">
+	</div>
+	
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Card Number">Card Number</label>
+		<input type="number" class="form-control" placeholder="XXXX XXXX XXXX XXXX" ng-model="card.number">
+	</div>
+
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Security Code">Security Code</label>
+		<input type="text" class="form-control" placeholder="CCV" ng-model="card.ccv">
+	</div>
+
+	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
+		<label for="Expiration Date">Expiration Date</label>
+		<select ng-model="card.month"><option ng-repeat="month in months">{{month}}</option></select>
+		<select ng-model="card.year"><option ng-repeat="year in years">{{year}}</option></select>
+	</div>
+
+
+	<div class="form-group col-lg-3 col-md-3 col-sm-3 col-centered">
+		<input class="btn btn-default" type="submit" value="Submit">
+	</div>
+	
+</form>
+
+	
+
+	
