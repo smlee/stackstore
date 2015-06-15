@@ -54,7 +54,7 @@ router.put('/update', function(req, res, next){
 	Order.update({_id: req.body.params._id}, req.body.params.newData)
 	.exec()
 	.then(function (updatedOrder) {
-		console.log('order successfully updated')
+		console.log('order successfully updated', updatedOrder)
 		res.send(updatedOrder)
 	})
 	.then(null, next);
@@ -69,6 +69,17 @@ router.put('/update/:id', function(req, res, next){
         })
 });
 
+router.put('/update/status/:id', function(req, res, next){
+    Order.findOneAndUpdate({_id: req.params.id}, {
+    	$set: { "paid": req.body.params.status }
+    })
+    .exec()
+    	.then(function(order){
+    		console.log('order has been changed to true!', order)
+    		res.send(order)
+    	})
+});
+
 router.put('/', function (req, res, next){
 	Order.findOneAndUpdate({_id: req.params._id})
 	.exec()
@@ -77,6 +88,7 @@ router.put('/', function (req, res, next){
 	})
 	.then(null, next);
 });
+
 
 router.post('/', function (req, res, next){
 

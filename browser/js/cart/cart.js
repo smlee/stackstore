@@ -50,10 +50,7 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, A
     };
 
     $scope.submitOrder = function (cartid) {
-    	CartFactory.submitOrder(cartid)
-    	.then(function () {
-
-    	}) 
+    	
     }
 
 });
