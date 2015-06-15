@@ -32,6 +32,13 @@ router.post('/', function (req, res, next){
 	})
 	.then(null, next);
 });
+
+//untested
+router.put('/:id', function (req, res, next){
+	Event.findOneAndUpdate({_id: req.params._id}).exec()
+	.then(null, next);
+});
+
 //tested
 router.delete('/:id', function (req, res, next){
 	Event.remove({_id: req.params.id})

@@ -18,7 +18,14 @@ app.run(function ($rootScope, AuthService, $state) {
 
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, AUTH_EVENTS) {
+        
+        if (toState.data && toState.data.authorizedRoles && !AuthService.isAuthorized(toState.data.authorizedRoles)) {
+            // event.preventDefault();            
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+            $state.go('home');
+        }
+
 
         if (!destinationStateRequiresAuth(toState)) {
             // The destination state does not require authentication
@@ -32,6 +39,9 @@ app.run(function ($rootScope, AuthService, $state) {
             return;
         }
 
+        
+
+
         // Cancel navigating to new state.
         event.preventDefault();
 
@@ -41,7 +51,7 @@ app.run(function ($rootScope, AuthService, $state) {
             // otherwise, if no user is logged in, go to "login" state.
             if (user) {
                 $state.go(toState.name, toParams);
-            } else {
+            }else {
                 $state.go('login');
             }
         });

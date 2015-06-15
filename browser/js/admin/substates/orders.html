@@ -1,1 +1,19 @@
-<h1>orders page</h1>
+<h1>Orders page</h1>
+
+<div>
+	<div>
+	<pre>{{cart}}</pre>
+		<div ng-repeat="item in cart.all_items">
+			<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url"></img>
+			<p>Name: {{item.art.name}}</p>
+			<p>Price: {{item.art.price | currency}}</p>
+			<input ng-model="item.quantity" />
+			<pre>{{item}}</pre>
+			<button ng-click="editItem(cart._id, item._id, item.quantity)">Update Quantity</button>
+			<button ng-click="removeItem(cart._id, item.art._id, $index)">Remove</button>
+			<hr>
+		</div>
+		<p>Order type: {{ cart.order_type}}</p>
+	</div>
+	<button ng-click="submitOrder(cart._id)">Place Order</button>
+</div>

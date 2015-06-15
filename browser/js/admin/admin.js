@@ -1,4 +1,4 @@
-app.config(function ($stateProvider) {
+app.config(function ($stateProvider, USER_ROLES) {
 
     $stateProvider.state('admin', {
         url: '/admin',
@@ -8,6 +8,9 @@ app.config(function ($stateProvider) {
         	user: function (AuthService) {
         		return AuthService.getLoggedInUser()
         	}
+        },
+        data: {
+            authorizedRoles: [USER_ROLES.admin]
         }
     });
 
@@ -80,6 +83,13 @@ app.config(function ($stateProvider) {
         resolve: {
             user: function (AuthService) {
                 return AuthService.getLoggedInUser()
+            },
+            carts: function (AuthService, CartFactory) {
+                return AuthService.getLoggedInUser()
+                .then(function (user) {
+                    if (user) return CartFactory.getCarts(user._id)
+                    return CartFactory.getFromLocalStorage();
+                })
             }
         }
     });
@@ -141,6 +151,12 @@ app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, 
         }); 
     }
 
+    $scope.updateProduct = function (product) {
+        ProductFactory.updateProduct(product).then(function(response){
+            product.updated = response
+        })
+    }
+
 });
 
 app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, ReviewsFactory, ProductFactory, $state) {
@@ -158,13 +174,13 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
         }); 
     }
 
-    $scope.getReview = function (id) {
-        ReviewsFactory.getReviews(id)
+    artwork.forEach(function (art) {
+        ReviewsFactory.getReviews(art._id)
         .then(function (review) {
             // console.log(review)
-            $scope.reviews[id] = review
+            $scope.reviews[art._id] = review
         })
-    }
+    });
 
 });
 
@@ -175,8 +191,9 @@ app.controller('AdminEventsCtrl', function ($scope, user, events, $state) {
 
 });
 
-app.controller('AdminOrdersCtrl', function ($scope, user, $state) {
+app.controller('AdminOrdersCtrl', function ($scope, user, carts, $state) {
 
     $scope.user = user
+    $scope.cart = carts;
 
 });

@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 
 var Art = mongoose.model('Art');
+var Category = mongoose.model('Category');
 
 //tested without query string gets all
 //tested with query gets specific
@@ -11,6 +12,7 @@ router.get('/', function (req, res, next){
 	//console.log('this is category in the backend', category)
 	// if(req.query){
 		Art.find(category)
+		.populate("category")
 		.exec()
 		.then(function (art) {
 			res.send(art);
@@ -29,8 +31,21 @@ router.get('/:id', function (req, res, next){
 	.then(null, next);
 });
 
+//tested
 router.put('/', function(req, res, next){
-
+	var categoryBody = req.body.category
+	req.body.category = req.body.category._id
+	Art.findOneAndUpdate({_id: req.body._id}, req.body)
+	.exec()
+	.then(function(){
+		Category.findOneAndUpdate({_id: req.body.category}, categoryBody)
+		.exec()
+		.then(null, next);
+	})
+	.then(function() {
+		res.send("Updated")
+	})
+	.then(null, next);
 });
 //tested
 router.post('/', function (req, res, next){

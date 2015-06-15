@@ -30,6 +30,11 @@ app.factory('ProductFactory', function($http){
 			return $http.post('/api/art').then(function(response){
 				return response.data;
 			});
-		}
+		},
+		updateProduct: function(art) {
+			return $http.put('/api/art/', art).then(function(response){
+				return response.data;			
+			});
+		} 
 	}
 });
