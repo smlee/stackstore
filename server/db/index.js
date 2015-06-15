@@ -18,6 +18,7 @@ require('./models/review');
 require('./models/order');
 require('./models/event');
 require('./models/category');
+require('./models/promo');
 
 
 
