@@ -36,6 +36,13 @@ app.factory('CartFactory', function($http){
 				});
 		},
 
+		updateStatus: function(cartId, status){
+			return $http.put('/api/order/update/status/'+cartId, {params: status})
+				.then(function(order){
+					return order.data
+				})
+		},
+
 		removeItem: function (cartId, itemId) {
             return $http.delete('/api/order/' + cartId, {
                 params: {
