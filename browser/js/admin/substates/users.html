@@ -1,4 +1,4 @@
-<h1>users page</h1>
+<h1>Users</h1>
 
 <ul>
 <li ng-repeat="user in users">{{user.email}}<button ng-click='deleteUser(user)'>Delete</button><button ng-click='promoteAdmin(user)' ng-if="!user.is_admin">Promote Admin</button><button ng-click='demoteAdmin(user)' ng-if="user.is_admin">Demote Admin</button></li>

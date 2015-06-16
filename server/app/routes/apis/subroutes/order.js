@@ -8,7 +8,8 @@ router.get('/', function (req, res, next){
 	// var id = req.query._id;
 	Order.find({})
 	.populate("all_items.art")
-	.populate("")
+	.populate("user")
+	.populate("promo_code")
 	.exec()
 	.then(function (orders){
 		res.send(orders);

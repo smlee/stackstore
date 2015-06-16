@@ -114,7 +114,7 @@ app.controller('AdminCtrl', function ($scope, user, $state, $rootScope) {
     $scope.user = user;
     $scope.test = function () {
         $state.go('admin.promos')
-    }
+    };
 });
 
 app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, UsersFactory, $state) {
@@ -127,7 +127,7 @@ app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, Us
                 $scope.users = users;
             });
         });             
-    }
+    };
 
     var obj = {
         updateType: 'user',
@@ -142,7 +142,7 @@ app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, Us
         UsersFactory.updateUser(user._id, obj).then(function(){
             //$scope.users = users;
         });
-    }
+    };
 
     $scope.demoteAdmin = function(user){
         user.is_admin = false;
@@ -152,12 +152,12 @@ app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, Us
         UsersFactory.updateUser(user._id, obj).then(function(){
             //$scope.users = users;
         });
-    }
+    };
 });
 
 app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, ProductFactory, $state) {
 
-    $scope.user = user
+    $scope.user = user;
     $scope.products = artwork;
     $scope.categories = categories;
 
@@ -166,69 +166,79 @@ app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, 
         ProductFactory.getProduct(categoryId).then(function(response){
             $scope.products = response;
         }); 
-    }
+    };
 
     $scope.updateProduct = function (product) {
         ProductFactory.updateProduct(product).then(function(response){
             product.updated = response
-        })
-    }
+        });
+    };
 
 });
 
 app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, ReviewsFactory, ProductFactory, $state) {
 
-    $scope.user = user
+    $scope.user = user;
     $scope.products = artwork;
     $scope.categories = categories;
 
-    $scope.reviews = {}
+    $scope.reviews = {};
 
     $scope.filterProducts = function(){
         var categoryId = $scope.categoryName._id
         ProductFactory.getProduct(categoryId).then(function(response){
             $scope.products = response;
         }); 
-    }
+    };
 
     artwork.forEach(function (art) {
         ReviewsFactory.getReviews(art._id)
         .then(function (review) {
             // console.log(review)
             $scope.reviews[art._id] = review
-        })
+        });
     });
 
     $scope.updateReview = function (review) {
         ReviewsFactory.updateReview(review).then(function(response){
             review.updated = response
-        })
-    }
+        });
+    };
 });
 
 app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory, $state) {
 
-    $scope.user = user
-    $scope.events = events
-    console.log(events)
+    $scope.user = user;
+    $scope.events = events;
 
     $scope.updateEvent = function (event) {
         EventsFactory.updateEvents(event).then(function(response){
             event.updated = response
-        })
-    }
+        });
+    };
 
 });
 
 app.controller('AdminOrdersCtrl', function ($scope, user, carts, CartFactory, $state) {
 
-    $scope.user = user
+    $scope.user = user;
     $scope.orders = carts;
-    console.log($scope.orders)
 
+    $scope.deleteItem = function (item, allItems) {
+        console.log('hello', item, allItems)
+        _.remove(allItems, function (n) {
+            return (n._id === item._id)
+        });
+    };
 
-
-    // $scope.
+    $scope.updateOrder = function (order) {
+        delete order.user
+        delete order.promo_code
+        CartFactory.updateOrder(order._id, order)
+        .then(function(response){
+            console.log(response)
+        });
+    };
 
 });
 
@@ -242,9 +252,9 @@ app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, Pr
         .then(function(response){
             console.log(response);
 
-            promo.updated = response;
+            promo.updated = response.message;
         });
-    }
+    };
     $scope.updatePromo = function (promo){
         
         
@@ -256,13 +266,13 @@ app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, Pr
             //     promo.updated = null
             // }, 2000);
         });
-    }
+    };
 
     $scope.deletePromo = function (promo){
         PromosFactory.deletePromo(promo)
         .then(function(response){
             promo.updated = response
         });
-    }
+    };
 });
 
