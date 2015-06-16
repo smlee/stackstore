@@ -3,15 +3,15 @@
 	<div>
 		<h2>New Promo Code</h2>
 		<form name="promoForm" ng-submit="promoForm.$valid && addPromoCode(newPromo)">
-			<label>Promo Code</label>
+			<h3>Promo Code</h3>
 			<input class="form-control" ng-model="newPromo.code"></input>
-			<label>Type</label>
+			<h3>Type</h3>
 			<input class="form-control" ng-model="newPromo.promo_type"></input>
-			<label>Expires</label>
+			<h3>Expires</h3>
 			<input class="form-control" ng-model="newPromo.exp_date"></input>
-			<label>Category</label>
+			<h3>Category</h3>
 			<input class="form-control" ng-model="newPromo.category_id"></input>
-			<label>Art</label>
+			<h3>Art</h3>
 			<input class="form-control" ng-model="newPromo.art_id"></input>
 			<button type="submit" class="btn btn-primary">Submit</button>
 			<div>{{promo.updated}}</div>
@@ -21,16 +21,16 @@
 	<hr>
 	<h2>Current Promotions</h2>
 	<div ng-repeat="promo in promos">
-		<label>Promo Code</label>
+		<h3>Promo Code</h3>
 		<input class="form-control" ng-model="promo.code"></input>
-		<label>Type</label>
+		<h3>Type</h3>
 		<input class="form-control" ng-model="promo.promo_type"></input>
-		<label>Expires</label>
+		<h3>Expires</h3>
 		<p>{{promo.exp_date | date : 'short'}}</p>
 		<input class="form-control" ng-model="promo.exp_date"></input>
-		<label>Category</label>
+		<h3>Category</h3>
 		<input class="form-control" ng-model="promo.category_id"></input>
-		<label>Art</label>
+		<h3>Art</h3>
 		<input class="form-control" ng-model="promo.art_id"></input>
 		<p>Created At: {{promo.creation_date | date : 'short'}}</p>
 		<button class="btn btn-primary" ng-click="updatePromo(promo)">Update</button>

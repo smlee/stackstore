@@ -7,14 +7,13 @@
 	<p><h4>Updated At:</h4>{{order.updated_at}}</p>
 	<p><h4>Promo Code:</h4> {{order.promo_code.code}}</p>
 	<p><h4>Order Type:</h4>{{order.order_type}}</p>
+	<p><h4>Subtotal:</h4>{{order.subtotal | currency}}</p>
+	<p><h4>Total Quantity:</h4>{{order.totalquant}}</p>
 
 	<label>Paid</label>
 	<input class="form-control" ng-model="order.paid"></input>
 
-	<label>Total</label>
-	<input class="form-control" ng-model="order.total"></input>
-
-	<h4>All Items</h4>
+	<h3>Cart Items</h3>
 	<div ng-repeat="item in order.all_items">
 		<h4>Item</h4>
 		<p><h4>Art:</h4>{{item.art.name}}</p>
