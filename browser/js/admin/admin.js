@@ -224,11 +224,24 @@ app.controller('AdminOrdersCtrl', function ($scope, user, carts, CartFactory, $s
     $scope.user = user;
     $scope.orders = carts;
 
-    $scope.deleteItem = function (item, allItems) {
-        console.log('hello', item, allItems)
-        _.remove(allItems, function (n) {
-            return (n._id === item._id)
-        });
+    $scope.decrementItem = function (item, allItems) {
+        for (var i=0; i<allItems.length;i++) {
+            if (item._id === allItems[i]._id) {
+                if (item.quantity > 0) {
+                    item.quantity--
+                } else {
+                    return
+                }
+            }
+        }
+    };
+
+    $scope.incrementItem = function (item, allItems) {
+        for (var i=0; i<allItems.length;i++) {
+            if (item._id === allItems[i]._id) {
+                item.quantity++
+            }
+        }
     };
 
     $scope.updateOrder = function (order) {
