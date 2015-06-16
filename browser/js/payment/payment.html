@@ -1,29 +1,33 @@
 <h1>Payment Options</h1>
 
 
-<form name="cardForm" ng-submit="sendCardInfo(card)">
-	<select ng-model="card.type"><option ng-repeat="creditCard in creditCards">{{creditCard}}</option></select>
+<form name="cardForm" ng-submit="cardForm.$valid && sendCardInfo(card)">
+<code>{{cardForm}}</code>
+	<select ng-model="card.type" required><option ng-repeat="creditCard in creditCards">{{creditCard}}</option></select>
 	<code>{{card}}</code>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Name">Full Name</label>
-		<input type="text" class="form-control" placeholder="Enter full name" ng-model="card.name">
+		<input type="text" class="form-control" placeholder="Enter full name" ng-model="card.name" required>
 	</div>
 	
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Card Number">Card Number</label>
-		<input type="number" class="form-control" placeholder="XXXX XXXX XXXX XXXX" ng-model="card.number">
+		<input type="number" name="number" class="form-control" placeholder="XXXX XXXX XXXX XXXX" ng-model="card.number" required ng-minlength="16" ng-maxlength="16" >
+		<p ng-show="cardForm.number.$error.minlength">Too short!</p>
+		<p ng-show="cardForm.number.$error.maxlength">Too Long!</p>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Security Code">Security Code</label>
-		<input type="text" class="form-control" placeholder="CCV" ng-model="card.ccv">
+		<input type="text" name="ccv" class="form-control" placeholder="CCV" ng-model="card.ccv" ng-minlength="3" ng-maxlength="3" required>
+		<p ng-show="addressForm.ccv.$invalid && !addressForm.ccv.$pristine">CCV is required!</p>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Expiration Date">Expiration Date</label>
-		<select ng-model="card.month"><option ng-repeat="month in months">{{month}}</option></select>
-		<select ng-model="card.year"><option ng-repeat="year in years">{{year}}</option></select>
+		<select ng-model="card.month" required><option ng-repeat="month in months">{{month}}</option></select>
+		<select ng-model="card.year" required><option ng-repeat="year in years">{{year}}</option></select>
 	</div>
 
 

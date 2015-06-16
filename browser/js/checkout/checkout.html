@@ -1,55 +1,7 @@
-<form name="addressForm" ng-submit="sendAddressInfo(customer)">
-<pre>{{customer}}</pre>
-	
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">First Name</label>
-		<input type="name" class="form-control" placeholder="Enter first name" ng-model="customer.first_name">
-	</div>
+<div>
+    <a href='' ng-click="open('lg', 'New Shipping Address')">Add Shipping Address</a>
+</div>
+<div>
+    <a href='' ng-click="open('lg', 'New Credit Card')">Add Card</a>
+</div>
 
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">Last Name</label>
-		<input type="name" class="form-control" placeholder="Enter last name" ng-model="customer.last_name">
-	</div>
-
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">Email</label>
-		<input type="email" class="form-control" placeholder="Enter email" ng-model="customer.email">
-	</div>
-
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">Address 1</label><select ng-model="customer.contact_type"><option ng-repeat="contact in contactType">{{contact}}</option></select>
-		<input type="address" class="form-control" placeholder="Enter address" ng-model="customer.address_line_1">
-	</div>
-
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">Address 2</label>
-		<input type="address" class="form-control" placeholder="Enter address" ng-model="customer.address_line_2">
-	</div>
-
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">City</label>
-		<input type="city" class="form-control" placeholder="Enter city" ng-model="customer.city">
-	</div>
-
-	<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3 col-centered">
-	    <label for="Profile">State</label>
-	    <select id="state" class="form-control" ng-model="customer.state">
-			<option ng-repeat="state in states">{{state.abbreviation}}</option>
-		</select>
-     </div>
-
-	<div class="form-group col-lg-4 col-md-4 col-sm-4 col-centered">
-		<label for="Profile">Zip Code</label>
-		<input type="zipcode" class="form-control" placeholder="Enter zip" ng-model="customer.zip">
-	</div>
-
-	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">Phone</label>
-		<input type="phone" class="form-control" placeholder="Enter phone number" ng-model="customer.phone">
-	</div>
-
-	<div class="form-group col-lg-3 col-md-3 col-sm-3 col-centered">
-		<input class="btn btn-default" type="submit" value="Submit">
-	</div>
-	
-</form>

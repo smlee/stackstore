@@ -11,7 +11,6 @@ router.get('/', function (req, res, next){
 	.populate("")
 	.exec()
 	.then(function (orders){
-		console.log(orders)
 		res.send(orders);
 	})
 	.then(null, next);
@@ -66,7 +65,7 @@ router.put('/update/:id', function(req, res, next){
         { $set: {'all_items.$.quantity': req.body.params.quantity}}, function (err, result) {
             if (err) return next(err);
             console.log('Is this updated?',result);
-            res.send({message: 'Quantity updated.'});
+            res.send(result);
         })
 });
 
