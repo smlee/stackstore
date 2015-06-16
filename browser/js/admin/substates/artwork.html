@@ -11,7 +11,7 @@
 
 <div class="productImgContainer" ng-repeat="product in products | filter: query">
 	<div class="productImage">
-		<img ui-sref="product({id: product._id})" class="productImage" src="{{product.url}}" />
+		<img ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" />
 		<label>Name</label>
 		<input value="{{product.name}}" ng-model="product.name"></input>	
 		<label>Artist Name</label>
