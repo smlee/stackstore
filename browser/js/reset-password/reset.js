@@ -25,8 +25,13 @@ app.controller('ResetCtrl', function ($scope, AuthService, UsersFactory, $state)
 		};
 		UsersFactory.updateUserPasswordByEmail(obj).then(function(saved){ 
 			if(saved){
-				//email user new password
 				$scope.displayMessage = "Password Updated";
+				var email = {
+					sendTOEmail: userInfo.email,
+					sendFromEmail: "admin@ArtsyFartsy.com",
+					message: "Your Password Has Been Reset. Your New Password is: " + newPass
+				};
+				UsersFactory.sendEmail(email);
 			}
 			else{				
 				$scope.displayMessage = "Email Is Wrong"
@@ -50,8 +55,13 @@ app.controller('AdminResetCtrl', function ($scope, AuthService, UsersFactory, $s
 				if(userInfo.email === user.email){
 					UsersFactory.updateUserPasswordByEmail(obj).then(function(saved){
 						if(saved){
-							//email user new password
 							$scope.displayMessage = "Password Updated";
+							var email = {
+								sendTOEmail: userInfo.email,
+								sendFromEmail: "admin@ArtsyFartsy.com",
+								message: "Your Password Has Been Reset. Your New Password is: " + newPass
+							};
+							UsersFactory.sendEmail(email);
 						}
 						else{				
 							$scope.displayMessage = "Email Is Wrong";
