@@ -27,7 +27,7 @@
 
             <div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
                 <label for="ccNumber">Card Number</label>
-                <input type="number" name="ccNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX" ng-model="card.number" required ng-minlength="16" ng-maxlength="16" >
+                <input type="number" id="ccNumber" name="ccNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX" ng-model="card.number" required ng-minlength="16" ng-maxlength="16" >
                 <p ng-show="cardForm.number.$error.minlength">Too short!</p>
                 <p ng-show="cardForm.number.$error.maxlength">Too Long!</p>
             </div>
@@ -48,9 +48,18 @@
 
         </div>
         <h3>Promo Code</h3>
-        <input type="text" id="promocode" name="promocode" class="form-control" placeholder="promo code" ng-model="card.promo">
-        <h3>Subtotal: <span>{{}}</span></h3>
+        <div class="row">
+
+            <div class="col-md-8">
+                <input type="text" id="promocode" name="promocode" class="form-control" placeholder="promo code" ng-model="card.promo">
+            </div>
+            <div class="col-md-4">
+                <button>Apply Code</button>
+            </div>
+        </div>
+        <h3>Subtotal: <span>{{cart.subtotal | currency}}</span></h3>
         <button>Place Order</button>
+
     </div>
 
     <div class="col-md-6">
