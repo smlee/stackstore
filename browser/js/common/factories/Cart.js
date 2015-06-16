@@ -1,12 +1,10 @@
 app.factory('CartFactory', function($http){
 	return{
 		getCarts: function (userId) {
-			return $http.get('/api/order', {
-				params: {
-					_id: userId
-				}
-			}).then(function(orders){
-				return orders.data[0];
+			return $http.get('/api/order/' + userId)
+                .then(function(orders){
+                    console.log(orders);
+				return orders.data;
 			});
 		},
 
