@@ -1,0 +1,47 @@
+#admin {
+	hr {
+		border: 0;
+    	height: 2px;
+    	background: #333;
+    	background-image: linear-gradient(to right, #ccc, #333, #ccc);
+	}
+	ul {
+			list-style-type: none;
+	}
+	.searchbar {
+		margin: 20px;
+	}
+	#users {
+		ul {
+			list-style-type: none;
+		}
+		li {
+			margin: 10px 0;
+		}
+		button {
+			margin: 0 10px;
+			width: 125px;
+		}
+	}
+	#artwork {
+		li {
+			margin: 10px;
+		}
+		input {
+		}
+		label {
+		}
+		button {
+			margin: 10px;
+		}
+	}
+	#reviews {
+		button {
+			margin: 10px;
+		}
+	}
+	#events {
+		input {
+		}
+	}
+}
