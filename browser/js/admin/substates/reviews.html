@@ -1,5 +1,5 @@
 <h1>Reviews</h1>
-<div class="container searchbar">
+<div class=" searchbar">
 	<div class="input-group col-lg-4 col-md-4">
 		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"> Search</span>
 		<input ng-model="query" type="text" class="form-control">
@@ -10,7 +10,7 @@
 </div>
 
 <div id="reviews"class="productImgContainer" ng-repeat="product in products | filter: query">
-	<div class="productImage container">
+	<div class="productImage ">
 		<div class="col-lg-4 col-md-4 col-sm-4">
 			<img ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" />
 		</div>

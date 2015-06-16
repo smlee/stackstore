@@ -8,6 +8,16 @@
 	ul {
 			list-style-type: none;
 	}
+	img {
+		width: 80%;
+		margin: 0 auto;
+		padding: 20px 0;
+	}
+	#adminInfo {
+		border: solid 2px;
+		text-align: center;
+		background: 
+	}
 	.searchbar {
 		margin: 20px;
 	}
@@ -36,12 +46,21 @@
 		}
 	}
 	#reviews {
+		@include clearfix;
 		button {
 			margin: 10px;
 		}
 	}
 	#events {
 		input {
+		}
+	}
+	#orders {
+		font-size: 16px;
+	}
+	#promos {
+		button {
+			margin: 10px 5px;
 		}
 	}
 }
