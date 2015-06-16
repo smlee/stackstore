@@ -14,7 +14,7 @@
 			</div>
 			<p>Order type: {{ cart.order_type}}</p>
             <br>
-            <p><h3>Subtotal ({{total().quantity()}} item):</h3> {{ total().sub() | currency }}</p>
+            <p><h3>Subtotal ({{cart.subQuantity}} item):</h3> {{ cart.subtotal | currency }}</p>
 		</div>
 		<button ui-sref="checkout" >Place Order</button>
 	</div>
