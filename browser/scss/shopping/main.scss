@@ -1,12 +1,26 @@
 .productImgContainer{
 	text-align: center;
 	margin: 0 auto;
-	//position:relative;
 }
 
 .productImage{
-	display: inline-block;
-	width: 200px;
-	height: 200px;
+	float: left;
+
+	display:inline-block;
+	img{
+		width: 200px;
+		margin-left: 35px;
+	}
+
+	p{
+
+	}
 }
 
+.productUnavailable{
+	opacity: 0.1;
+}
+
+// .search-bar {
+// 	width: 50%
+// }

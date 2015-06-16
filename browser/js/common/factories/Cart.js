@@ -1,11 +1,17 @@
 app.factory('CartFactory', function($http){
 	return{
 		getCarts: function (userId) {
-			return $http.get('/api/order/' + userId)
+			if (userId) {
+				return $http.get('/api/order/' + userId)
                 .then(function(orders){
-                    console.log(orders);
-				return orders.data;
-			});
+					return orders.data;
+				})
+			} else {
+				return $http.get('/api/order')
+                .then(function(orders){
+					return orders.data;
+				})
+			}
 		},
 
 		editItem: function (cartId, itemId, quantity) {
