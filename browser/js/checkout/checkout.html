@@ -51,10 +51,10 @@
         <div class="row">
 
             <div class="col-md-8">
-                <input type="text" id="promocode" name="promocode" class="form-control" placeholder="promo code" ng-model="card.promo">
+                <input type="text" id="promocode" name="promocode" class="form-control" placeholder="promo code" ng-model="promocode">
             </div>
             <div class="col-md-4">
-                <button>Apply Code</button>
+                <button ng-click="applyCode(promocode)">Apply Code</button>
             </div>
         </div>
         <h3>Subtotal: <span>{{cart.subtotal | currency}}</span></h3>

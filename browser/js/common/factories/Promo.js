@@ -5,6 +5,11 @@ app.factory('PromosFactory', function($http){
 				return promos.data;
 			});
 		},
+        getPromo: function (code) {
+            return $http.get('/api/promo'+code).then(function(promo) {
+                return promo.data;
+            });
+        },
 
 		updatePromo: function(promo) {
 			return $http.put('/api/promo', promo).then(function(response){

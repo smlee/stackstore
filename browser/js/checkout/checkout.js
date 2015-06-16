@@ -72,6 +72,11 @@ app.controller('CheckoutCtrl', function ($scope, united, $state, user, cart, con
 
     }
 
+    //Promo Code
+    $scope.applyCode = function(code) {
+        console.log('Code that is being applied', code)
+    }
+
 });
 
 app.controller('addressCtrl', function($scope, $modalInstance, user, united, title, ContactFactory){
