@@ -29,7 +29,7 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, A
         if (AuthService.isAuthenticated()) {
             CartFactory.editItem(cartid, itemid, newInfo)
                 .then(function (updatedOrders) {
-                    $scope.carts = updatedOrders
+                    $scope.cart = updatedOrders
                 });
         }
         CartFactory.editLocal(idx, newInfo);
@@ -48,6 +48,26 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, A
         $scope.cart = $scope.cart;
     	
     };
+
+    $scope.total = function(){
+        return {
+            quantity: function() {
+                var quants = 0;
+                $scope.cart.all_items.forEach(function (ele) {
+                    quants += ele.quantity;
+                });
+                return quants;
+            },
+            sub: function() {
+                var subtotal = 0;
+                $scope.cart.all_items.forEach(function (ele) {
+                    subtotal += ele.art.price;
+                });
+                return subtotal;
+            }
+        }
+    };
+    console.log($scope.total().quantity());
 
     $scope.submitOrder = function (cartid) {
     	

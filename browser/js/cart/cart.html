@@ -3,7 +3,7 @@
 		<div>
 		<pre>{{cart}}</pre>
 			<div ng-repeat="item in cart.all_items">
-				<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url"></img>
+				<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url" />
 				<p>Name: {{item.art.name}}</p>
 				<p>Price: {{item.art.price | currency}}</p>
 				<input ng-model="item.quantity" />
@@ -13,6 +13,8 @@
 				<hr>
 			</div>
 			<p>Order type: {{ cart.order_type}}</p>
+            <br>
+            <p><h3>Subtotal ({{total().quantity()}} item):</h3> {{ total().sub() | currency }}</p>
 		</div>
 		<button ui-sref="checkout" >Place Order</button>
 	</div>
