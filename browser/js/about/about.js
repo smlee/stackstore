@@ -10,8 +10,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('AboutController', function ($scope) {
-
+app.controller('AboutController', function ($scope, $state) {
     // Images of beautiful Fullstack people.
     $scope.images = _.shuffle([
         'https://pbs.twimg.com/media/B7gBXulCAAAXQcE.jpg:large',

@@ -5,13 +5,16 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
-	// var id = req.query._id;
-	Order.find({})
+
+	var query = req.query._id ? {user: req.query._id} : {};
+
+	Order.find(query)
 	.populate("all_items.art")
 	.populate("user")
 	.populate("promo_code")
 	.exec()
 	.then(function (orders){
+		console.log('twas a success!')
 		res.send(orders);
 	})
 	.then(null, next);

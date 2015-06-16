@@ -1,20 +1,20 @@
 app.factory('CartFactory', function($http){
-	return{
-		getCarts: function (userId) {
-			if (userId) {
-				return $http.get('/api/order/' + userId)
-                .then(function(orders){
-					return orders.data;
-				})
-			} else {
-				return $http.get('/api/order')
-                .then(function(orders){
-					return orders.data;
-				})
-			}
-		},
+    return{
+        getCarts: function (userId) {
+            if (userId) {
+                return $http.get('/api/order/' + userId)
+                    .then(function(orders){
+                        return orders.data;
+                    })
+            } else {
+                return $http.get('/api/order')
+                    .then(function(orders){
+                        return orders.data;
+                    })
+            }
+        },
 
-		editItem: function (cartId, itemId, quantity) {
+        editItem: function (cartId, itemId, quantity) {
 
             return $http.put('/api/order/update/'+cartId, {
                 params: {
@@ -32,7 +32,7 @@ app.factory('CartFactory', function($http){
                 return updatedOrders.data;
             });
 
-		},
+        },
 
         editLocal: function(idx, newInfo) {
             var quants = 0,subtotal = 0;
@@ -48,21 +48,21 @@ app.factory('CartFactory', function($http){
             localStorage.userCart = JSON.stringify(cart);
         },
 
-		updateOrder: function(cartId, newInfo){
-			return $http.put('/api/order/update', { params: {_id: cartId, newData: newInfo} })
-				.then(function(order){ 
-					return order.data 
-				});
-		},
+        updateOrder: function(cartId, newInfo){
+            return $http.put('/api/order/update', { params: {_id: cartId, newData: newInfo} })
+                .then(function(order){
+                    return order.data
+                });
+        },
 
-		updateStatus: function(cartId, status){
-			return $http.put('/api/order/update/status/'+cartId, {params: status})
-				.then(function(order){
-					return order.data
-				})
-		},
+        updateStatus: function(cartId, status){
+            return $http.put('/api/order/update/status/'+cartId, {params: status})
+                .then(function(order){
+                    return order.data
+                })
+        },
 
-		removeItem: function (cartId, itemId) {
+        removeItem: function (cartId, itemId) {
             return $http.delete('/api/order/' + cartId, {
                 params: {
                     _id: itemId
@@ -72,7 +72,7 @@ app.factory('CartFactory', function($http){
                     return response.data;
                 });
 
-		},
+        },
 
         removeItemLocal: function(idx, itemId) {
 
@@ -84,54 +84,55 @@ app.factory('CartFactory', function($http){
             localStorage.userCart = JSON.stringify(cart);
         },
 
-		submitOrder: function (orderId) {
-			return $http.put('/api/order/submit', {
-				params: {
-					_id: orderId
-				}
-			})
-			.then(function(response){
-				return response.data;
-			});
-		},
+        submitOrder: function (orderId) {
+            return $http.put('/api/order/submit', {
+                params: {
+                    _id: orderId
+                }
+            })
+                .then(function(response){
+                    return response.data;
+                });
+        },
 
-		addToLocalStorage: function(cart){
-			console.log('adding cart to ls', cart)
-			if (localStorage.userCart !== undefined){
-				var updatedCart = this.getFromLocalStorage();
-				console.log('this be updatedCart', updatedCart)
-				updatedCart.all_items.push(cart.all_items[0]);
-				localStorage.userCart = JSON.stringify(updatedCart);
-			} else {
-				console.log('new cart added!')
-				localStorage.setItem('userCart', JSON.stringify(cart));
-			}
-			
-		},
+        addToLocalStorage: function(cart){
+            console.log('adding cart to ls', cart)
+            if (localStorage.userCart !== undefined){
+                var updatedCart = this.getFromLocalStorage();
+                console.log('this be updatedCart', updatedCart)
+                updatedCart.all_items.push(cart.all_items[0]);
+                localStorage.userCart = JSON.stringify(updatedCart);
+            } else {
+                console.log('new cart added!')
+                localStorage.setItem('userCart', JSON.stringify(cart));
+            }
 
-		getFromLocalStorage: function(){
-			return JSON.parse(localStorage.getItem('userCart'));
-		},
+        },
 
-		createCart: function(cart){
-			console.log('inside createCart')
-			return $http.post('/api/order', {params: cart}).then(function(response){
-				return response.data;
-			})
-		},
+        getFromLocalStorage: function(){
+            return JSON.parse(localStorage.getItem('userCart'));
+        },
 
-		pushItem: function(cartid, item){
-			console.log('inside pushItem', cartid, item);
-			return $http.put('/api/order/push', { params: {_id: cartid, newData: item} }).then(function(response){
-				return response.data;
-			});
-		},
+        createCart: function(cart){
+
+            return $http.post('/api/order', {params: cart}).then(function(response){
+                return response.data;
+            })
+        },
+
+        pushItem: function(cartid, item){
+            console.log('inside pushItem', cartid, item);
+            return $http.put('/api/order/push', { params: {_id: cartid, newData: item} }).then(function(response){
+                return response.data;
+            });
+        },
 
         syncCart: function(userId) {
             var self = this;
             this.getCarts(userId).then(function(cart){
                 // if they have a cart, add to it from localStorage to database
-                if(cart !== undefined){
+                if(cart.length !== 0){
+
                     self.updateOrder(cart._id, self.getFromLocalStorage())
                 } else {
                     var newCart = self.getFromLocalStorage();
@@ -142,5 +143,5 @@ app.factory('CartFactory', function($http){
             })
         }
 
-	}
+    }
 });

@@ -16,10 +16,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
                 // { label: 'Tutorial', state: 'tutorial' },
                 { label: 'Admin', state: 'admin.users', auth: true, adminAuth: scope.adminAuthorized},
                 { label: 'New Customer', state: 'customerForm' },
-                { label: 'Purchase', state: 'product' },
+                // { label: 'Purchase', state: 'product' },
                 { label: 'Cart', state: 'cart' },
                 { label: 'Artist Page', state: 'artist' },
                 { label: 'Artist Manage', state: 'profileForm' },
+                { label: 'Order History', state: 'order-history', auth: true },
                 { label: 'Members Only', state: 'membersOnly', auth: true}
             ];
 
