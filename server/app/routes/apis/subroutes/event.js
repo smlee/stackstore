@@ -27,7 +27,6 @@ router.get('/:id', function (req, res, next){
 router.post('/', function (req, res, next){	
 	Event.create(req.body)
 	.then(function(){
-		console.log("got here");
 		res.send({message: 'event was saved'});
 	})
 	.then(null, next);

@@ -1,9 +1,9 @@
-<h1>promos page</h1>
+<h1>Promos</h1>
 
 <div>
+	<h2>New Promo Code</h2>
 	<form name="promoForm" ng-submit="promoForm.$valid && addPromoCode(newPromo)">
 		<label>Promo Code</label>
-		<code>{{newPromo}}</code>
 		<input ng-model="newPromo.code"></input>
 		<label>Type</label>
 		<input ng-model="newPromo.promo_type"></input>
@@ -14,9 +14,12 @@
 		<label>Art</label>
 		<input ng-model="newPromo.art_id"></input>
 		<button type="submit" class="btn btn-default">Submit</button>
+		<div>{{promo.updated}}</div>
 	</form>
 </div>
 
+<hr>
+<h2>Current Promotions</h2>
 <div ng-repeat="promo in promos">
 	<label>Promo Code</label>
 	<input ng-model="promo.code"></input>
