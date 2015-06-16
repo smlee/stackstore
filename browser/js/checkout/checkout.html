@@ -1,24 +1,27 @@
-<form name="addressForm" ng-submit="sendAddressInfo(customer)">
+<form name="addressForm" ng-submit="addressForm.$valid && sendAddressInfo(customer)">
 <pre>{{customer}}</pre>
 	
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Profile">First Name</label>
-		<input type="name" class="form-control" placeholder="Enter first name" ng-model="customer.first_name">
+		<input type="first_name" class="form-control" placeholder="Enter first name" ng-model="customer.first_name" required>
+		<span ng-show="addressForm.first_name.$invalid && !addressForm.first_name.$pristine">Your first name is required</span>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Profile">Last Name</label>
-		<input type="name" class="form-control" placeholder="Enter last name" ng-model="customer.last_name">
+		<input type="last_name" class="form-control" placeholder="Enter last name" ng-model="customer.last_name" required>
+		<span ng-show="addressForm.last_name.$invalid && !addressForm.last_name.$pristine">Your last name is required</span>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
-		<label for="Profile">Email</label>
-		<input type="email" class="form-control" placeholder="Enter email" ng-model="customer.email">
+		<label for="Email">Email</label>
+		<input type="email" class="form-control" placeholder="Enter email" ng-model="customer.email" required>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Profile">Address 1</label><select ng-model="customer.contact_type"><option ng-repeat="contact in contactType">{{contact}}</option></select>
-		<input type="address" class="form-control" placeholder="Enter address" ng-model="customer.address_line_1">
+		<input type="address" name="address" class="form-control" placeholder="Enter address" ng-model="customer.address_line_1" required>
+		<span ng-show="addressForm.address.$invalid && !addressForm.address.$pristine">Your address is required</span>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
@@ -28,19 +31,21 @@
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
 		<label for="Profile">City</label>
-		<input type="city" class="form-control" placeholder="Enter city" ng-model="customer.city">
+		<input type="city" name="city" class="form-control" placeholder="Enter city" ng-model="customer.city" required>
+		<span ng-show="addressForm.city.$invalid && !addressForm.city.$pristine">Your city is required</span>
 	</div>
 
 	<div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-3 col-centered">
 	    <label for="Profile">State</label>
-	    <select id="state" class="form-control" ng-model="customer.state">
+	    <select id="state" class="form-control" ng-model="customer.state" required>
 			<option ng-repeat="state in states">{{state.abbreviation}}</option>
 		</select>
      </div>
 
 	<div class="form-group col-lg-4 col-md-4 col-sm-4 col-centered">
 		<label for="Profile">Zip Code</label>
-		<input type="zipcode" class="form-control" placeholder="Enter zip" ng-model="customer.zip">
+		<input type="zipcode" class="form-control" placeholder="Enter zip" ng-model="customer.zip" ng-minlength="5" ng-maxlength="5" required>
+		<span ng-show="addressForm.zip.$invalid">Zip Code is invalid</span>
 	</div>
 
 	<div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
