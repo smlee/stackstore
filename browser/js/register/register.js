@@ -18,6 +18,11 @@ app.controller('RegisterCtrl', function ($scope, $rootScope, $state, AuthService
         confirm: null
     };
 
+    $scope.isMatched = function(){
+        return $scope.register.password === $scope.register.confirm;
+    }
+    
+
     $scope.signUp = function(newInfo) {
 
         RegisterFactory.newUser(newInfo).then(function(result) {
