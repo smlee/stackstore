@@ -4,17 +4,9 @@
 }
 
 .productImage{
-	float: left;
-
-	display:inline-block;
-	img{
-		width: 200px;
-		margin-left: 35px;
-	}
-
-	p{
-
-	}
+	display: inline-block;
+	width: 200px;
+	height: 200px;
 }
 
 .productUnavailable{
