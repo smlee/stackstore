@@ -14,6 +14,7 @@ app.controller('ShoppingController', function ($scope, ProductFactory, CategoryF
 
 	CategoryFactory.getCategories().then(function(response){
 		$scope.categories = response;
+		$scope.categories.unshift({name:"All"});
 	});
 	
 	$scope.filterProducts = function(){
