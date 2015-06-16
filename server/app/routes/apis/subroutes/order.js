@@ -5,6 +5,7 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
+	console.log('hit the first route in order.js', req.query._id)
 	var id = req.query._id;
 	Order.find({ user: id })
 	.populate("all_items.art")

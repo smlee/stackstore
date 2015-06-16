@@ -28,7 +28,8 @@ router.put('/', function (req, res, next){
 });
 //tested but i think art id should be required in the models
 router.post('/', function (req, res, next){
-	Review.create(req.body)
+	console.log('hit this!', req.body.params)
+	Review.create(req.body.params)
 	.then(function(){
 		res.send({message: 'review was saved'});
 	})

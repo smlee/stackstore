@@ -1,5 +1,12 @@
 app.factory('CartFactory', function($http){
 	return{
+		// new route to get user's order history
+		getOrderHistory: function(userId){
+			return $http.get('/api/order',  {params: { _id: userId}}).then(function(orders){
+				return orders.data;
+			});
+		},
+
 		getCarts: function (userId) {
 			return $http.get('/api/order/' + userId)
                 .then(function(orders){
