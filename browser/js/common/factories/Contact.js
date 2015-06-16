@@ -6,12 +6,6 @@ app.factory('ContactFactory', function($http){
 			.then(function(response){
 				return response.data;
 			})
-		},
-
-        getContacts: function(userId) {
-            return $http.get('api/contact/'+userId).then(function(contacts){
-                return contacts.data;
-            })
-        }
+		}
 	}
 })
