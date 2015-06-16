@@ -32,8 +32,27 @@ var schema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Promo'
 	}
+},{
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
+schema.virtual('subtotal').get(function(){
+    var subtotal = 0;
+    this.all_items.forEach(function(elem){
+        subtotal += (elem.quantity * elem.art.price);
+    });
+    console.log("I REALLY HOPE THIS IS RUNNING",subtotal);
+    return subtotal;
+});
+
+schema.virtual('totalquant').get(function(){
+    var tq = 0;
+    this.all_items.forEach(function(elem){
+        tq += elem.quantity;
+    });
+    return tq;
+});
 
 schema.pre('update', function(next){
 	this.updated_at = Date.now();
