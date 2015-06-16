@@ -5,23 +5,22 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
-	console.log('does query exist?',req.query);
-	console.log('does req body exist?', req.body.params)
 	var id = req.query._id;
 	Order.find({ user: id })
 	.populate("all_items.art")
 	.exec()
 	.then(function (orders){
-		console.log('what is orders??', orders);
 		res.send(orders);
 	})
 	.then(null, next);
 });
 
 router.get('/:id', function (req, res, next){
-	Order.findOne({_id: req.params.id})
+	Order.findOne({user: req.params.id})
+    .populate("all_items.art")
 	.exec()
 	.then(function (order){
+            console.log(order);
 		res.send(order);
 	})
 	.then(null, next);
