@@ -16,14 +16,29 @@ app.factory('CartFactory', function($http){
                     quantity: quantity
                 }
             }).then(function(updatedOrders){
+                var quants = 0,subtotal = 0;
+                updatedOrders.data.all_items.forEach(function (ele) {
+                    quants += ele.quantity;
+                    subtotal += (ele.art.price*ele.quantity);
+                });
+                updatedOrders.data.subtotal = subtotal;
+                updatedOrders.data.subQuantity = quants;
                 return updatedOrders.data;
             });
 
 		},
 
         editLocal: function(idx, newInfo) {
+            var quants = 0,subtotal = 0;
             var cart = this.getFromLocalStorage();
             cart.all_items[idx].quantity = newInfo;
+            cart.all_items.forEach(function (ele) {
+                quants += ele.quantity;
+                subtotal += (ele.art.price*ele.quantity);
+            });
+            cart.subtotal = subtotal;
+            cart.subQuantity = quants;
+
             localStorage.userCart = JSON.stringify(cart);
         },
 
@@ -54,6 +69,7 @@ app.factory('CartFactory', function($http){
 		},
 
         removeItemLocal: function(idx, itemId) {
+
             var cart = this.getFromLocalStorage();
             var updatedItem = cart.all_items.filter(function(item){
                 return item.art._id !== itemId;

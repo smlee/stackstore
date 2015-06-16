@@ -11,7 +11,9 @@ app.config(function ($stateProvider) {
         	carts: function (AuthService, CartFactory) {
         		return AuthService.getLoggedInUser()
         		.then(function (user) {
-        			if (user) return CartFactory.getCarts(user._id)
+        			if (user){
+                        return CartFactory.getCarts(user._id)
+                    }
                     return CartFactory.getFromLocalStorage();
         		})
         	}
@@ -21,15 +23,17 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, AuthService) {
-
+    var quants = 0,subtotal = 0;
 	$scope.user = user;
     $scope.cart = carts;
+
+
 
     $scope.editItem = function (cartid, itemid, newInfo, idx) {
         if (AuthService.isAuthenticated()) {
             CartFactory.editItem(cartid, itemid, newInfo)
                 .then(function (updatedOrders) {
-                    $scope.cart = updatedOrders
+                    $scope.cart = updatedOrders;
                 });
         }
         CartFactory.editLocal(idx, newInfo);
@@ -41,7 +45,6 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, A
         if (AuthService.isAuthenticated()) {
             CartFactory.removeItem(cartid, itemid);
         }
-
         CartFactory.removeItemLocal(idx, itemid);
         // removes from view
         $scope.cart.all_items.splice(idx,1);
@@ -50,24 +53,16 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, A
     };
 
     $scope.total = function(){
+
+        $scope.cart.all_items.forEach(function (ele) {
+            quants += ele.quantity;
+            subtotal += ele.art.price*ele.quantity;
+        });
         return {
-            quantity: function() {
-                var quants = 0;
-                $scope.cart.all_items.forEach(function (ele) {
-                    quants += ele.quantity;
-                });
-                return quants;
-            },
-            sub: function() {
-                var subtotal = 0;
-                $scope.cart.all_items.forEach(function (ele) {
-                    subtotal += ele.art.price;
-                });
-                return subtotal;
-            }
+            quantity: quants,
+            sub: subtotal
         }
     };
-    console.log($scope.total().quantity());
 
     $scope.submitOrder = function (cartid) {
     	
