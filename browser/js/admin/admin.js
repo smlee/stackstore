@@ -211,6 +211,15 @@ app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory,
     $scope.user = user;
     $scope.events = events;
 
+    $scope.addEvent = function (event){
+        EventsFactory.addEvent(event)
+        .then(function(response){
+            console.log(response);
+
+            event.updated = response.message;
+        });
+    };
+
     $scope.updateEvent = function (event) {
         EventsFactory.updateEvents(event).then(function(response){
             event.updated = response

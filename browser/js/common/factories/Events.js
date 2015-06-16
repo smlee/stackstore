@@ -15,6 +15,11 @@ app.factory('EventsFactory', function($http){
 			return $http.put('/api/event/', event).then(function(response){
 				return response.data;			
 			});
+		},
+		addEvent: function(event){
+			return $http.post('/api/event', event).then(function(response){
+				return response.data;
+			});
 		}
 	}
 });
