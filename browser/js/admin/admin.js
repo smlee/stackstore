@@ -85,10 +85,8 @@ app.config(function ($stateProvider, USER_ROLES) {
                 return AuthService.getLoggedInUser()
             },
             carts: function (AuthService, CartFactory) {
-                return AuthService.getLoggedInUser()
-                .then(function (user) {
-                    if (user) return CartFactory.getCarts(user._id)
-                    return CartFactory.getFromLocalStorage();
+                return CartFactory.getCarts()
+                    // return CartFactory.getFromLocalStorage();
                 })
             }
         }
@@ -219,10 +217,13 @@ app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory,
 
 });
 
-app.controller('AdminOrdersCtrl', function ($scope, user, carts, $state) {
+app.controller('AdminOrdersCtrl', function ($scope, user, carts, CartFactory, $state) {
 
     $scope.user = user
-    $scope.cart = carts;
+    $scope.orders = carts;
+    console.log($scope.orders)
+
+
 
     // $scope.
 
