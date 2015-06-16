@@ -3,6 +3,7 @@ app.config(function ($stateProvider) {
 		url: '/history',
 		templateUrl: 'js/order-history/history.html',
 		controller: 'HistoryCtrl',
+    data: {authenticate: true},
 		resolve: {
         	user: function (AuthService) {
         		return AuthService.getLoggedInUser()

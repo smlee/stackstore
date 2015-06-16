@@ -24,9 +24,13 @@ var schema = new mongoose.Schema({
 	total: Number, // do in frontend
 	paid: Boolean,
 	invoice_id: Number,
+	status: {
+		type: String,
+		enum: ['created', 'processing', 'cancelled', 'completed']
+	},
 	promo_code: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'promo'
+		ref: 'Promo'
 	}
 });
 

@@ -1,4 +1,4 @@
-<h1>Reviews </h1>
+<h1>Reviews</h1>
 
 	<div class="input-group col-lg-4 col-md-4">
 		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -11,14 +11,14 @@
 
 <div class="productImgContainer" ng-repeat="product in products | filter: query">
 	<div class="productImage">
-		<img ui-sref="product({id: product._id})" class="productImage" src="{{product.url}}" />
+		<img ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" />
 		<p>{{product.name}}</p>	
 		<div ng-repeat="review in reviews[product._id]">
 			<label>Stars</label>
-			<input value="{{review.rating}}" ng-model="review.rating"></input>
+			<input ng-model="review.rating"></input>
 			<label>Reviews</label>
-			<input value="{{review.content}}" ng-model="review.content"></input>
-			<button ng-show="{{review.content}}" ng-click="updateReview(review)">Update</button>
+			<input ng-model="review.content"></input>
+			<button ng-show="{{!!(review.content)}}" ng-click="updateReview(review)">Update</button>
 			<div>{{review.updated}}</div>
 		</div>
 	</div>

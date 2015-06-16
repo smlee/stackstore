@@ -5,12 +5,16 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
-	console.log('hit the first route in order.js', req.query._id)
-	var id = req.query._id;
-	Order.find({ user: id })
+
+	var query = req.query._id ? {user: req.query._id} : {};
+
+	Order.find(query)
 	.populate("all_items.art")
+	.populate("user")
+	.populate("promo_code")
 	.exec()
 	.then(function (orders){
+		console.log('twas a success!')
 		res.send(orders);
 	})
 	.then(null, next);
@@ -95,6 +99,8 @@ router.post('/', function (req, res, next){
 	var itemFix = req.body.params.all_items.map(function(elem) {
 		return {art: elem.art._id, quantity: elem.quantity}
 	})
+	console.log(itemFix);
+	
 	//re-assign all_items with the fixed array
 	req.body.params.all_items = itemFix;
 	

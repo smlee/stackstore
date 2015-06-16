@@ -1,19 +1,28 @@
-<h1>Orders page</h1>
+<h1>Orders</h1>
 
-<div>
-	<div>
-	<pre>{{cart}}</pre>
-		<div ng-repeat="item in cart.all_items">
-			<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url"></img>
-			<p>Name: {{item.art.name}}</p>
-			<p>Price: {{item.art.price | currency}}</p>
-			<input ng-model="item.quantity" />
-			<pre>{{item}}</pre>
-			<button ng-click="editItem(cart._id, item._id, item.quantity)">Update Quantity</button>
-			<button ng-click="removeItem(cart._id, item.art._id, $index)">Remove</button>
-			<hr>
-		</div>
-		<p>Order type: {{ cart.order_type}}</p>
+<div ng-repeat="order in orders">
+	<h3>Invoice Number: {{order.invoice_id}}</h3>
+	<p><h4>User Email:</h4> {{order.user.email}}</p>
+	<p><h4>Created At:</h4> {{order.created_at}}</p>
+	<p><h4>Updated At:</h4>{{order.updated_at}}</p>
+	<p><h4>Promo Code:</h4> {{order.promo_code.code}}</p>
+	<p><h4>Order Type:</h4>{{order.order_type}}</p>
+
+	<label>Paid</label>
+	<input ng-model="order.paid"></input>
+
+	<label>Total</label>
+	<input ng-model="order.total"></input>
+
+	<h4>All Items</h4>
+	<div ng-repeat="item in order.all_items">
+		<h4>Item</h4>
+		<p><h5>Art:</h5>{{item.art.name}}</p>
+		<p><h5>Price:</h5>{{item.art.price | currency}}</p>
+		<p><h5>Cart Quantity:</h5>{{item.quantity}}</p>
+		<button ng-click="decrementItem(item, order.all_items)">Decrement</button>
+		<button ng-click="incrementItem(item, order.all_items)">Increment</button>
 	</div>
-	<button ng-click="submitOrder(cart._id)">Place Order</button>
+	<button style="margin-top:10px;" ng-click="updateOrder(order)">Update</button>
+	<hr>
 </div>
