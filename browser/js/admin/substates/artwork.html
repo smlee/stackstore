@@ -12,10 +12,8 @@
 
 <div id="artwork" class="productImgContainer" ng-repeat="product in products | filter: query">
 
-	<div class="productImage">
-
 		<div class="col-lg-4 col-md-4 col-sm-4">
-			<img ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" />
+			<img ui-sref="product({id: product._id})" class="" ng-src="{{product.url}}" />
 		</div>
 
 		<div class="col-lg-8 col-md-8 col-sm-8">
@@ -52,8 +50,6 @@
 			<div>{{product.updated}}</div>
 
 		</div>
-
-	</div>
 
 </div>
 </div
