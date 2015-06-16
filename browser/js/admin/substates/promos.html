@@ -9,6 +9,10 @@
 			<input class="form-control" ng-model="newPromo.promo_type"></input>
 			<h3>Expires</h3>
 			<input class="form-control" ng-model="newPromo.exp_date"></input>
+			<h3>Discount Type</h3>
+			<input class="form-control" ng-model="newPromo.discount.discount_type"></input>
+			<h3>Discount Amount</h3>
+			<input class="form-control" ng-model="newPromo.discount.amount"></input>
 			<h3>Category</h3>
 			<input class="form-control" ng-model="newPromo.category_id"></input>
 			<h3>Art</h3>
@@ -28,6 +32,10 @@
 		<h3>Expires</h3>
 		<p>{{promo.exp_date | date : 'short'}}</p>
 		<input class="form-control" ng-model="promo.exp_date"></input>
+		<h3>Discount Type</h3>
+		<input class="form-control" ng-model="promo.discount.discount_type"></input>
+		<h3>Discount Amount</h3>
+		<input class="form-control" ng-model="promo.discount.amount"></input>
 		<h3>Category</h3>
 		<input class="form-control" ng-model="promo.category_id"></input>
 		<h3>Art</h3>
