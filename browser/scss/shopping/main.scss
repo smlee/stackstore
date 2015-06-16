@@ -1,6 +1,7 @@
 .productImgContainer{
 	text-align: center;
 	margin: 0 auto;
+	//position:relative;
 }
 
 .productImage{
@@ -8,6 +9,7 @@
 	width: 200px;
 	height: 200px;
 }
+
 
 .productUnavailable{
 	opacity: 0.1;

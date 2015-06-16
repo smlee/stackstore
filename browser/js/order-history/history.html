@@ -1,0 +1,22 @@
+<h1>Order History</h1>
+
+<table class="table">
+	<thead><tr>
+		<th ng-repeat="header in headers">{{header}}</th>
+	</tr></thead>
+	<tr ng-repeat="order in orders">
+		<td>{{order.invoice_id}}</td>
+		<td>
+			<ul>
+				<div ng-repeat="item in order.all_items">
+					<li class="order-li" ui-sref="product({id: item.art._id})">{{item.art.name}}</li>
+					<a ng-if="order.paid" href='' ng-click="open('md', 'Add Review', item.art._id)">Write Reivew</a> 
+				</div>
+			</ul>
+		</td>
+		<td><ul><li class="order-li" ng-repeat="item in order.all_items">{{item.quantity}}</li></ul></td>
+		<td>{{order.total}}</td>
+		<td ng-if="order.paid">Completed</td>
+		<td ng-if="!order.paid">Processing</td>
+	</tr>
+</table>

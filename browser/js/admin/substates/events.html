@@ -1,4 +1,21 @@
-<h1>events page</h1>
+<h1>Events</h1>
+
+<div>
+	<h2>New Event</h2>
+	<form name="eventForm" ng-submit="eventForm.$valid && addEvent(newEvent)">
+		<label>Event Name</label>
+		<input ng-model="newEvent.event_name"></input>
+		<label>Description</label>
+		<input ng-model="newEvent.description"></input>
+		<label>Price</label>
+		<input ng-model="newEvent.price"></input>
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+</div>
+
+<hr>
+
+<h2>Upcoming Events</h2>
 
 <div ng-repeat="event in events">
 	<label>Event Name</label>
@@ -7,9 +24,8 @@
 	<input value="{{event.description}}" ng-model="event.description"></input>
 	<label>Price</label>
 	<input value="{{event.price | currency}}" ng-model="event.price"></input>
-	<label>Updated At</label>
-	<input value="{{event.updated_at}}" ng-model="event.updated_at"></input>
-	<p>Created At: {{event.updated_at}}</p>
+	<p>Updated At: {{event.updated_at}}</p>
+	<p>Created At: {{event.created_at}}</p>
 	<button ng-click="updateEvent(event)">Update</button>
 	<div>{{event.updated}}</div>
 </div>

@@ -30,7 +30,7 @@ var schema = new mongoose.Schema({
 	},
 	promo_code: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'promo'
+		ref: 'Promo'
 	}
 });
 

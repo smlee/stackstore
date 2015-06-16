@@ -1,24 +1,28 @@
-<h1>Orders page</h1>
+<h1>Orders</h1>
 
 <div ng-repeat="order in orders">
-	<p>{{order.invoice_id}}</p>
-	<label>Order Type</label>
-	<input ng-model="order.order_type"></input>
+	<h3>Invoice Number: {{order.invoice_id}}</h3>
+	<p><h4>User Email:</h4> {{order.user.email}}</p>
+	<p><h4>Created At:</h4> {{order.created_at}}</p>
+	<p><h4>Updated At:</h4>{{order.updated_at}}</p>
+	<p><h4>Promo Code:</h4> {{order.promo_code.code}}</p>
+	<p><h4>Order Type:</h4>{{order.order_type}}</p>
+
 	<label>Paid</label>
 	<input ng-model="order.paid"></input>
-	<label>User Id</label>
-	<input ng-model="order.user"></input>
-	<label>Updated At</label>
-	<input ng-model="order.updated_at"></input>
-	<p>Created At: {{order.created_at}}</p>
-	<label>All Items</label>
-	<div ng-repeat="item in order.all_items">
-	<!-- {{item}} -->
-		<input ng-model="item.name"></input>
-	</div>
+
 	<label>Total</label>
 	<input ng-model="order.total"></input>
-	<label>Promo Code</label>
-	<input ng-model="order.promo_code"></input>
-	<button ng-click="updateOrder(order)">Update</button>
+
+	<h4>All Items</h4>
+	<div ng-repeat="item in order.all_items">
+		<h4>Item</h4>
+		<p><h5>Art:</h5>{{item.art.name}}</p>
+		<p><h5>Price:</h5>{{item.art.price | currency}}</p>
+		<p><h5>Cart Quantity:</h5>{{item.quantity}}</p>
+		<button ng-click="decrementItem(item, order.all_items)">Decrement</button>
+		<button ng-click="incrementItem(item, order.all_items)">Increment</button>
+	</div>
+	<button style="margin-top:10px;" ng-click="updateOrder(order)">Update</button>
+	<hr>
 </div>

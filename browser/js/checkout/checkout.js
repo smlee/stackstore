@@ -19,7 +19,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('CheckoutCtrl', function ($scope, ContactFactory, united, $state, user, carts, $modal,$log){
+app.controller('CheckoutCtrl', function ($scope, ContactFactory, united, $state, user, carts, $modal, $log){
 	$scope.sendAddressInfo = function(info){
 		ContactFactory.sendNewContactInfo(user._id, info).then(function(response){
 			console.log('contact info succesfully added')
@@ -27,8 +27,7 @@ app.controller('CheckoutCtrl', function ($scope, ContactFactory, united, $state,
 		});
 	};
 
-	$scope.contactType = ['shipping', 'billing', 'home', 'event'];
-	$scope.states = united.states;
+	
 
     $scope.open = function (size, title) {
 
@@ -53,6 +52,9 @@ app.controller('CheckoutCtrl', function ($scope, ContactFactory, united, $state,
 
 });
 
-app.controller('addressCtrl', function($scope, title){
+app.controller('addressCtrl', function($scope, united, title){
     $scope.title = title;
+    $scope.contactType = ['shipping', 'billing', 'home', 'event'];
+    $scope.states = united.states;
 });
+

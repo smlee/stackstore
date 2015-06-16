@@ -1,11 +1,24 @@
 app.factory('CartFactory', function($http){
 	return{
-		getCarts: function (userId) {
-			return $http.get('/api/order/' + userId)
-                .then(function(orders){
-                    console.log(orders);
+		// new route to get user's order history
+		getOrderHistory: function(userId){
+			return $http.get('/api/order',  {params: { _id: userId}}).then(function(orders){
 				return orders.data;
 			});
+		},
+
+		getCarts: function (userId) {
+			if (userId) {
+				return $http.get('/api/order/' + userId)
+                .then(function(orders){
+					return orders.data;
+				})
+			} else {
+				return $http.get('/api/order')
+                .then(function(orders){
+					return orders.data;
+				})
+			}
 		},
 
 		editItem: function (cartId, itemId, quantity) {
