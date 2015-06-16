@@ -6,8 +6,6 @@ var User = mongoose.model('User');
 var Contact = mongoose.model('Contact');
 
 router.get('/', function (req, res, next){
-	console.log(req.query.role);
-	//User.find({role: req.query.role})
 	User.find({})
 	.populate("contact")
 	.exec()
@@ -33,6 +31,37 @@ router.get('/:id', function (req, res, next){
 		res.send(user);
 	})
 	.then(null, next);				
+});
+
+router.put('/email', function (req, res, next){
+	User.findOne({email: req.body.email})
+	.populate("contact")
+	.exec()
+	.then(function (user){	
+		if(user){
+			user.reset_Password = false;
+			user.password = req.body.password;
+			user.save(function(err, data){
+				if(err){
+					res.send(false);
+				}
+				res.send("Password Changed");
+			})
+		}else{
+			res.send(false);
+		}
+		
+	})
+	.then(null, next);		
+});
+
+router.put('/', function (req, res, next){
+	User.update({}, req.body, {multi: true})
+	.exec()
+	.then(function (){		
+		res.send("All Users Updated");
+	})
+	.then(null, next);
 });
 
 router.put('/:id', function (req, res, next){

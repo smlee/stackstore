@@ -12,6 +12,12 @@ app.factory('UsersFactory', function($http){
 			}
 		},
 
+		updateUserPasswordByEmail: function (email) {
+			return $http.put('/api/user/email', email).then(function(user){
+				return user.data;
+			});
+		},
+
 		deleteUser: function(userId){
 			return $http.delete('/api/user/'+userId).then(function(){
 				return;			
@@ -19,8 +25,14 @@ app.factory('UsersFactory', function($http){
 		},
 
 		updateUser: function(userId, user){
-			return $http.put('/api/user/'+userId, user).then(function(){
-				return;			
+			return $http.put('/api/user/'+userId, user).then(function(response){
+				return response.data;			
+			});
+		},
+
+		updateAllUsersWithProp: function(users){
+			return $http.put('/api/user', users).then(function(response){
+				return response.data;			
 			});
 		}
 	}

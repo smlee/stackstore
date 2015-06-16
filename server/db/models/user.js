@@ -33,7 +33,11 @@ var schema = new mongoose.Schema({
     role: String,
     is_admin: Boolean,
     first_name: String,
-    last_name: String
+    last_name: String,
+    reset_Password: {
+        type: Boolean,
+        default: false
+    }
 });
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

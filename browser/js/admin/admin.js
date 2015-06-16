@@ -87,11 +87,6 @@ app.config(function ($stateProvider, USER_ROLES) {
             carts: function (CartFactory) {
                 return CartFactory.getCarts()
             }
-            // carts: function (AuthService, CartFactory) {
-            //     return CartFactory.getCarts()
-            //         // return CartFactory.getFromLocalStorage();
-            //     })
-            // }
         }
     });
 
@@ -108,13 +103,24 @@ app.config(function ($stateProvider, USER_ROLES) {
             }
         }
     });
+
+    $stateProvider.state('admin.resetPass', {
+        url: '/admin/reset-passwords',
+        templateUrl: 'js/admin/substates/resetPass.html',
+        controller: 'AdminResetPassCtrl',
+        resolve: {
+            user: function (AuthService) {
+                return AuthService.getLoggedInUser()
+            },
+            users: function (UsersFactory) {
+                return UsersFactory.getUsers()
+            }
+        }
+    });
 });
 
 app.controller('AdminCtrl', function ($scope, user, $state, $rootScope) {
     $scope.user = user;
-    $scope.test = function () {
-        $state.go('admin.promos')
-    }
 });
 
 app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, UsersFactory, $state) {
@@ -265,4 +271,32 @@ app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, Pr
         });
     }
 });
+
+app.controller('AdminResetPassCtrl', function ($scope, user, users, $state, $rootScope, UsersFactory) {
+    $scope.user = user;
+    $scope.users = users; 
+        
+    var obj = {
+        updateType: 'user',
+        info: null
+    };
+
+    $scope.resetOneUser = function (user){
+        obj.info = user;
+        user.reset_Password = true;
+        UsersFactory.updateUser(user._id, obj).then(function(message){
+            console.log(message); 
+        });
+    };
+
+    $scope.resetAllUsers = function (){
+        UsersFactory.updateAllUsersWithProp({reset_Password: true}).then(function(message){
+            console.log(message); 
+        });
+    };
+});
+
+
+
+
 
