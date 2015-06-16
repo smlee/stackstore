@@ -1,7 +1,6 @@
 <h1>Orders page</h1>
 
 <div ng-repeat="order in orders">
-{{order}}
 	<p>{{order.invoice_id}}</p>
 	<label>Order Type</label>
 	<input ng-model="order.order_type"></input>
@@ -14,11 +13,12 @@
 	<p>Created At: {{order.created_at}}</p>
 	<label>All Items</label>
 	<div ng-repeat="item in order.all_items">
-		<input ng-model="item"></input>
+	<!-- {{item}} -->
+		<input ng-model="item.name"></input>
 	</div>
 	<label>Total</label>
 	<input ng-model="order.total"></input>
 	<label>Promo Code</label>
 	<input ng-model="order.promo_code"></input>
-	<button ng-click="submitOrder(cart._id)">Place Order</button>
+	<button ng-click="updateOrder(order)">Update</button>
 </div>

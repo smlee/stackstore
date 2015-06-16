@@ -5,11 +5,13 @@ module.exports = router;
 var Order = mongoose.model('Order');
 
 router.get('/', function (req, res, next){
-	var id = req.query._id;
-	Order.find({ user: id })
+	// var id = req.query._id;
+	Order.find({})
 	.populate("all_items.art")
+	.populate("")
 	.exec()
 	.then(function (orders){
+		console.log(orders)
 		res.send(orders);
 	})
 	.then(null, next);
@@ -94,6 +96,8 @@ router.post('/', function (req, res, next){
 	var itemFix = req.body.params.all_items.map(function(elem) {
 		return {art: elem.art._id, quantity: elem.quantity}
 	})
+	console.log(itemFix);
+	
 	//re-assign all_items with the fixed array
 	req.body.params.all_items = itemFix;
 	

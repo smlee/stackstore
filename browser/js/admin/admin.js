@@ -84,11 +84,14 @@ app.config(function ($stateProvider, USER_ROLES) {
             user: function (AuthService) {
                 return AuthService.getLoggedInUser()
             },
-            carts: function (AuthService, CartFactory) {
+            carts: function (CartFactory) {
                 return CartFactory.getCarts()
-                    // return CartFactory.getFromLocalStorage();
-                })
             }
+            // carts: function (AuthService, CartFactory) {
+            //     return CartFactory.getCarts()
+            //         // return CartFactory.getFromLocalStorage();
+            //     })
+            // }
         }
     });
 
