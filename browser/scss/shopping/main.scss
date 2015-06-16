@@ -1,13 +1,11 @@
 .productImgContainer{
 	text-align: center;
 	margin: 0 auto;
-	//position:relative;
 }
 
 .productImage{
 	float: left;
 
-	//position:absolute;
 	display:inline-block;
 	img{
 		width: 200px;
@@ -17,12 +15,10 @@
 	p{
 
 	}
-
-
 }
 
 .productUnavailable{
-	opacity: 0.5;
+	opacity: 0.1;
 }
 
 // .search-bar {

@@ -11,8 +11,7 @@
 
 <div class="productImgContainer" ng-repeat="product in products | filter: query">
 	<div class="productImage">
-		<!-- <img class="product.quantity <= 0 && 'productUnavailable'" ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" /> -->
-		<img class="productImage" class="(product.quantity <= 0 && productUnavailable)" ui-sref="product({id: product._id})" ng-src="{{product.url}}" />
+		<img ng-class="{'productUnavailable': (product.quantity <= 0)}" ui-sref="product({id: product._id})" ng-src="{{product.url}}" />
 		<p>{{product.name}}</p>	
 		<p class='text-danger' ng-if='product.quantity <= 0'>Unavailable</p>
 	</div>
