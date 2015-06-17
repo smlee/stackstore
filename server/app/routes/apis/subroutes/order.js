@@ -50,16 +50,15 @@ router.put('/push', function(req, res, next){
 
 router.put('/update', function(req, res, next){
 	var itemFix = req.body.params.newData.all_items.map(function(elem) {
-		console.log('elem elem', elem)
 		return {art: elem.art._id, quantity: elem.quantity}
-	})
+	});
 		//re-assign all_items with the fixed array
 		req.body.params.newData.all_items = itemFix;
 	Order.update({_id: req.body.params._id}, req.body.params.newData)
 	.exec()
 	.then(function (updatedOrder) {
-		console.log('order successfully updated', updatedOrder)
-		res.send(updatedOrder)
+		console.log('order successfully updated', updatedOrder);
+		res.json({message:'updated '+updatedOrder})
 	})
 	.then(null, next);
 });
