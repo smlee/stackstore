@@ -13,7 +13,11 @@
 <div id="artwork" class="productImgContainer" ng-repeat="product in products | filter: query">
 
 		<div class="col-lg-4 col-md-4 col-sm-4">
-			<img ui-sref="product({id: product._id})" class="" ng-src="{{product.url}}" />
+<!-- 			<img ui-sref="product({id: product._id})" class="" ng-src="{{product.url}}" />
+ -->
+			<img ui-sref="product({id: product._id})" class="productImage img-responsive" ng-class="{'productUnavailable': (product.quantity <= 0)}" ng-src="{{product.url}}" />
+			<p>{{product.name}}</p>	
+			<p class='text-danger' ng-if='product.quantity <= 0'>Unavailable</p>
 		</div>
 
 		<div class="col-lg-8 col-md-8 col-sm-8">
@@ -39,7 +43,7 @@
 
 				<label>Image Source</label>
 				<input class="form-control" value="{{product.url}}" ng-model="product.url"></input>
-			
+				
 				<label>Tags</label>
 				<div ng-repeat="tag in product.tags">
 				<input class="form-control" value="{{tag}}"></input>
@@ -48,7 +52,7 @@
 				
 			<button class="btn btn-primary" ng-click="updateProduct(product)">Update</button>
 			<div>{{product.updated}}</div>
-
+			<hr>
 		</div>
 
 </div>

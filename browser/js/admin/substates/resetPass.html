@@ -1,11 +1,12 @@
 <h1>Reset Passwords</h1>
 <br/>
 <button class="btn btn-danger" ng-click='resetAllUsers()'>Reset All Passwords</button>
-
+<p ng-if="resetMessage">{{resetMessage}}</p>
 <ul>
 <li ng-repeat="user in users">
 	<h4>{{user.email}}</h4>
 	<button class="btn btn-warning" ng-click='resetOneUser(user)'>Reset Password</button>
+	<p>{{user.resetMessage}}</p>
 	<hr>
 </li>
 </ul>
