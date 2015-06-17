@@ -15,7 +15,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('ResetCtrl', function ($scope, AuthService, UsersFactory, $state) {
-	$scope.login = {};
 	var newPass = Math.random().toString(36).slice(-8);	
 
 	$scope.resetPassword = function (userInfo){
@@ -42,7 +41,6 @@ app.controller('ResetCtrl', function ($scope, AuthService, UsersFactory, $state)
 
 app.controller('AdminResetCtrl', function ($scope, AuthService, UsersFactory, $state) {
 	$scope.displayMessage = "The Admin is requesting you change you password";
-	$scope.login = {};
 	var newPass = Math.random().toString(36).slice(-8);	
 
 	$scope.resetPassword = function (userInfo){

@@ -23,8 +23,8 @@ app.run(function ($rootScope, AuthService, $state, $location) {
         $rootScope.previousPath = $location.path();
         
         if (toState.data && toState.data.authorizedRoles && !AuthService.isAuthorized(toState.data.authorizedRoles)) {
-            // event.preventDefault();            
-            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+            event.preventDefault();            
+            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);            
             $state.go('home');
         }
         

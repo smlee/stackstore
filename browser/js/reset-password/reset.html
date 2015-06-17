@@ -1,7 +1,7 @@
-<h1 ng-if="displayMessage">{{displayMessage}}</h1>
-
 <h1>Reset Password</h1>
-<p>Email</p>
+<h5>Email</h5>
 <input ng-model="userInfo.email"/>
-<button  ng-click='resetPassword(userInfo)'>Submit</button>
-<h1>A New Password Will Be Emailed To You Shortly</h1>
+<button  class="btn btn-primary" ng-click='resetPassword(userInfo)'>Submit</button>
+<p style="color:red">A New Password Will Be Emailed To You Shortly</p>
+<hr>
+<h1 style="text-align:center" ng-if="displayMessage">{{displayMessage}}</h1>
