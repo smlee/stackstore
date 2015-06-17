@@ -1,6 +1,7 @@
 <div class="row">
 
     <div class="col-md-6">
+        <form name="cardForm" ng-submit="cardForm.$valid && sendCardInfo(card)">
         <div ng-show="contacts">
             <h2>Shipping Address</h2>
             {{contacts.first_name}} {{contacts.last_name}}<br>
@@ -15,7 +16,7 @@
             <a href='' ng-click="open('lg', 'New Shipping Address')">Change Shipping Address</a>
         </div>
         <h2>Payment</h2>
-        <form name="cardForm" ng-submit="cardForm.$valid && sendCardInfo(card)">
+
             <div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
                 <label for="cctype">Type</label>
                 <select ng-model="card.type" id="cctype" required><option ng-repeat="creditCard in creditCards">{{creditCard}}</option></select>
@@ -35,7 +36,7 @@
             <div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
                 <label for="security">Security Code</label>
                 <input type="text" id="security" name="ccv" class="form-control" placeholder="CCV" ng-model="card.ccv" ng-minlength="3" ng-maxlength="3" required>
-                <p ng-show="addressForm.ccv.$invalid && !addressForm.ccv.$pristine">CCV is required!</p>
+                <p ng-show="cardForm.ccv.$invalid && !cardForm.ccv.$pristine">CCV is required!</p>
             </div>
 
             <div class="form-group col-lg-10 col-md-10 col-sm-10 col-centered">
@@ -43,7 +44,7 @@
                 <select ng-model="card.month" required><option ng-repeat="month in months">{{month}}</option></select>
                 <select ng-model="card.year" required><option ng-repeat="year in years">{{year}}</option></select>
             </div>
-        </form>
+
         <div>
 
         </div>
@@ -52,14 +53,18 @@
 
             <div class="col-md-8">
                 <input type="text" id="promocode" name="promocode" class="form-control" placeholder="promo code" ng-model="promocode">
+                <p ng-show="code !== 'invalid' && code !== null">Promo code {{code}} applied!</p>
+                <p ng-show="code === 'invalid'">Sorry! No such promo code.</p>
             </div>
             <div class="col-md-4">
-                <button ng-click="applyCode(promocode)">Apply Code</button>
+                <a href='' ng-click="applyCode(promocode)">Apply Code</a>
             </div>
+
         </div>
+
         <h3>Subtotal: <span>{{cart.subtotal | currency}}</span></h3>
         <button>Place Order</button>
-
+        </form>
     </div>
 
     <div class="col-md-6">

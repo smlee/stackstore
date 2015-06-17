@@ -6,7 +6,7 @@ app.factory('PromosFactory', function($http){
 			});
 		},
         getPromo: function (code) {
-            return $http.get('/api/promo'+code).then(function(promo) {
+            return $http.get('/api/promo/'+code).then(function(promo) {
                 return promo.data;
             });
         },

@@ -19,7 +19,9 @@ app.config(function ($stateProvider) {
 	});
 });
 
-app.controller('HistoryCtrl', function ($scope, CartFactory, user, $modal, $log){
+app.controller('HistoryCtrl', function ($scope, CartFactory, user, $modal, $log, $stateParams){
+    console.log('what is state params???', $stateParams);
+    if($stateParams.message) $scope.message = $stateParams.message;
 	$scope.headers = ["Invoice", "Product", "Quantity", "Price", "Order Status"];
 	$scope.orders;
 
