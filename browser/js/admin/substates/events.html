@@ -4,13 +4,14 @@
 		<h2>New Event</h2>
 		<form name="eventForm" ng-submit="eventForm.$valid && addEvent(newEvent)">
 			<label>Event Name</label>
-			<input class="form-control" ng-model="newEvent.event_name"></input>
+			<input required class="form-control" ng-model="newEvent.event_name"></input>
 			<label>Description</label>
 			<input class="form-control" ng-model="newEvent.description"></input>
 			<label>Price</label>
 			<input class="form-control" ng-model="newEvent.price"></input>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+		<p ng-if="addEventMessage">{{addEventMessage}}</p>
 	</div>
 
 	<hr>
@@ -28,5 +29,6 @@
 		<p>Created At: {{event.created_at}}</p>
 		<button class="btn btn-primary" ng-click="updateEvent(event)">Update</button>
 		<div>{{event.updated}}</div>
+		<hr>
 	</div>
 </div>

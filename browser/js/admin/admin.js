@@ -161,7 +161,7 @@ app.controller('AdminUsersCtrl', function ($scope, $stateParams, user, users, Us
     };
 });
 
-app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, ProductFactory, $state) {
+app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, ProductFactory, $state, $timeout) {
 
     $scope.user = user;
     $scope.products = artwork;
@@ -176,13 +176,16 @@ app.controller('AdminArtworkCtrl', function ($scope, user, artwork, categories, 
 
     $scope.updateProduct = function (product) {
         ProductFactory.updateProduct(product).then(function(response){
-            product.updated = response
+            product.updated = response;
+            $timeout(function() {
+                product.updated = null;
+            }, 1000);
         });
     };
 
 });
 
-app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, ReviewsFactory, ProductFactory, $state) {
+app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, ReviewsFactory, ProductFactory, $state, $timeout) {
 
     $scope.user = user;
     $scope.products = artwork;
@@ -200,7 +203,6 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
     artwork.forEach(function (art) {
         ReviewsFactory.getReviews(art._id)
         .then(function (review) {
-            // console.log(review)
             $scope.reviews[art._id] = review
         });
     });
@@ -208,11 +210,14 @@ app.controller('AdminReviewsCtrl', function ($scope, user, artwork, categories, 
     $scope.updateReview = function (review) {
         ReviewsFactory.updateReview(review).then(function(response){
             review.updated = response
+            $timeout(function() {
+                review.updated = null;
+            }, 1000);
         });
     };
 });
 
-app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory, $state) {
+app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory, $state, $timeout) {
 
     $scope.user = user;
     $scope.events = events;
@@ -220,15 +225,23 @@ app.controller('AdminEventsCtrl', function ($scope, user, events, EventsFactory,
     $scope.addEvent = function (event){
         EventsFactory.addEvent(event)
         .then(function(response){
-            console.log(response);
+            $scope.addEventMessage = response.message;
+            EventsFactory.getEvents().then(function(events){
+                $scope.events = events;
+                $timeout(function() {
+                    $scope.addEventMessage = null;
+                }, 1000);
+            });
 
-            event.updated = response.message;
         });
     };
 
     $scope.updateEvent = function (event) {
         EventsFactory.updateEvents(event).then(function(response){
-            event.updated = response
+            event.updated = response;
+            $timeout(function() {
+                event.updated = null;
+            }, 1000);
         });
     };
 
@@ -270,7 +283,7 @@ app.controller('AdminOrdersCtrl', function ($scope, user, carts, CartFactory, $s
 
 });
 
-app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, PromosFactory, promos) {
+app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, PromosFactory, promos, $timeout) {
     $scope.user = user;
     $scope.promos = promos;
 
@@ -278,33 +291,40 @@ app.controller('AdminPromosCtrl', function ($scope, user, $state, $rootScope, Pr
         console.log(promo);
         PromosFactory.addPromos(promo)
         .then(function(response){
-            console.log(response);
-
             promo.updated = response.message;
+            $timeout(function() {
+                promo.updated = null;
+            }, 1000); 
+            PromosFactory.getAllPromos().then(function(promos){
+                $scope.promos = promos;
+            });
         });
     };
     $scope.updatePromo = function (promo){
-        
-        
         PromosFactory.updatePromo(promo)
         .then(function(response){
-            promo.updated = response;
-                        
-            // $timeout(function() {
-            //     promo.updated = null
-            // }, 2000);
+            promo.updated = response;              
+            $timeout(function() {
+                promo.updated = null;
+            }, 1000);            
         });
     };
 
     $scope.deletePromo = function (promo){
         PromosFactory.deletePromo(promo)
         .then(function(response){
-            promo.updated = response
+            promo.updated = response.message;
+            $timeout(function() {
+                promo.updated = null;
+            }, 1000); 
+            PromosFactory.getAllPromos().then(function(promos){
+                $scope.promos = promos;
+            });
         });
     };
 });
 
-app.controller('AdminResetPassCtrl', function ($scope, user, users, $state, $rootScope, UsersFactory) {
+app.controller('AdminResetPassCtrl', function ($scope, user, users, $state, $rootScope, UsersFactory, $timeout) {
     $scope.user = user;
     $scope.users = users; 
         
@@ -316,15 +336,19 @@ app.controller('AdminResetPassCtrl', function ($scope, user, users, $state, $roo
     $scope.resetOneUser = function (user){
         obj.info = user;
         user.reset_Password = true;
-        UsersFactory.updateUser(user._id, obj).then(function(message){
-            console.log(message); 
-        });
+        user.resetMessage = "User Will Be Prompted To Change Password";
+        UsersFactory.updateUser(user._id, obj)
+        $timeout(function() {
+            user.resetMessage = null;
+        }, 1000); 
     };
 
     $scope.resetAllUsers = function (){
-        UsersFactory.updateAllUsersWithProp({reset_Password: true}).then(function(message){
-            console.log(message); 
-        });
+        $scope.resetMessage = "User Will Be Prompted To Change Password";
+        UsersFactory.updateAllUsersWithProp({reset_Password: true})
+        $timeout(function() {
+            $scope.resetMessage = null;
+        }, 1000); 
     };
 });
 
