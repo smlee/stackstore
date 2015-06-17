@@ -20,7 +20,7 @@ router.post('/', function (req, res, next){
             user.contact.push(contact._id);
             user.save(function(err, data){
                 if(err) return next(err);
-                res.send("contact successfully added to user");
+                res.send("contact successfully added to user")
             });
         });
     });

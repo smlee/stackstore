@@ -19,7 +19,7 @@ router.get('/:code', function (req, res, next){
 	.exec()
 	.then(function (promo) {
 		if (promo){
-			res.send(true)
+			res.send(promo)
 		} else res.send(false)
 	})
 	.then(null, next);

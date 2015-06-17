@@ -2,7 +2,7 @@ app.factory('CartFactory', function($http){
     return{
         getOrderHistory: function(userId){
             return $http.get('/api/order',  {params: { _id: userId}}).then(function(orders){
-               return orders.data;
+                return orders.data;
             });
         },
         getCarts: function (userId) {

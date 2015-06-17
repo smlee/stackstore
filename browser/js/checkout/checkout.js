@@ -26,10 +26,14 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('CheckoutCtrl', function ($scope, united, $state, user, cart, contacts, $modal,$log, CartFactory){
+app.controller('CheckoutCtrl', function ($scope, united, $state, user, cart, contacts,
+                                         $modal,$log, CartFactory, PromosFactory){
 
     $scope.contacts = contacts.contact[0];
     $scope.cart = cart;
+    $scope.code = null;
+    $scope.promo = null;
+
 
     $scope.open = function (size, title) {
 
@@ -61,15 +65,36 @@ app.controller('CheckoutCtrl', function ($scope, united, $state, user, cart, con
     $scope.years = [2015, 2016, 2017, 2018, 2019, 2020];
 
     var cartId = CartFactory.getFromLocalStorage()._id;
-    console.log('this is cart id in paymentCtrl', cartId)
     $scope.sendCardInfo = function(info){
-        console.log('this is the user\'s card info!!!!', info);
-
-        CartFactory.updateStatus(cartId, {paid: true}).then(function(response){
-            $state.go('invoice');
+        var updates = {
+            all_items: $scope.cart.all_items,
+            paid: true,
+            total: $scope.cart.subtotal,
+            status: 'completed',
+            promo_code: $scope.promo?$scope.promo._id : null
+        };
+        CartFactory.updateOrder(cartId, updates).then(function(response){
+            localStorage.clear();
+            $state.go('order-history');
+            $rootScope.message;
         });
+    };
 
-
+    //Promo Code
+    $scope.applyCode = function(code) {
+        PromosFactory.getPromo(code).then(function(promo){
+            if(promo){
+                $scope.promo = promo;
+                if(promo.discount.discount_type === 'percent') {
+                    $scope.cart.subtotal = $scope.cart.subtotal*promo.discount.amount/100;
+                }else {
+                    $scope.cart.subtotal = $scope.cart.subtotal-promo.discount.amount;
+                }
+                $scope.code = code;
+            } else {
+                $scope.code = 'invalid';
+            }
+        });
     }
 
 });
