@@ -1,5 +1,16 @@
 <h1>Users</h1>
+<div id="users">
+	<ul>
+	<li ng-repeat="user in users">
+		<h4>{{user.email}}<h4>
+		<button class="btn btn-primary" ng-click='promoteAdmin(user)' ng-if="!user.is_admin">Promote Admin
+		</button>
+		<button class="btn btn-warning" ng-click='demoteAdmin(user)' ng-if="user.is_admin">Demote Admin
+		</button>
+		<button class="btn btn-danger" ng-click='deleteUser(user)'>Delete
+		</button>
+		<hr>
+	</li>
+	</ul>
+</div>
 
-<ul>
-<li ng-repeat="user in users">{{user.email}}<button ng-click='deleteUser(user)'>Delete</button><button ng-click='promoteAdmin(user)' ng-if="!user.is_admin">Promote Admin</button><button ng-click='demoteAdmin(user)' ng-if="user.is_admin">Demote Admin</button></li>
-</ul>

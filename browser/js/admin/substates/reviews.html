@@ -1,24 +1,27 @@
 <h1>Reviews</h1>
-
+<div class=" searchbar">
 	<div class="input-group col-lg-4 col-md-4">
-		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"> Search</span>
 		<input ng-model="query" type="text" class="form-control">
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<select class="form-control" ng-model="categoryName" ng-change="filterProducts()" ng-options="category.name for category in categories"></select>
 	</div>
+</div>
 
+<div id="reviews"class="productImgContainer" ng-repeat="product in products | filter: query">
+	<div class=" ">
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<img ui-sref="product({id: product._id})" class="" ng-src="{{product.url}}" />
+		</div>
 
-<div class="productImgContainer" ng-repeat="product in products | filter: query">
-	<div class="productImage">
-		<img ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" />
-		<p>{{product.name}}</p>	
-		<div ng-repeat="review in reviews[product._id]">
+		<h4>{{product.name}}</h4>	
+		<div class="col-lg-8 col-md-8 col-sm-8" ng-repeat="review in reviews[product._id]">
 			<label>Stars</label>
-			<input ng-model="review.rating"></input>
+			<input class="form-control" ng-model="review.rating"></input>
 			<label>Reviews</label>
-			<input ng-model="review.content"></input>
-			<button ng-show="{{!!(review.content)}}" ng-click="updateReview(review)">Update</button>
+			<input class="form-control" ng-model="review.content"></input>
+			<button class="btn btn-primary"ng-show="{{!!(review.content)}}" ng-click="updateReview(review)">Update</button>
 			<div>{{review.updated}}</div>
 		</div>
 	</div>

@@ -1,39 +1,48 @@
 <h1>Promos</h1>
+<div id="promos">
+	<div>
+		<h2>New Promo Code</h2>
+		<form name="promoForm" ng-submit="promoForm.$valid && addPromoCode(newPromo)">
+			<h3>Promo Code</h3>
+			<input class="form-control" ng-model="newPromo.code"></input>
+			<h3>Type</h3>
+			<input class="form-control" ng-model="newPromo.promo_type"></input>
+			<h3>Expires</h3>
+			<input class="form-control" ng-model="newPromo.exp_date"></input>
+			<h3>Discount Type</h3>
+			<input class="form-control" ng-model="newPromo.discount.discount_type"></input>
+			<h3>Discount Amount</h3>
+			<input class="form-control" ng-model="newPromo.discount.amount"></input>
+			<h3>Category</h3>
+			<input class="form-control" ng-model="newPromo.category_id"></input>
+			<h3>Art</h3>
+			<input class="form-control" ng-model="newPromo.art_id"></input>
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<div>{{promo.updated}}</div>
+		</form>
+	</div>
 
-<div>
-	<h2>New Promo Code</h2>
-	<form name="promoForm" ng-submit="promoForm.$valid && addPromoCode(newPromo)">
-		<label>Promo Code</label>
-		<input ng-model="newPromo.code"></input>
-		<label>Type</label>
-		<input ng-model="newPromo.promo_type"></input>
-		<label>Expires</label>
-		<input ng-model="newPromo.exp_date"></input>
-		<label>Category</label>
-		<input ng-model="newPromo.category_id"></input>
-		<label>Art</label>
-		<input ng-model="newPromo.art_id"></input>
-		<button type="submit" class="btn btn-default">Submit</button>
+	<hr>
+	<h2>Current Promotions</h2>
+	<div ng-repeat="promo in promos">
+		<h3>Promo Code</h3>
+		<input class="form-control" ng-model="promo.code"></input>
+		<h3>Type</h3>
+		<input class="form-control" ng-model="promo.promo_type"></input>
+		<h3>Expires</h3>
+		<p>{{promo.exp_date | date : 'short'}}</p>
+		<input class="form-control" ng-model="promo.exp_date"></input>
+		<h3>Discount Type</h3>
+		<input class="form-control" ng-model="promo.discount.discount_type"></input>
+		<h3>Discount Amount</h3>
+		<input class="form-control" ng-model="promo.discount.amount"></input>
+		<h3>Category</h3>
+		<input class="form-control" ng-model="promo.category_id"></input>
+		<h3>Art</h3>
+		<input class="form-control" ng-model="promo.art_id"></input>
+		<p>Created At: {{promo.creation_date | date : 'short'}}</p>
+		<button class="btn btn-primary" ng-click="updatePromo(promo)">Update</button>
+		<button class="btn btn-danger" ng-click="deletePromo(promo)">Delete</button>
 		<div>{{promo.updated}}</div>
-	</form>
-</div>
-
-<hr>
-<h2>Current Promotions</h2>
-<div ng-repeat="promo in promos">
-	<label>Promo Code</label>
-	<input ng-model="promo.code"></input>
-	<label>Type</label>
-	<input ng-model="promo.promo_type"></input>
-	<label>Expires</label>
-	<p>{{promo.exp_date | date : 'short'}}</p>
-	<input ng-model="promo.exp_date"></input>
-	<label>Category</label>
-	<input ng-model="promo.category_id"></input>
-	<label>Art</label>
-	<input ng-model="promo.art_id"></input>
-	<p>Created At: {{promo.creation_date | date : 'short'}}</p>
-	<button ng-click="updatePromo(promo)">Update</button>
-	<button ng-click="deletePromo(promo)">Delete</button>
-	<div>{{promo.updated}}</div>
+	</div>
 </div>

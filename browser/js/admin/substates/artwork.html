@@ -1,37 +1,56 @@
 <h1>Artwork</h1>
-
+<div class="">
+<div class=" searchbar">
 	<div class="input-group col-lg-4 col-md-4">
-		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		<span ng-click="testFn()" class="glyphicon glyphicon-search" aria-hidden="true"> Search</span>
 		<input ng-model="query" type="text" class="form-control">
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4">
 		<select class="form-control" ng-model="categoryName" ng-change="filterProducts()" ng-options="category.name for category in categories"></select>
 	</div>
-
-
-<div class="productImgContainer" ng-repeat="product in products | filter: query">
-	<div class="productImage">
-		<img ui-sref="product({id: product._id})" class="productImage" ng-src="{{product.url}}" />
-		<label>Name</label>
-		<input value="{{product.name}}" ng-model="product.name"></input>	
-		<label>Artist Name</label>
-		<input value="{{product.artist_name}}" ng-model="product.artist_name"></input>
-		<label>Category</label>
-		<input value="{{product.category.name}}" ng-model="product.category.name"></input>
-		<label>Description</label>
-		<input value="{{product.description}}" ng-model="product.description"></input>
-		<label>Price</label>
-		<input value="{{product.price | currency}}" ng-model="product.price"></input>
-		<label>Quantity</label>
-		<input value="{{product.quantity}}" ng-model="product.quantity"></input>
-		<label>Image Source</label>
-		<input value="{{product.url}}" ng-model="product.url"></input>
-		<label>Tags</label>
-		<div ng-repeat="tag in product.tags">
-			<input value="{{tag}}"></input>
-		</div>
-		<button ng-click="updateProduct(product)">Update</button>
-		<div>{{product.updated}}</div>
-	</div>
 </div>
+
+<div id="artwork" class="productImgContainer" ng-repeat="product in products | filter: query">
+
+		<div class="col-lg-4 col-md-4 col-sm-4">
+			<img ui-sref="product({id: product._id})" class="" ng-src="{{product.url}}" />
+		</div>
+
+		<div class="col-lg-8 col-md-8 col-sm-8">
+
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<label>Name</label>
+				<input class="form-control" value="{{product.name}}" ng-model="product.name"></input>
+
+				<label>Artist Name</label>
+				<input class="form-control" value="{{product.artist_name}}" ng-model="product.artist_name"></input>
+
+				<label>Category</label>
+				<input class="form-control" value="{{product.category.name}}" ng-model="product.category.name"></input>
+			
+				<label>Description</label>
+				<input class="form-control" value="{{product.description}}" ng-model="product.description"></input>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<label>Price</label>
+				<input class="form-control" value="{{product.price | currency}}" ng-model="product.price"></input>
+				<label>Quantity</label>
+				<input class="form-control" value="{{product.quantity}}" ng-model="product.quantity"></input>
+
+				<label>Image Source</label>
+				<input class="form-control" value="{{product.url}}" ng-model="product.url"></input>
+			
+				<label>Tags</label>
+				<div ng-repeat="tag in product.tags">
+				<input class="form-control" value="{{tag}}"></input>
+				</div>
+			</div>
+				
+			<button class="btn btn-primary" ng-click="updateProduct(product)">Update</button>
+			<div>{{product.updated}}</div>
+
+		</div>
+
+</div>
+</div
 
