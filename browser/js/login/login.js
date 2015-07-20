@@ -26,7 +26,7 @@ app.controller('LoginCtrl', function ($scope, $rootScope, AuthService, $state, C
                 if(user && user.reset_Password){
                     $state.go('adminReset');
                 }else{
-                    $state.go('home');
+                    $state.go('shopping');
                 }
                 
                 if(user) {

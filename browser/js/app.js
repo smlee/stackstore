@@ -25,7 +25,7 @@ app.run(function ($rootScope, AuthService, $state, $location) {
         if (toState.data && toState.data.authorizedRoles && !AuthService.isAuthorized(toState.data.authorizedRoles)) {
             event.preventDefault();            
             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);            
-            $state.go('home');
+            $state.go('shopping');
         }
         
         if (!destinationStateRequiresAuth(toState)) {

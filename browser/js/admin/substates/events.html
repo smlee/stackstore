@@ -4,9 +4,9 @@
 		<h2>New Event</h2>
 		<form name="eventForm" ng-submit="eventForm.$valid && addEvent(newEvent)">
 			<label>Event Name</label>
-			<input required class="form-control" ng-model="newEvent.event_name"></input>
+			<input required class="form-control" ng-model="newEvent.event_name">
 			<label>Description</label>
-			<input class="form-control" ng-model="newEvent.description"></input>
+			<input class="form-control" ng-model="newEvent.description">
 			<label>Price</label>
 			<input class="form-control" ng-model="newEvent.price"></input>
 			<button type="submit" class="btn btn-primary">Submit</button>
@@ -18,7 +18,7 @@
 
 	<h2>Upcoming Events</h2>
 
-	<div ng-repeat="event in events">
+	<div ng-repeat="event in events | reverse">
 		<label>Event Name</label>
 		<input class="form-control" value="{{event.event_name}}" ng-model="event.event_name"></input>
 		<label>Description</label>

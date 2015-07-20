@@ -15,7 +15,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.users', {
-        url: '/admin/users/:id',
+        url: '/users/:id',
         templateUrl: 'js/admin/substates/users.html',
         controller: 'AdminUsersCtrl',
         resolve: {
@@ -29,7 +29,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.artwork', {
-        url: '/admin/artwork',
+        url: '/artwork',
         templateUrl: 'js/admin/substates/artwork.html',
         controller: 'AdminArtworkCtrl',
         resolve: {
@@ -46,7 +46,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.reviews', {
-        url: '/admin/reviews',
+        url: '/reviews',
         templateUrl: 'js/admin/substates/reviews.html',
         controller: 'AdminReviewsCtrl',
         resolve: {
@@ -63,7 +63,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.events', {
-        url: '/admin/events',
+        url: '/events',
         templateUrl: 'js/admin/substates/events.html',
         controller: 'AdminEventsCtrl',
         resolve: {
@@ -77,7 +77,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.orders', {
-        url: '/admin/orders',
+        url: '/orders',
         templateUrl: 'js/admin/substates/orders.html',
         controller: 'AdminOrdersCtrl',
         resolve: {
@@ -91,7 +91,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.promos', {
-        url: '/admin/promos',
+        url: '/promos',
         templateUrl: 'js/admin/substates/promos.html',
         controller: 'AdminPromosCtrl',
         resolve: {
@@ -105,7 +105,7 @@ app.config(function ($stateProvider, USER_ROLES) {
     });
 
     $stateProvider.state('admin.resetPass', {
-        url: '/admin/reset-passwords',
+        url: '/reset-passwords',
         templateUrl: 'js/admin/substates/resetPass.html',
         controller: 'AdminResetPassCtrl',
         resolve: {
@@ -352,7 +352,11 @@ app.controller('AdminResetPassCtrl', function ($scope, user, users, $state, $roo
     };
 });
 
-
+app.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
 
 
 

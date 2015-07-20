@@ -32,8 +32,13 @@ app.controller('CartCtrl', function ($scope, user, carts, $state, CartFactory, A
     $scope.editItem = function (cartid, itemid, newInfo, idx) {
         if (AuthService.isAuthenticated()) {
             CartFactory.editItem(cartid, itemid, newInfo)
-                .then(function (updatedOrders) {
-                    $scope.cart = updatedOrders;
+                .then(function (updatedOrder) {
+                    if(cartid){
+                        CartFactory.getCartById(cartid).then(function(cart){
+                            $scope.cart = cart;
+                        });
+                    }
+
                 });
         }
         CartFactory.editLocal(idx, newInfo);

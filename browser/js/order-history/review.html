@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
 	<form name="reviewForm" ng-submit="sendReview(review)">
-		<code>{{review}}</code>
+		<!--<code>{{review}}</code>-->
 		<div class="form-group">
 			<label for="rating">Rating</label>
 			<rating ng-model="review.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" required></rating>

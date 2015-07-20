@@ -1,13 +1,13 @@
 <section id="cart">
 	<div>
 		<div>
-		<pre>{{cart}}</pre>
+		<!--<pre>{{cart}}</pre>-->
 			<div ng-repeat="item in cart.all_items">
 				<img class="thumbnail" ng-src="{{item.art.url}}" ng-show="item.art.url" />
 				<p>Name: {{item.art.name}}</p>
 				<p>Price: {{item.art.price | currency}}</p>
 				<input ng-model="item.quantity" />
-				<pre>{{item}}</pre>
+				<!--<pre>{{item}}</pre>-->
 				<button ng-click="editItem(cart._id, item._id, item.quantity, $index)">Update Quantity</button>
 				<button ng-click="removeItem(cart._id, item.art._id, $index)">Remove</button>
 				<hr>

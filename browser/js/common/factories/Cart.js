@@ -19,6 +19,12 @@ app.factory('CartFactory', function($http){
             }
         },
 
+        getCartById: function(cartId) {
+            return $http.get('/api/order/id/'+cartId).then(function(order){
+                return order.data;
+            })
+        },
+
         editItem: function (cartId, itemId, quantity) {
 
             return $http.put('/api/order/update/'+cartId, {
