@@ -30,6 +30,17 @@ router.get('/:id', function (req, res, next){
 	})
 	.then(null, next);
 });
+router.get('/id/:id', function(req, res, next) {
+    console.log('testing')
+    Order.findOne({_id: req.params.id})
+        .populate("all_items.art")
+        .exec()
+        .then(function (order){
+            console.log(order);
+            res.send(order);
+        })
+        .then(null, next);
+})
 
 router.put('/push', function(req, res, next){
 	console.log('inside the push route', req.body.params);
